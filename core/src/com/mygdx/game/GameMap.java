@@ -1,6 +1,7 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import entity.Entity;
@@ -24,6 +25,9 @@ public abstract class GameMap {
     public void update (float delta){
         for (Entity entity : entities){
             entity.update(delta);
+            if (Gdx.input.isKeyPressed(Input.Keys.A)){
+            System.out.print("I pressed A");
+            }
         }
     }
 

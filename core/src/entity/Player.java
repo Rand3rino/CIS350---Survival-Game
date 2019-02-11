@@ -2,12 +2,13 @@ package entity;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.GameMap;
 
-public class Player extends Entity {
-    private static final int speed = 80;
+public class Player extends Entity  {
+    private static final int speed = 10;
     Texture image;
 
     public Player (float x, float y, GameMap map){
@@ -17,6 +18,7 @@ public class Player extends Entity {
     public void update (float deltaTime){
         if (Gdx.input.isKeyPressed(Input.Keys.DPAD_LEFT)){
         moveX (-speed * deltaTime);
+
         }
 
         if (Gdx.input.isKeyPressed(Input.Keys.DPAD_RIGHT)){
@@ -24,11 +26,12 @@ public class Player extends Entity {
         }
 
         if (Gdx.input.isKeyPressed(Input.Keys.DPAD_UP)){
-            moveY (-speed * deltaTime);
+            moveY (speed *deltaTime);
+
         }
 
         if (Gdx.input.isKeyPressed(Input.Keys.DPAD_DOWN)){
-            moveY (speed * deltaTime);
+            moveY (-speed *deltaTime);
         }
     }
 

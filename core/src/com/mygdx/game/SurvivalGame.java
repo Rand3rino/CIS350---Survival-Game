@@ -36,7 +36,8 @@ public class SurvivalGame extends ApplicationAdapter {
 
 
 	}
-	
+
+
 	@Override
 	public void dispose () {
 		batch.dispose();

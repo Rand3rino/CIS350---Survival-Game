@@ -14,6 +14,7 @@ import java.util.ArrayList;
 public class TiledGameMap extends GameMap {
     TiledMap tiledMap;
     OrthogonalTiledMapRenderer tiledMapRenderer;
+    float delta = 1;
 
     public TiledGameMap(){
     tiledMap = new TmxMapLoader().load("C:\\Users\\Angel\\SurvivalGame\\core\\assets\\map1.tmx");
@@ -29,6 +30,7 @@ public class TiledGameMap extends GameMap {
         batch.begin();
         super.render(camera, batch);
         batch.end();
+        update(delta);
 
 
     }
