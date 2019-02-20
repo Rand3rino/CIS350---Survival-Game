@@ -12,9 +12,18 @@ public class Player extends Entity  {
     Texture image;
 
     public Player (float x, float y, GameMap map){
-            super(x,y,EntityType.PLAYER, map);
-            image = new Texture ("C:\\Users\\Angel\\SurvivalGame\\core\\assets\\Battle_OPM_single.png");
+        super(x,y,EntityType.PLAYER, map);
+        image = new Texture ("C:\\Users\\Rand3\\Desktop\\CIS350\\core\\assets\\Battle_OPM_single_clear.png");
     }
+
+    public float getPosX() {
+        return pos.x;
+    }
+
+    public float getPosY() {
+        return pos.y;
+    }
+
     public void update (float deltaTime){
         if (Gdx.input.isKeyPressed(Input.Keys.DPAD_LEFT)){
         moveX (-speed * deltaTime);

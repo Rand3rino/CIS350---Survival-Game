@@ -3,7 +3,7 @@ package entity;
 
 public enum EntityType {
 
-   PLAYER("player", 14, 24, 40);
+   PLAYER("player", 14, 24, 40), COMPUTER("computer", 14, 24, 40);
     private String id;
     private int width, height;
     private float weight;
