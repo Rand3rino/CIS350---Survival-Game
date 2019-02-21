@@ -2,12 +2,14 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import entity.Entity;
 import entity.Player;
+import entity.AI;
 
 import java.util.ArrayList;
 
@@ -17,19 +19,19 @@ public class TiledGameMap extends GameMap {
     MapProperties mapProp;
     int[][] mapArray;
     float delta = 1;
+    Player p;
 
     public TiledGameMap(){
         tiledMap = new TmxMapLoader().load("C:\\Users\\Rand3\\Desktop\\CIS350\\core\\assets\\Level0.tmx");
         tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
         mapProp = tiledMap.getProperties();
-
+        p = new Player(400, 400, this, null);
         createArray();
 
         entities = new ArrayList<Entity>();
-        entities.add(new AI(300,300,this));
-        entities.add(new Player(400, 400, this));
+        entities.add(new AI(300,300,this, p));
+        entities.add(p);
         mapArray[400][400] = 1;
-
     }
 
     public void render (OrthographicCamera camera, SpriteBatch batch){
@@ -46,7 +48,7 @@ public class TiledGameMap extends GameMap {
     }
     public void update (float delta){
         super.update(delta);
-
+        setMapArray();
     }
     public void dispose (){
         tiledMap.dispose();
@@ -69,25 +71,31 @@ public class TiledGameMap extends GameMap {
     }
 
     private void createArray() {
-
         int width = getWidth();
         int height = getHeight();
-
         mapArray = new int[width][height];
-
-        for (int i=0; i<width; i++)
-            for (int j=0; j<height; j++)
-                mapArray[i][j] = 0;
-
     }
 
-    private void setMapArray(int x1, int y1, int x2, int y2) {
-        mapArray[x1][y1] = 0;
-        mapArray[x2][y2] = 1;
+    private void resetMapArray() {
+        for (int i=0; i<getWidth(); i++)
+            for (int j=0; j<getHeight(); j++)
+                mapArray[i][j] = 0;
+    }
+
+    private void setMapArray() {
+
+        // Vector position is a float, must cast to int
+        int x = (int)p.getPosX();
+        int y = (int)p.getPosY();
+
+        // Set old position to 0, THERE MUST BE A BETTER WAY TO DO THIS
+        resetMapArray();
+
+        mapArray[x][y] = 1;
+        //System.out.println(x + " " + y);
     }
 
     public int[][] getMapArray() {
         return mapArray;
     }
-
 }

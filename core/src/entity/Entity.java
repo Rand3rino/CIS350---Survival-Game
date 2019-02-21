@@ -10,12 +10,15 @@ public abstract class Entity {
     protected Vector2 pos;
     protected EntityType type;
     protected GameMap map;
+    protected Entity player;
     protected boolean grounded;
 
-    public Entity(float x, float y, EntityType type, GameMap map) {
+
+    public Entity(float x, float y, EntityType type, GameMap map, Entity e) {
         this.type = type;
         this.map = map;
         this.pos = new Vector2(x, y);
+        this.player = e;
     }
 
     public void update(float deltaTime) {
@@ -69,4 +72,3 @@ public abstract class Entity {
 
 
 }
-
