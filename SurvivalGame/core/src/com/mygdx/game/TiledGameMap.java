@@ -7,6 +7,7 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.utils.Timer;
 import entity.Entity;
 import entity.AI;
 import entity.Player;
@@ -27,15 +28,16 @@ public class TiledGameMap extends GameMap {
         tiledMap = new TmxMapLoader().load("core/assets/test1.tmx");
         tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
         mapProp = tiledMap.getProperties();
+        Timer timer = new Timer();
 
         // Grabs the collision layer, wont work with other maps until I change em.
         // Also the boarder was not changed, resulting in no collision. Will fix.
         collision = (TiledMapTileLayer) tiledMap.getLayers().get("Tile Layer 1");
 
-        p = new Player(200, 200, collision, null);
+        p = new Player(300, 400, collision, null);
         createArray();
         entities = new ArrayList<Entity>();
-        entities.add(new AI(200,200,collision, p));
+        entities.add(new AI(10,10,collision, p));
         entities.add(p);
         mapArray[400][400] = 1;
     }

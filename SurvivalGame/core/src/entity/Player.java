@@ -145,7 +145,8 @@ public class Player extends Entity {
             image =  new Texture("core/assets/playerMoveAssets/down2.png");
         }
         else{
-            image = new Texture("core/assets/playerMoveAssets/left1.png");
+            image = new Texture("core/assets/playerMoveAssets/down3" +
+                    ".png");
         }
         down++;
         down = down % 3;
