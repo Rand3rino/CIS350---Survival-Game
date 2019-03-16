@@ -1,85 +1,130 @@
 package Logic;
-// A Java program for Dijkstra's single source shortest path algorithm.
-// The program is for adjacency matrix representation of the graph
+
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import entity.AI;
+import entity.Entity;
 import java.util.*;
-import java.lang.*;
-import java.io.*;
+
 public class PathFinder {
 
+    TiledMapTileLayer map;
 
-        // A utility function to find the vertex with minimum distance value,
-        // from the set of vertices not yet included in shortest path tree
-        static final int V=9;
-        int minDistance(int dist[], Boolean sptSet[])
-        {
-            // Initialize min value
-            int min = Integer.MAX_VALUE, min_index=-1;
+    public PathFinder(TiledMapTileLayer inMap) {
+        map = inMap;
+    }
 
-            for (int v = 0; v < V; v++)
-                if (sptSet[v] == false && dist[v] <= min)
-                {
-                    min = dist[v];
-                    min_index = v;
-                }
 
-            return min_index;
+    public int minDistance(int AIPosX, int AIPosY, Entity e) {
+        //variables are divided by 32 because float X and Y positions are provided in pixel quantities
+        //each tile on map is 32 pixels
+        int playerX = (int) e.getX() / 32;
+        int playerY = (int) e.getY() / 32;
+        AIPosX /= 32;
+        AIPosY /= 32;
+        int loc[][] = new int[map.getWidth()][map.getHeight()]; // array generated from map blocks
+        for (int i = 0; i < map.getHeight(); i++) {
+            for (int j = 0; j < map.getWidth(); j++) {
+                if (isCellBlocked(i, j)) {
+                    loc[i][j] = 2; //sets all blocked locations on array map to 2
+                } else
+                    loc[i][j] = 0; // sets all accessible spaces to 0
+            }
+        }
+        //places player location on map array using a 3
+        loc[playerX][playerY] = 3;
+        //places AI location on map array using a 4
+        loc[AIPosX][AIPosY] = 4;
+        Point minDist = find(new Point (AIPosX, AIPosY), new Point (playerX, playerY), loc);
+        if (minDist.getX() < AIPosX){
+            return 0;
         }
 
-        // A utility function to print the constructed distance array
-        void printSolution(int dist[], int n)
-        {
-            System.out.println("Vertex   Distance from Source");
-            for (int i = 0; i < V; i++)
-                System.out.println(i+" tt "+dist[i]);
+        if (minDist.getX() > AIPosX){
+            return 1;
         }
 
-        // Funtion that implements Dijkstra's single source shortest path
-        // algorithm for a graph represented using adjacency matrix
-        // representation
-        void dijkstra(int graph[][], int src)
-        {
-            int dist[] = new int[V]; // The output array. dist[i] will hold
-            // the shortest distance from src to i
+        if (minDist.getY() < AIPosY){
+            return 2;
+        }
 
-            // sptSet[i] will true if vertex i is included in shortest
-            // path tree or shortest distance from src to i is finalized
-            Boolean sptSet[] = new Boolean[V];
+        if (minDist.getY() > AIPosY){
+            return 3;
+        }
 
-            // Initialize all distances as INFINITE and stpSet[] as false
-            for (int i = 0; i < V; i++)
-            {
-                dist[i] = Integer.MAX_VALUE;
-                sptSet[i] = false;
-            }
 
-            // Distance of source vertex from itself is always 0
-            dist[src] = 0;
+         for (int i = 0; i < map.getHeight() ; i++){
+         for (int j = 0 ; j < map.getWidth(); j++){
+         System.out.print(loc[i][j] + " ");
+         }
+         System.out.println();
+         }
+         System.out.println();
+         System.out.println();
 
-            // Find shortest path for all vertices
-            for (int count = 0; count < V-1; count++)
-            {
-                // Pick the minimum distance vertex from the set of vertices
-                // not yet processed. u is always equal to src in first
-                // iteration.
-                int u = minDistance(dist, sptSet);
 
-                // Mark the picked vertex as processed
-                sptSet[u] = true;
 
-                // Update dist value of the adjacent vertices of the
-                // picked vertex.
-                for (int v = 0; v < V; v++)
+        return -1;
+    }
 
-                    // Update dist[v] only if is not in sptSet, there is an
-                    // edge from u to v, and total weight of path from src to
-                    // v through u is smaller than current value of dist[v]
-                    if (!sptSet[v] && graph[u][v]!=0 &&
-                            dist[u] != Integer.MAX_VALUE &&
-                            dist[u]+graph[u][v] < dist[v])
-                        dist[v] = dist[u] + graph[u][v];
-            }
+    // same is blocked method from player entity but adjusted to read tile data from x and y coordinates
+    private boolean isCellBlocked(int x, int y) {
+        TiledMapTileLayer.Cell cell = map.getCell(x, y);
+        return cell != null && cell.getTile() != null && cell.getTile().getProperties().containsKey("blocked");
+    }
 
-            // print the constructed distance array
-            printSolution(dist, V);
+
+
+
+    private boolean isValidCell(int row, int col){
+        if (row < map.getHeight() && row >= 0 && col < map.getWidth() && col >= 0){
+            return true;
+        }
+        else{
+            return false;
         }
     }
+
+   private Point find(Point src, Point dest, int[][] loc){
+        int rowNum[] = {-1, 0, 0, 1};
+        int colNum[] = {0, -1, 1, 0};
+        Queue<QueueNode> q = new LinkedList<QueueNode>();
+
+        // Distance of source cell is 0
+        QueueNode s = new QueueNode(src, 0);
+       QueueNode curr;
+       q.add(s);
+        while( !q.isEmpty()){
+            curr = ((LinkedList<QueueNode>) q).peekFirst();
+            Point pt = curr.getCurrent();
+
+            if (pt.getX() == dest.getX() && pt.getY() == dest.getY())
+
+                return curr.getFirst();
+
+            ((LinkedList<QueueNode>) q).removeFirst();
+            int row = pt.getX();
+            int col = pt.getY();
+            for (int i = 0; i < 4; i++)
+            {
+                if ((pt.getX() + rowNum[i]) < map.getHeight() && (pt.getX() + rowNum[i]) >= 0) {
+                    row = pt.getX() + rowNum[i];
+                }
+                if ((pt.getY() + colNum[i]) < map.getWidth() && (pt.getY() + rowNum[i]) >= 0) {
+                    col = pt.getY() + colNum[i];
+                }
+
+                // if adjacent cell is valid, has path and
+                // not visited yet, enqueue it.
+                if (isValidCell(row, col) && loc[row][col] != 2 && loc[row][col] != 1)
+                {
+                    // mark cell as visited and enqueue it
+                    loc[row][col] = 1;
+                    QueueNode adjCell = new QueueNode(new Point(row, col), curr.getDist() + 1);
+                    ((LinkedList<QueueNode>) q).addFirst(adjCell);
+
+                }
+            }
+        }
+        return null;
+    }
+}
