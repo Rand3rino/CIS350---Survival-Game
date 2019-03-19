@@ -12,6 +12,8 @@ public class Player extends Entity {
     int left = 1, right = 1, up = 1, down = 1;
     private static final int speed = 1;
     private static final int sprint = 2;
+    private static final int sprintBarMax = 100;
+    private int sprintBar;
     Collision rect;
     Texture image;
     TiledMapTileLayer collision;
@@ -24,13 +26,16 @@ public class Player extends Entity {
         image =  new Texture("core/assets/playerMoveAssets/down2.png");
         this.rect = new Collision(getX(),getY(),getWidth(),getHeight());
         this.collision = map;
-
-
+        sprintBar = sprintBarMax;
     }
 
     public void update (float deltaTime){
+        if (!Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT))
+            if (sprintBar < sprintBarMax)
+                sprintBar++;
         playerSprint(deltaTime);
         playerWalk(deltaTime);
+
     }
 
     // Handles if players chooses to sprint in a direction.
@@ -39,9 +44,10 @@ public class Player extends Entity {
         // Run Left
         if (Gdx.input.isKeyPressed(Input.Keys.A)
                 && Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT)){
-            if(!collidesRight()) {
+            if(!collidesRight() && sprintBar > 0) {
                 moveX(-speed * sprint * deltaTime);
                 rect.move(getX(), getY());
+                sprintBar -= 2;
             }
             imgRight();
         }
@@ -49,9 +55,10 @@ public class Player extends Entity {
         // Run Right
         if (Gdx.input.isKeyPressed(Input.Keys.D)
                 && Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT)){
-            if(!collidesRight()) {
+            if(!collidesRight() && sprintBar > 0) {
                 moveX(speed * sprint * deltaTime);
                 rect.move(getX(), getY());
+                sprintBar -= 2;
             }
             imgRight();
         }
@@ -59,9 +66,10 @@ public class Player extends Entity {
         // Run Up
         if (Gdx.input.isKeyPressed(Input.Keys.W)
                 && Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT)){
-            if(!collidesTop()) {
+            if(!collidesTop() && sprintBar > 0) {
                 moveY(speed * sprint * deltaTime);
                 rect.move(getX(), getY());
+                sprintBar -= 2;
             }
             imgUp();
         }
@@ -69,9 +77,10 @@ public class Player extends Entity {
         // Run Down
         if (Gdx.input.isKeyPressed(Input.Keys.S)
                 && Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT)){
-            if(!collidesBottom()) {
+            if(!collidesBottom() && sprintBar > 0) {
                 moveY(-speed * sprint * deltaTime);
                 rect.move(getX(), getY());
+                sprintBar -= 2;
             }
             imgDown();
         }
@@ -116,6 +125,7 @@ public class Player extends Entity {
             imgDown();
         }
     }
+
 
     @Override
     public void render(SpriteBatch batch) {
