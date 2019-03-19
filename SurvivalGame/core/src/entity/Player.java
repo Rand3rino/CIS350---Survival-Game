@@ -11,6 +11,7 @@ import com.mygdx.game.Collision;
 public class Player extends Entity {
     int left = 1, right = 1, up = 1, down = 1;
     private static final int speed = 1;
+    private static final int sprint = 2;
     Collision rect;
     Texture image;
     TiledMapTileLayer collision;
@@ -28,8 +29,59 @@ public class Player extends Entity {
     }
 
     public void update (float deltaTime){
+        playerSprint(deltaTime);
+        playerWalk(deltaTime);
+    }
 
-        if (Gdx.input.isKeyPressed(Input.Keys.DPAD_LEFT)){
+    // Handles if players chooses to sprint in a direction.
+    private void playerSprint(float deltaTime) {
+
+        // Run Left
+        if (Gdx.input.isKeyPressed(Input.Keys.A)
+                && Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT)){
+            if(!collidesRight()) {
+                moveX(-speed * sprint * deltaTime);
+                rect.move(getX(), getY());
+            }
+            imgRight();
+        }
+
+        // Run Right
+        if (Gdx.input.isKeyPressed(Input.Keys.D)
+                && Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT)){
+            if(!collidesRight()) {
+                moveX(speed * sprint * deltaTime);
+                rect.move(getX(), getY());
+            }
+            imgRight();
+        }
+
+        // Run Up
+        if (Gdx.input.isKeyPressed(Input.Keys.W)
+                && Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT)){
+            if(!collidesTop()) {
+                moveY(speed * sprint * deltaTime);
+                rect.move(getX(), getY());
+            }
+            imgUp();
+        }
+
+        // Run Down
+        if (Gdx.input.isKeyPressed(Input.Keys.S)
+                && Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT)){
+            if(!collidesBottom()) {
+                moveY(-speed * sprint * deltaTime);
+                rect.move(getX(), getY());
+            }
+            imgDown();
+        }
+    }
+
+    // Handle if player chooses to walk in a direction.
+    private void playerWalk(float deltaTime) {
+
+        // Walk Left
+        if (Gdx.input.isKeyPressed(Input.Keys.A)){
             if(!collidesLeft()) {
                 moveX(-speed * deltaTime);
                 rect.move(getX(), getY());
@@ -37,7 +89,8 @@ public class Player extends Entity {
             imgLeft();
         }
 
-        if (Gdx.input.isKeyPressed(Input.Keys.DPAD_RIGHT)){
+        // Walk Right
+        if (Gdx.input.isKeyPressed(Input.Keys.D)){
             if(!collidesRight()) {
                 moveX(speed * deltaTime);
                 rect.move(getX(), getY());
@@ -45,7 +98,8 @@ public class Player extends Entity {
             imgRight();
         }
 
-        if (Gdx.input.isKeyPressed(Input.Keys.DPAD_UP)){
+        // Walk Up
+        if (Gdx.input.isKeyPressed(Input.Keys.W)){
             if(!collidesTop()) {
                 moveY(speed * deltaTime);
                 rect.move(getX(), getY());
@@ -53,15 +107,14 @@ public class Player extends Entity {
             imgUp();
         }
 
-        if (Gdx.input.isKeyPressed(Input.Keys.DPAD_DOWN)){
+        // Walk Down
+        if (Gdx.input.isKeyPressed(Input.Keys.S)){
             if(!collidesBottom()) {
                 moveY(-speed * deltaTime);
                 rect.move(getX(), getY());
             }
             imgDown();
         }
-
-
     }
 
     @Override
