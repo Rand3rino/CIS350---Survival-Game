@@ -197,58 +197,58 @@ public class Player extends Entity {
 
     private void imgLeft(){
 
-        if (left == 0 ){
+        if (left >= 20 ){
             image = new Texture("core/assets/playerMoveAssets/left1.png");
         }
-        else if (left == 1){
+        else if (left >= 10){
             image = new Texture("core/assets/playerMoveAssets/left2.png");
         }
-        else{
+        else if (left >= 0){
             image =  new Texture("core/assets/playerMoveAssets/left3.png");
          }
         left++;
-        left = left % 2;
+        left = left % 30;
     }
 
     private void imgRight(){
-        if (right == 0){
+        if (right >= 20){
             image = new Texture("core/assets/playerMoveAssets/right1.png");
         }
-        else if(right == 1){
+        else if(right >= 10){
             image =  new Texture("core/assets/playerMoveAssets/right2.png");
         }
-        else{
+        else if(right >= 0){
             image =  new Texture("core/assets/playerMoveAssets/right3.png");
         }
         right++;
-        right = right % 3;
+        right = right % 30;
     }
 
     private void imgDown(){
-        if (down == 0){
+        if (down >= 20){
             image =  new Texture("core/assets/playerMoveAssets/down1.png");
         }
-        else if (down == 1){
+        else if (down >= 10){
             image =  new Texture("core/assets/playerMoveAssets/down2.png");
         }
-        else{
+        else if (down >= 0){
             image = new Texture("core/assets/playerMoveAssets/down3.png");
         }
         down++;
-        down = down % 3;
+        down = down % 30;
     }
 
     private void imgUp(){
-        if (up == 0){
+        if (up >= 20){
             image =  new Texture("core/assets/playerMoveAssets/up1.png");
         }
-        else if (up == 2){
+        else if (up >= 10){
             image =  new Texture("core/assets/playerMoveAssets/up2.png");
         }
-        else{
+        else if (up >= 0){
             image =  new Texture("core/assets/playerMoveAssets/up3.png");
         }
         up++;
-        up = up % 3;
+        up = up % 30;
     }
 }
