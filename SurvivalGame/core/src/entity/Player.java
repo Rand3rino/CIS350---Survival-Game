@@ -35,7 +35,10 @@ public class Player extends Entity {
                 sprintBar++;
         playerSprint(deltaTime);
         playerWalk(deltaTime);
+    }
 
+    public int getSprintBar() {
+        return sprintBar;
     }
 
     // Handles if players chooses to sprint in a direction.
@@ -226,6 +229,5 @@ public class Player extends Entity {
         }
         up++;
         up = up % 3;
-
     }
 }

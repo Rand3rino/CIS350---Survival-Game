@@ -19,7 +19,7 @@ public class AI extends Entity {
     public AI (float x, float y, TiledMapTileLayer map, Entity e){
         super(x,y,EntityType.COMPUTER, map, e);
         player = e;
-        image = new Texture ("C:\\Users\\Rand3\\Desktop\\CIS350\\CIS350---Survival-Game\\SurvivalGame\\core\\assets\\DeepSeaKingWalk.png");
+        image = new Texture ("core/assets/playerMoveAssets/down1.png");
         path = new PathFinder(map);
     }
 
