@@ -9,7 +9,7 @@ import com.mygdx.game.Collision;
 
 
 public class Player extends Entity {
-    int left = 1, right = 1, up = 1, down = 1;
+    private int left = 1, right = 1, up = 1, down = 1;
     private static final int speed = 1;
     private static final int sprint = 2;
     private static final int sprintBarMax = 100;
@@ -65,13 +65,13 @@ public class Player extends Entity {
         // Run Left
         if (Gdx.input.isKeyPressed(Input.Keys.A)
                 && Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT)){
-            if(!collidesRight() && sprintBar > 0) {
+            if(!collidesLeft() && sprintBar > 0) {
                 moveX(-speed * sprint * deltaTime);
                 rect.move(getX(), getY());
-                sprintBar -= 2;
+                sprintBar--;
             }
             imgRight();
-        }
+        }a
 
         // Run Right
         if (Gdx.input.isKeyPressed(Input.Keys.D)
@@ -79,7 +79,7 @@ public class Player extends Entity {
             if(!collidesRight() && sprintBar > 0) {
                 moveX(speed * sprint * deltaTime);
                 rect.move(getX(), getY());
-                sprintBar -= 2;
+                sprintBar--;
             }
             imgRight();
         }
@@ -90,7 +90,7 @@ public class Player extends Entity {
             if(!collidesTop() && sprintBar > 0) {
                 moveY(speed * sprint * deltaTime);
                 rect.move(getX(), getY());
-                sprintBar -= 2;
+                sprintBar--;
             }
             imgUp();
         }
@@ -101,7 +101,7 @@ public class Player extends Entity {
             if(!collidesBottom() && sprintBar > 0) {
                 moveY(-speed * sprint * deltaTime);
                 rect.move(getX(), getY());
-                sprintBar -= 2;
+                sprintBar--;
             }
             imgDown();
         }
@@ -192,7 +192,7 @@ public class Player extends Entity {
     }
 
     private void imgPunch() {
-        image = new Texture("core/assets/Green.PNG");
+        image = new Texture("core/assets/playerMoveAssets/Green.PNG");
     }
 
     private void imgLeft(){
