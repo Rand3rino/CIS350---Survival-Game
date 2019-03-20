@@ -13,7 +13,9 @@ public class Player extends Entity {
     private static final int speed = 1;
     private static final int sprint = 2;
     private static final int sprintBarMax = 100;
+    private static final int punchBarMax = 100;
     private int sprintBar;
+    private int punchBar;
     Collision rect;
     Texture image;
     TiledMapTileLayer collision;
@@ -27,18 +29,34 @@ public class Player extends Entity {
         this.rect = new Collision(getX(),getY(),getWidth(),getHeight());
         this.collision = map;
         sprintBar = sprintBarMax;
+        punchBar = punchBarMax;
+    }
+    public int getSprintBar() {
+        return sprintBar;
+    }
+
+    public int getPunchBar() {
+        return punchBar;
     }
 
     public void update (float deltaTime){
         if (!Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT))
             if (sprintBar < sprintBarMax)
                 sprintBar++;
+        if (!Gdx.input.isKeyPressed(Input.Keys.SPACE))
+            if (punchBar < punchBarMax)
+                punchBar++;
         playerSprint(deltaTime);
         playerWalk(deltaTime);
+        playerPunch();
     }
 
-    public int getSprintBar() {
-        return sprintBar;
+    private void playerPunch() {
+        if (Gdx.input.isKeyPressed(Input.Keys.SPACE))
+            if (punchBar == punchBarMax) {
+                imgPunch();
+                punchBar = 0;
+            }
     }
 
     // Handles if players chooses to sprint in a direction.
@@ -129,7 +147,6 @@ public class Player extends Entity {
         }
     }
 
-
     @Override
     public void render(SpriteBatch batch) {
         batch.draw(image, pos.x, pos.y, getWidth(), getHeight());
@@ -172,6 +189,10 @@ public class Player extends Entity {
             if(isCellBlocked(getX() + step, getY()))
                 return true;
         return false;
+    }
+
+    private void imgPunch() {
+        image = new Texture("core/assets/Green.PNG");
     }
 
     private void imgLeft(){
