@@ -35,6 +35,15 @@ public class PathFinder {
         //places AI location on map array using a 4
         loc[AIPosX][AIPosY] = 4;
         Point minDist = find(new Point (AIPosX, AIPosY), new Point (playerX, playerY), loc);
+        for (int i = 0; i < map.getHeight() ; i++){
+            for (int j = 0 ; j < map.getWidth(); j++){
+                System.out.print(loc[i][j] + " ");
+            }
+            System.out.println();
+        }
+        System.out.println();
+        System.out.println();
+
         if (minDist.getX() < AIPosX){
             return 0;
         }
@@ -50,18 +59,6 @@ public class PathFinder {
         if (minDist.getY() > AIPosY){
             return 3;
         }
-
-
-         for (int i = 0; i < map.getHeight() ; i++){
-         for (int j = 0 ; j < map.getWidth(); j++){
-         System.out.print(loc[i][j] + " ");
-         }
-         System.out.println();
-         }
-         System.out.println();
-         System.out.println();
-
-
 
         return -1;
     }

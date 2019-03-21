@@ -9,27 +9,177 @@ import com.mygdx.game.Collision;
 
 
 public class Player extends Entity {
-    int left = 1, right = 1, up = 1, down = 1;
+
+    /** Directional Variables to be used in movement */
+    private int left = 1, right = 1, up = 1, down = 1;
+
+    /** Default Character Movement Speed */
     private static final int speed = 1;
+
+    /** Enhanced Character Speed */
+    private static final int sprint = 2;
+
+    /** Maximum Value of Character's Stamina Bar */
+    private static final int sprintBarMax = 100;
+
+    /** Energy Used in Attacks */
+    private static final int punchBarMax = 100;
+
+    /** Stamina Bar */
+    private int sprintBar;
+
+    /** Attack Bar */
+    private int punchBar;
+
+    // TODO
     Collision rect;
+
+    // TODO
     Texture image;
+
+    // TODO
     TiledMapTileLayer collision;
 
 
-    // The only change here is the map
+    /******************************************************************
+     * Player Constructor
+     *
+     * @param x The player's starting horizontal location
+     * @param y The Player's starting vertical location
+     * @param map The map that the player is placed on
+     * @param e An entity object for entities to track. Player will
+     *          not use this variable
+     *****************************************************************/
     public Player (float x, float y, TiledMapTileLayer map, Entity e){
 
         super(x,y,EntityType.PLAYER, map, e);
         image =  new Texture("core/assets/playerMoveAssets/down2.png");
         this.rect = new Collision(getX(),getY(),getWidth(),getHeight());
         this.collision = map;
-
-
+        sprintBar = sprintBarMax;
+        punchBar = punchBarMax;
     }
 
+    /******************************************************************
+     * Sprint Bar getter
+     *
+     * @return sprintBar Value of the character's stamina bar.
+     *****************************************************************/
+    public int getSprintBar() {
+        return sprintBar;
+    }
+
+    /******************************************************************
+     * Punch Bar getter
+     *
+     * @return punchBar value of the character's attack bar.
+     *****************************************************************/
+    public int getPunchBar() {
+        return punchBar;
+    }
+
+    /******************************************************************
+     * update method handles character movement as well as stamina
+     * and attack bar levels.
+     *
+     * @param deltaTime The amount of time for each move
+     *****************************************************************/
     public void update (float deltaTime){
 
-        if (Gdx.input.isKeyPressed(Input.Keys.DPAD_LEFT)){
+        // If the sprint button is not held, charge stamina till max
+        if (!Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT))
+            if (sprintBar < sprintBarMax)
+                sprintBar++;
+
+        // If the attack button is not held, charge the attack till max
+        if (!Gdx.input.isKeyPressed(Input.Keys.SPACE))
+            if (punchBar < punchBarMax)
+                punchBar++;
+
+        // Handle if character is sprinting
+        playerSprint(deltaTime);
+
+        // Handle if character is walking
+        playerWalk(deltaTime);
+
+        // Handle if character is punching
+        // TODO need deltaTime?
+        playerPunch();
+    }
+
+    /******************************************************************
+     * playerPunch will handle if player presses the attack button
+     *****************************************************************/
+    private void playerPunch() {
+
+        // Perform a punch upon button press if attack bar if full
+        if (Gdx.input.isKeyPressed(Input.Keys.SPACE))
+            if (punchBar == punchBarMax) {
+
+                // Update sprite image.
+                imgPunch();
+
+                // Reset attack bar
+                punchBar = 0;
+            }
+    }
+
+    /******************************************************************
+     * playerSprint will handle if player presses the sprint button
+     * while selecting a direction
+     *****************************************************************/
+    private void playerSprint(float deltaTime) {
+
+        // Run Left
+        if (Gdx.input.isKeyPressed(Input.Keys.A)
+                && Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT)){
+            if(!collidesLeft() && sprintBar > 0) {
+                moveX(-speed * sprint * deltaTime);
+                rect.move(getX(), getY());
+                sprintBar--;
+            }
+            imgRight();
+        }
+
+        // Run Right
+        if (Gdx.input.isKeyPressed(Input.Keys.D)
+                && Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT)){
+            if(!collidesRight() && sprintBar > 0) {
+                moveX(speed * sprint * deltaTime);
+                rect.move(getX(), getY());
+                sprintBar--;
+            }
+            imgRight();
+        }
+
+        // Run Up
+        if (Gdx.input.isKeyPressed(Input.Keys.W)
+                && Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT)){
+            if(!collidesTop() && sprintBar > 0) {
+                moveY(speed * sprint * deltaTime);
+                rect.move(getX(), getY());
+                sprintBar--;
+            }
+            imgUp();
+        }
+
+        // Run Down
+        if (Gdx.input.isKeyPressed(Input.Keys.S)
+                && Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT)){
+            if(!collidesBottom() && sprintBar > 0) {
+                moveY(-speed * sprint * deltaTime);
+                rect.move(getX(), getY());
+                sprintBar--;
+            }
+            imgDown();
+        }
+    }
+
+    // Handle if player chooses to walk in a direction.
+    private void playerWalk(float deltaTime) {
+
+        // Walk Left
+        if (Gdx.input.isKeyPressed(Input.Keys.A)){
             if(!collidesLeft()) {
                 moveX(-speed * deltaTime);
                 rect.move(getX(), getY());
@@ -37,7 +187,8 @@ public class Player extends Entity {
             imgLeft();
         }
 
-        if (Gdx.input.isKeyPressed(Input.Keys.DPAD_RIGHT)){
+        // Walk Right
+        if (Gdx.input.isKeyPressed(Input.Keys.D)){
             if(!collidesRight()) {
                 moveX(speed * deltaTime);
                 rect.move(getX(), getY());
@@ -45,7 +196,8 @@ public class Player extends Entity {
             imgRight();
         }
 
-        if (Gdx.input.isKeyPressed(Input.Keys.DPAD_UP)){
+        // Walk Up
+        if (Gdx.input.isKeyPressed(Input.Keys.W)){
             if(!collidesTop()) {
                 moveY(speed * deltaTime);
                 rect.move(getX(), getY());
@@ -53,15 +205,14 @@ public class Player extends Entity {
             imgUp();
         }
 
-        if (Gdx.input.isKeyPressed(Input.Keys.DPAD_DOWN)){
+        // Walk Down
+        if (Gdx.input.isKeyPressed(Input.Keys.S)){
             if(!collidesBottom()) {
                 moveY(-speed * deltaTime);
                 rect.move(getX(), getY());
             }
             imgDown();
         }
-
-
     }
 
     @Override
@@ -108,62 +259,64 @@ public class Player extends Entity {
         return false;
     }
 
+    private void imgPunch() {
+        image = new Texture("core/assets/playerMoveAssets/Green.PNG");
+    }
+
     private void imgLeft(){
 
-        if (left == 0 ){
+        if (left >= 20 ){
             image = new Texture("core/assets/playerMoveAssets/left1.png");
         }
-        else if (left == 1){
+        else if (left >= 10){
             image = new Texture("core/assets/playerMoveAssets/left2.png");
         }
-        else{
+        else if (left >= 0){
             image =  new Texture("core/assets/playerMoveAssets/left3.png");
          }
         left++;
-        left = left % 2;
+        left = left % 30;
     }
 
     private void imgRight(){
-        if (right == 0){
+        if (right >= 20){
             image = new Texture("core/assets/playerMoveAssets/right1.png");
         }
-        else if(right == 1){
+        else if(right >= 10){
             image =  new Texture("core/assets/playerMoveAssets/right2.png");
         }
-        else{
+        else if(right >= 0){
             image =  new Texture("core/assets/playerMoveAssets/right3.png");
         }
         right++;
-        right = right % 3;
+        right = right % 30;
     }
 
     private void imgDown(){
-        if (down == 0){
+        if (down >= 20){
             image =  new Texture("core/assets/playerMoveAssets/down1.png");
         }
-        else if (down == 1){
+        else if (down >= 10){
             image =  new Texture("core/assets/playerMoveAssets/down2.png");
         }
-        else{
-            image = new Texture("core/assets/playerMoveAssets/down3" +
-                    ".png");
+        else if (down >= 0){
+            image = new Texture("core/assets/playerMoveAssets/down3.png");
         }
         down++;
-        down = down % 3;
+        down = down % 30;
     }
 
     private void imgUp(){
-        if (up == 0){
+        if (up >= 20){
             image =  new Texture("core/assets/playerMoveAssets/up1.png");
         }
-        else if (up == 2){
+        else if (up >= 10){
             image =  new Texture("core/assets/playerMoveAssets/up2.png");
         }
-        else{
+        else if (up >= 0){
             image =  new Texture("core/assets/playerMoveAssets/up3.png");
         }
         up++;
-        up = up % 3;
-
+        up = up % 30;
     }
 }
