@@ -9,19 +9,47 @@ import com.mygdx.game.Collision;
 
 
 public class Player extends Entity {
+
+    /** Directional Variables to be used in movement */
     private int left = 1, right = 1, up = 1, down = 1;
+
+    /** Default Character Movement Speed */
     private static final int speed = 1;
+
+    /** Enhanced Character Speed */
     private static final int sprint = 2;
+
+    /** Maximum Value of Character's Stamina Bar */
     private static final int sprintBarMax = 100;
+
+    /** Energy Used in Attacks */
     private static final int punchBarMax = 100;
+
+    /** Stamina Bar */
     private int sprintBar;
+
+    /** Attack Bar */
     private int punchBar;
+
+    // TODO
     Collision rect;
+
+    // TODO
     Texture image;
+
+    // TODO
     TiledMapTileLayer collision;
 
 
-    // The only change here is the map
+    /******************************************************************
+     * Player Constructor
+     *
+     * @param x The player's starting horizontal location
+     * @param y The Player's starting vertical location
+     * @param map The map that the player is placed on
+     * @param e An entity object for entities to track. Player will
+     *          not use this variable
+     *****************************************************************/
     public Player (float x, float y, TiledMapTileLayer map, Entity e){
 
         super(x,y,EntityType.PLAYER, map, e);
@@ -31,35 +59,75 @@ public class Player extends Entity {
         sprintBar = sprintBarMax;
         punchBar = punchBarMax;
     }
+
+    /******************************************************************
+     * Sprint Bar getter
+     *
+     * @return sprintBar Value of the character's stamina bar.
+     *****************************************************************/
     public int getSprintBar() {
         return sprintBar;
     }
 
+    /******************************************************************
+     * Punch Bar getter
+     *
+     * @return punchBar value of the character's attack bar.
+     *****************************************************************/
     public int getPunchBar() {
         return punchBar;
     }
 
+    /******************************************************************
+     * update method handles character movement as well as stamina
+     * and attack bar levels.
+     *
+     * @param deltaTime The amount of time for each move
+     *****************************************************************/
     public void update (float deltaTime){
+
+        // If the sprint button is not held, charge stamina till max
         if (!Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT))
             if (sprintBar < sprintBarMax)
                 sprintBar++;
+
+        // If the attack button is not held, charge the attack till max
         if (!Gdx.input.isKeyPressed(Input.Keys.SPACE))
             if (punchBar < punchBarMax)
                 punchBar++;
+
+        // Handle if character is sprinting
         playerSprint(deltaTime);
+
+        // Handle if character is walking
         playerWalk(deltaTime);
+
+        // Handle if character is punching
+        // TODO need deltaTime?
         playerPunch();
     }
 
+    /******************************************************************
+     * playerPunch will handle if player presses the attack button
+     *****************************************************************/
     private void playerPunch() {
+
+        // Perform a punch upon button press if attack bar if full
         if (Gdx.input.isKeyPressed(Input.Keys.SPACE))
             if (punchBar == punchBarMax) {
+
+                // Update sprite image.
                 imgPunch();
+
+                // Reset attack bar
                 punchBar = 0;
             }
     }
 
-    // Handles if players chooses to sprint in a direction.
+    /******************************************************************
+     * playerSprint will handle if player presses the sprint button
+     * while selecting a direction
+     *****************************************************************/
     private void playerSprint(float deltaTime) {
 
         // Run Left
@@ -71,7 +139,7 @@ public class Player extends Entity {
                 sprintBar--;
             }
             imgRight();
-        }a
+        }
 
         // Run Right
         if (Gdx.input.isKeyPressed(Input.Keys.D)
