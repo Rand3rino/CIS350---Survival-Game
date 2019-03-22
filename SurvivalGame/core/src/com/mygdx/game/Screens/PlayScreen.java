@@ -15,7 +15,6 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.GameMap;
 import com.mygdx.game.Hud.Hud;
 import com.mygdx.game.SurvivalGame;
-import com.mygdx.game.TiledGameMap;
 import entity.AI;
 import entity.Entity;
 import entity.Player;
@@ -69,8 +68,11 @@ public class PlayScreen extends GameMap implements Screen {
 
     }
 
-    public void update (float deltaTime) {
-        super.update(deltaTime);
+    public void update () {
+//        super.update(deltaTime);
+        for (Entity entity : entities){
+            entity.update(deltaTime);
+        }
         gameCam.update();
         renderer.setView(gameCam);
 //        setMapArray();
@@ -78,13 +80,15 @@ public class PlayScreen extends GameMap implements Screen {
 
     @Override
     public void render(float deltaTime) {
-        update(deltaTime);
+        update();
 //        Gdx.gl.glClearColor(0,0,0,1);
 //        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         renderer.render();
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();
-
+        game.batch.begin();
+        super.render(gameCam, game.batch);
+        game.batch.end();
 
         //        game.batch.setProjectionMatrix(gameCam.combined);
 //        game.batch.begin();
