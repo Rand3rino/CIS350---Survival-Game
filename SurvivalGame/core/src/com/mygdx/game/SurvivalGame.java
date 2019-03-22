@@ -11,16 +11,14 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Screens.PlayScreen;
 
-
 public class SurvivalGame extends Game {
-	public static final int WIDTH = 720;
-	public static final int HEIGHT = 720;
+	public static final int WIDTH = 480;
+	public static final int HEIGHT = 480;
 	private Viewport gamePort;
 	public SpriteBatch batch;
 	Texture img;
 	GameMap map1;
 	OrthographicCamera camera;
-
 
 
 	@Override
@@ -39,7 +37,7 @@ public class SurvivalGame extends Game {
 		super.render();
 //		Gdx.gl.glClearColor(0, 0, 0, 0);
 //		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-//		map1.render(camera, batch);
+		map1.render(camera, batch);
 //
 //		if (Gdx.input.isTouched()) {
 //		camera.translate(- Gdx.input.getDeltaX(), Gdx.input.getDeltaY());
@@ -48,7 +46,6 @@ public class SurvivalGame extends Game {
 
 
 	}
-
 
 	@Override
 	public void dispose () {

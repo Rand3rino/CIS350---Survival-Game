@@ -15,16 +15,16 @@ public class Hud {
     public Stage stage;
     private Viewport viewport;
 
-    private Integer staminaBar;
-    private Integer attackGauge;
-    private Integer health;
-    private Integer score;
+    private static int staminaBar;
+    private int attackGauge;
+    private int health;
+    private int score;
 
     Label staminaLabel;
     Label attackLabel;
     Label healthLabel;
     Label scoreLabel;
-    Label staminaLabelNum;
+    static Label staminaLabelNum;
     Label attackLabelNum;
     Label healthLabelNum;
     Label scoreLabelNum;
@@ -52,10 +52,10 @@ public class Hud {
         healthLabelNum = new Label(String.format("%d", health), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         scoreLabelNum =  new Label(String.format("%04d", score), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
-        table.add(staminaLabel).expandX().padTop(10);
-        table.add(attackLabel).expandX().padTop(10);
-        table.add(healthLabel).expandX().padTop(10);
-        table.add(scoreLabel).expandX().padTop(10);
+        table.add(staminaLabel).expandX();
+        table.add(attackLabel).expandX();
+        table.add(healthLabel).expandX();
+        table.add(scoreLabel).expandX();
         table.row();
         table.add(staminaLabelNum).expandX();
         table.add(attackLabelNum).expandX();
@@ -64,4 +64,18 @@ public class Hud {
         stage.addActor(table);
     }
 
+    // TODO static?
+    public void addScore(int value) {
+        score += value;
+        scoreLabelNum.setText(String.format("%04d", score));
+    }
+
+    public static void changeStamina(int value) {
+        staminaBar = value;
+        staminaLabelNum.setText(String.format("%03d", staminaBar));
+    }
+
+    public void dispose() {
+        stage.dispose();
+    }
 }
