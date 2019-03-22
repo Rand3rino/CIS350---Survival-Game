@@ -46,7 +46,7 @@ public class PlayScreen extends GameMap implements Screen {
         mapLoader = new TmxMapLoader();
         map = mapLoader.load("core/assets/test1.tmx");
         renderer = new OrthogonalTiledMapRenderer(map);
-        gameCam.position.set(gamePort.getWorldWidth(), gamePort.getWorldHeight(),0);
+        gameCam.position.set(gamePort.getWorldWidth()/2, gamePort.getWorldHeight()/2,0);
 
         // Grabs the collision layer, wont work with other maps until I change em.
         // Also the boarder was not changed, resulting in no collision. Will fix.
@@ -84,6 +84,7 @@ public class PlayScreen extends GameMap implements Screen {
         renderer.render();
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();
+
 
         //        game.batch.setProjectionMatrix(gameCam.combined);
 //        game.batch.begin();

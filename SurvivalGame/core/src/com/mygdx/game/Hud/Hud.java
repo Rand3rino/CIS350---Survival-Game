@@ -16,7 +16,7 @@ public class Hud {
     private Viewport viewport;
 
     private static int staminaBar;
-    private int attackGauge;
+    private static int attackGauge;
     private int health;
     private int score;
 
@@ -25,7 +25,7 @@ public class Hud {
     Label healthLabel;
     Label scoreLabel;
     static Label staminaLabelNum;
-    Label attackLabelNum;
+    static Label attackLabelNum;
     Label healthLabelNum;
     Label scoreLabelNum;
 
@@ -72,8 +72,14 @@ public class Hud {
 
     public static void changeStamina(int value) {
         staminaBar = value;
-        staminaLabelNum.setText(String.format("%03d", staminaBar));
+        staminaLabelNum.setText(String.format("%03d", staminaBar) + "%");
     }
+
+    public static void changeAttack(int value) {
+        attackGauge = value;
+        attackLabelNum.setText(String.format("%03d", attackGauge) + "%");
+    }
+
 
     public void dispose() {
         stage.dispose();
