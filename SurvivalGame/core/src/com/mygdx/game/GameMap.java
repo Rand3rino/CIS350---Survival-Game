@@ -11,10 +11,12 @@ import java.util.ArrayList;
 
 public abstract class GameMap {
     public ArrayList<Entity> entities;
+
     public GameMap(){
    /****     entities = new ArrayList<Entity>();
         entities.add(new Player(300, 250, this));
     ****/
+        entities = new ArrayList<Entity>();
     }
     public void render (OrthographicCamera camera, SpriteBatch batch){
         for (Entity entity : entities){
