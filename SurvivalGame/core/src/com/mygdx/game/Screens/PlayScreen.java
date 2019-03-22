@@ -24,7 +24,7 @@ public class PlayScreen extends GameMap implements Screen {
     TiledMap map;
     OrthogonalTiledMapRenderer renderer;
     MapProperties mapProp;
-    int[][] mapArray;
+
     float deltaTime = 1;
     Player p;
     TiledMapTileLayer collision;
@@ -52,11 +52,15 @@ public class PlayScreen extends GameMap implements Screen {
         collision = (TiledMapTileLayer) map.getLayers().get("Tile Layer 1");
 
         p = new Player(300, 400, collision, null);
-//        createArray();
         entities = new ArrayList<Entity>();
         entities.add(new AI(10,10,collision, p));
+        entities.add(new AI(200,200,collision, p));
+        entities.add(new AI(10,400,collision, p));
+        entities.add(new AI(100,70,collision, p));
+        entities.add(new AI(300,300,collision, p));
+
+
         entities.add(p);
-//        mapArray[400][400] = 1;
     }
 
     @Override
@@ -113,35 +117,6 @@ public class PlayScreen extends GameMap implements Screen {
         int mapHeight = mapProp.get("height", Integer.class);
         int tileHeight = mapProp.get("tileheight", Integer.class);
         return mapHeight * tileHeight;
-    }
-
-    private void createArray() {
-        int width = getWidth();
-        int height = getHeight();
-        mapArray = new int[width][height];
-    }
-
-    private void resetMapArray() {
-        for (int i=0; i<getWidth(); i++)
-            for (int j=0; j<getHeight(); j++)
-                mapArray[i][j] = 0;
-    }
-
-    private void setMapArray() {
-
-        // Vector position is a float, must cast to int
-        int x = (int)p.getX();
-        int y = (int)p.getY();
-
-        // Set old position to 0, THERE MUST BE A BETTER WAY TO DO THIS
-        resetMapArray();
-
-        mapArray[x][y] = 1;
-        //System.out.println(x + " " + y);
-    }
-
-    public int[][] getMapArray() {
-        return mapArray;
     }
 
     public int getLayer(){

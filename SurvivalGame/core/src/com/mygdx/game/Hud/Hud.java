@@ -17,17 +17,17 @@ public class Hud {
 
     private static int staminaBar;
     private static int attackGauge;
-    private int health;
-    private int score;
+    private static int health;
+    private static int score;
 
-    Label staminaLabel;
-    Label attackLabel;
-    Label healthLabel;
-    Label scoreLabel;
-    static Label staminaLabelNum;
-    static Label attackLabelNum;
-    Label healthLabelNum;
-    Label scoreLabelNum;
+    private Label staminaLabel;
+    private Label attackLabel;
+    private Label healthLabel;
+    private Label scoreLabel;
+    private static Label staminaLabelNum;
+    private static Label attackLabelNum;
+    private static Label healthLabelNum;
+    private static Label scoreLabelNum;
 
 
     public Hud (SpriteBatch batch) {
@@ -78,6 +78,16 @@ public class Hud {
     public static void changeAttack(int value) {
         attackGauge = value;
         attackLabelNum.setText(String.format("%03d", attackGauge) + "%");
+    }
+
+    public static void increaseHealth() {
+        health++;
+        healthLabelNum.setText(String.format("%d", health));
+    }
+
+    public static void decreaseHealth() {
+        health--;
+        healthLabelNum.setText(String.format("%d", health));
     }
 
 
