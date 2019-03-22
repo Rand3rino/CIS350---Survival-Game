@@ -142,7 +142,7 @@ public class Player extends Entity {
                 rect.move(getX(), getY());
                 sprintBar--;
             }
-            imgRight();
+            imgLeft();
         }
 
         // Run Right
