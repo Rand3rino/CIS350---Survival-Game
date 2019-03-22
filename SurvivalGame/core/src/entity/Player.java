@@ -6,7 +6,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.mygdx.game.Collision;
-
+import com.mygdx.game.Hud.Hud;
+import com.mygdx.game.Screens.PlayScreen;
 
 public class Player extends Entity {
 
@@ -105,6 +106,9 @@ public class Player extends Entity {
         // Handle if character is punching
         // TODO need deltaTime?
         playerPunch();
+
+        Hud.changeStamina(sprintBar);
+        Hud.changeAttack(punchBar);
     }
 
     /******************************************************************
