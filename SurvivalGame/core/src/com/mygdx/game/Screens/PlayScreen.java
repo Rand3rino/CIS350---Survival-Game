@@ -53,10 +53,10 @@ public class PlayScreen extends GameMap implements Screen {
 
         p = new Player(300, 400, collision, null);
         entities.add(new AI(10,10,collision, p));
-        entities.add(new AI(200,200,collision, p));
-        entities.add(new AI(10,400,collision, p));
-        entities.add(new AI(100,70,collision, p));
-        entities.add(new AI(300,300,collision, p));
+//        entities.add(new AI(200,200,collision, p));
+//        entities.add(new AI(10,400,collision, p));
+//        entities.add(new AI(100,70,collision, p));
+//        entities.add(new AI(300,300,collision, p));
         entities.add(p);
     }
 

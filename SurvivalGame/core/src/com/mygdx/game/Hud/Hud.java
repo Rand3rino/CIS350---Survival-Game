@@ -20,14 +20,10 @@ public class Hud {
     private static int health;
     private static int score;
 
-    private Label staminaLabel;
-    private Label attackLabel;
-    private Label healthLabel;
-    private Label scoreLabel;
-    private static Label staminaLabelNum;
-    private static Label attackLabelNum;
-    private static Label healthLabelNum;
-    private static Label scoreLabelNum;
+    private static Label staminaLabel;
+    private static Label attackLabel;
+    private static Label healthLabel;
+    private static Label scoreLabel;
 
 
     public Hud (SpriteBatch batch) {
@@ -43,51 +39,42 @@ public class Hud {
         table.top();
         table.setFillParent(true);
 
-        staminaLabel = new Label("Stamina", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        attackLabel =  new Label("Attack", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        healthLabel = new Label("Health", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        scoreLabel =  new Label("Score", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        staminaLabelNum = new Label(String.format("%03d", staminaBar) + "%", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        attackLabelNum =  new Label(String.format("%03d", attackGauge) + "%", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        healthLabelNum = new Label(String.format("%d", health), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        scoreLabelNum =  new Label(String.format("%04d", score), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        staminaLabel = new Label(String.format("%03d", staminaBar) + "% Stamina", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        attackLabel =  new Label(String.format("%03d", attackGauge) + "% Attack", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        healthLabel = new Label(String.format("%d", health) + " Health", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        scoreLabel =  new Label(String.format("%04d", score) + " Score", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
         table.add(staminaLabel).expandX();
         table.add(attackLabel).expandX();
         table.add(healthLabel).expandX();
         table.add(scoreLabel).expandX();
-        table.row();
-        table.add(staminaLabelNum).expandX();
-        table.add(attackLabelNum).expandX();
-        table.add(healthLabelNum).expandX();
-        table.add(scoreLabelNum).expandX();
         stage.addActor(table);
     }
 
     // TODO static?
     public void addScore(int value) {
         score += value;
-        scoreLabelNum.setText(String.format("%04d", score));
+        scoreLabel.setText(String.format("%04d", score) + " Score");
     }
 
     public static void changeStamina(int value) {
         staminaBar = value;
-        staminaLabelNum.setText(String.format("%03d", staminaBar) + "%");
+        staminaLabel.setText(String.format("%03d", staminaBar) + "% Stamina");
     }
 
     public static void changeAttack(int value) {
         attackGauge = value;
-        attackLabelNum.setText(String.format("%03d", attackGauge) + "%");
+        attackLabel.setText(String.format("%03d", attackGauge) + "% Attack");
     }
 
     public static void increaseHealth() {
         health++;
-        healthLabelNum.setText(String.format("%d", health));
+        healthLabel.setText(String.format("%d", health) + " Health");
     }
 
     public static void decreaseHealth() {
         health--;
-        healthLabelNum.setText(String.format("%d", health));
+        healthLabel.setText(String.format("%d", health) + " Health");
     }
 
 
