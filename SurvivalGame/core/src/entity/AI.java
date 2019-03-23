@@ -15,28 +15,35 @@ public class AI extends Entity {
     Texture image;
     Vector2 vector = new Vector2();
     Entity player;
+    long time = System.currentTimeMillis();
+    long start;
 
     public AI (float x, float y, TiledMapTileLayer map, Entity e){
         super(x,y,EntityType.COMPUTER, map, e);
         player = e;
         image = new Texture ("C:\\Users\\Angel\\SurvivalGame\\core\\assets\\DeepSeaKingWalk.png");
         path = new PathFinder(map);
+        start = time;
     }
 
     public void update (float deltaTime) {
-        Timer timer = new Timer();
-        for (int i = 0; i < 5; i++) {
+
+
             int move = path.minDistance((int) getX(), (int) getY(), player);
 
-            if (move == 0)
-                moveX(-speed);
-            else if (move == 1)
-                moveX(speed);
-            else if (move == 2)
-                moveY(-speed);
-            else if (move == 3)
-                moveY(speed);
-            timer.delay(50);
+                if (move == 0)
+                    moveX(-speed);
+                else if (move == 1)
+                    moveX(speed);
+                else if (move == 2)
+                    moveY(-speed);
+                else if (move == 3)
+                    moveY(speed);
+            }
+
+
+
+            //if locked in combat
             // AI can move in a square **/
 //        if (pos.x  < 400 && pos.y == 300)
 //            moveX(speed);
@@ -47,8 +54,8 @@ public class AI extends Entity {
 //        else
 //            moveY(-speed);
 
-        }
-    }
+
+
 
     // method "move to this point" Using tiledgamemap
     public Vector2 playerLocation() {

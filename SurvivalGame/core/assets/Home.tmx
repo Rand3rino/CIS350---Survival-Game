@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.2" tiledversion="1.2.2" orientation="orthogonal" renderorder="left-up" width="23" height="23" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="1">
  <tileset firstgid="1" name="hyptosis_tile-art-batch-1" tilewidth="32" tileheight="32" tilecount="900" columns="30">
-  <image source="map assets//Hyptosis Tiles//hyptosis_tile-art-batch-1.png" trans="000000" width="960" height="960"/>
+  <image source="../Hyptosis Tiles/hyptosis_tile-art-batch-1.png" trans="000000" width="960" height="960"/>
   <tile id="20">
    <properties>
     <property name="blocked" value="1"/>
@@ -93,8 +93,8 @@
    </properties>
   </tile>
  </tileset>
- <tileset firstgid="901" name="hyptosis_tile-art-batch-2" tilewidth="32" tileheight="32" tilecount="900" columns="30">
-  <image source="map assets//Hyptosis Tiles//hyptosis_til-art-batch-2.png" trans="000000" width="960" height="960"/>
+ <tileset firstgid="901" name="hyptosis_til-art-batch-2" tilewidth="32" tileheight="32" tilecount="900" columns="30">
+  <image source="../Hyptosis Tiles/hyptosis_til-art-batch-2.png" trans="000000" width="960" height="960"/>
   <tile id="24">
    <properties>
     <property name="blocked" value="1"/>
@@ -252,7 +252,7 @@
   </tile>
  </tileset>
  <tileset firstgid="1801" name="hyptosis_tile-art-batch-3" tilewidth="32" tileheight="32" tilecount="900" columns="30">
-  <image source="map assets//Hyptosis Tiles//hyptosis_tile-art-batch-3.png" trans="000000" width="960" height="960"/>
+  <image source="../Hyptosis Tiles/hyptosis_tile-art-batch-3.png" trans="000000" width="960" height="960"/>
  </tileset>
  <layer id="1" name="Base" width="23" height="23">
   <data encoding="csv">

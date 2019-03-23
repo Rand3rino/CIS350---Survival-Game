@@ -1,18 +1,15 @@
 package entity;
 
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.InputProcessor;
+
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.game.GameMap;
 public abstract class Entity {
 
     protected Vector2 pos;
     protected EntityType type;
     protected TiledMapTileLayer map;
     protected Entity player;
-    protected boolean grounded;
 
 
     public Entity(float x, float y, EntityType type, TiledMapTileLayer map, Entity e) {

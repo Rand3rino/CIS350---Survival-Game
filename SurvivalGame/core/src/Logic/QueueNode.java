@@ -2,12 +2,11 @@ package Logic;
 
 public class QueueNode {
     private int dist;
-    private Point first;
+
     private Point current;
 
     public QueueNode(Point p, int distance){
         dist = distance;
-        first = p;
         current = p;
     }
 
@@ -19,12 +18,11 @@ public class QueueNode {
         return dist;
     }
 
-    public Point getFirst() {
-        return first;
-    }
+
 
     public Point getCurrent(){
         return current;
     }
+
 
 }

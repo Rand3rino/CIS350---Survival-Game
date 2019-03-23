@@ -1,22 +1,25 @@
 package Logic;
 
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import entity.AI;
 import entity.Entity;
 import java.util.*;
+import java.lang.Math;
 
 public class PathFinder {
 
     TiledMapTileLayer map;
-
+    Queue<QueueNode> q = new LinkedList<QueueNode>();
     public PathFinder(TiledMapTileLayer inMap) {
         map = inMap;
     }
-
-
+    long time = System.currentTimeMillis();
+    double second = 1;
     public int minDistance(int AIPosX, int AIPosY, Entity e) {
+
         //variables are divided by 32 because float X and Y positions are provided in pixel quantities
         //each tile on map is 32 pixels
+
+
         int playerX = (int) e.getX() / 32;
         int playerY = (int) e.getY() / 32;
         AIPosX /= 32;
@@ -34,37 +37,21 @@ public class PathFinder {
         loc[playerX][playerY] = 3;
         //places AI location on map array using a 4
         loc[AIPosX][AIPosY] = 4;
-        Point minDist = find(new Point (AIPosX, AIPosY), new Point (playerX, playerY), loc);
-        if (minDist.getX() < AIPosX){
-            return 0;
-        }
-
-        if (minDist.getX() > AIPosX){
-            return 1;
-        }
-
-        if (minDist.getY() < AIPosY){
-            return 2;
-        }
-
-        if (minDist.getY() > AIPosY){
-            return 3;
-        }
-
-
-         for (int i = 0; i < map.getHeight() ; i++){
-         for (int j = 0 ; j < map.getWidth(); j++){
-         System.out.print(loc[i][j] + " ");
-         }
-         System.out.println();
-         }
-         System.out.println();
-         System.out.println();
-
-
-
-        return -1;
+        return find(new Point (AIPosX, AIPosY), new Point (playerX, playerY), loc);
     }
+
+/****
+        for (int i = 0; i < map.getHeight() ; i++){
+            for (int j = 0 ; j < map.getWidth(); j++){
+                System.out.print(loc[i][j] + " ");
+            }
+            System.out.println();
+        }
+        System.out.println();
+        System.out.println();
+****/
+
+
 
     // same is blocked method from player entity but adjusted to read tile data from x and y coordinates
     private boolean isCellBlocked(int x, int y) {
@@ -84,47 +71,68 @@ public class PathFinder {
         }
     }
 
-   private Point find(Point src, Point dest, int[][] loc){
-        int rowNum[] = {-1, 0, 0, 1};
-        int colNum[] = {0, -1, 1, 0};
-        Queue<QueueNode> q = new LinkedList<QueueNode>();
-
-        // Distance of source cell is 0
-        QueueNode s = new QueueNode(src, 0);
-       QueueNode curr;
-       q.add(s);
-        while( !q.isEmpty()){
-            curr = ((LinkedList<QueueNode>) q).peekFirst();
-            Point pt = curr.getCurrent();
-
-            if (pt.getX() == dest.getX() && pt.getY() == dest.getY())
-
-                return curr.getFirst();
-
-            ((LinkedList<QueueNode>) q).removeFirst();
-            int row = pt.getX();
-            int col = pt.getY();
-            for (int i = 0; i < 4; i++)
-            {
-                if ((pt.getX() + rowNum[i]) < map.getHeight() && (pt.getX() + rowNum[i]) >= 0) {
-                    row = pt.getX() + rowNum[i];
+    private int find(Point src, Point dest, int[][] loc) {
+        Point nextMove;
+    if (Math.abs(dest.getX() - src.getX()) > Math.abs(dest.getY() - src.getY())){
+        if (dest.getX() > src.getX()){
+            if (isValidCell(src.getX() + 1, src.getY()) && !isCellBlocked(src.getX() + 1, src.getY())){
+                return 1;
+            }
+            if (isValidCell(src.getX() + 1, src.getY()) && isCellBlocked(src.getX() + 1, src.getY())){
+                if (isValidCell(src.getX(), src.getY() + 1) && !isCellBlocked(src.getX(), src.getY() + 1)) {
+                    return 3;
                 }
-                if ((pt.getY() + colNum[i]) < map.getWidth() && (pt.getY() + rowNum[i]) >= 0) {
-                    col = pt.getY() + colNum[i];
-                }
-
-                // if adjacent cell is valid, has path and
-                // not visited yet, enqueue it.
-                if (isValidCell(row, col) && loc[row][col] != 2 && loc[row][col] != 1)
-                {
-                    // mark cell as visited and enqueue it
-                    loc[row][col] = 1;
-                    QueueNode adjCell = new QueueNode(new Point(row, col), curr.getDist() + 1);
-                    ((LinkedList<QueueNode>) q).addFirst(adjCell);
-
+                if (isValidCell(src.getX(), src.getY() - 1) && !isCellBlocked(src.getX(), src.getY() + 1)){
+                    return 1;
                 }
             }
         }
-        return null;
+        else{
+            if (isValidCell(src.getX() - 1, src.getY()) && !isCellBlocked(src.getX() - 1, src.getY())){
+                return 0;
+            }
+            if (isValidCell(src.getX() - 1, src.getY()) && isCellBlocked(src.getX() - 1, src.getY())){
+                if (isValidCell(src.getX(), src.getY() + 1) && !isCellBlocked(src.getX(), src.getY() + 1)) {
+                    return 3;
+                }
+                if (isValidCell(src.getX(), src.getY() - 1) && !isCellBlocked(src.getX(), src.getY() + 1)){
+                    return 2;
+                }
+            }
+        }
+    }
+
+
+
+    else{
+        if (dest.getY() > src.getY()){
+
+            if (isValidCell(src.getX(), src.getY() + 1) && !isCellBlocked(src.getX(), src.getY() + 1)){
+                return 3;
+            }
+            if (isValidCell(src.getX(), src.getY() + 1) && isCellBlocked(src.getX(), src.getY() + 1)){
+                if (isValidCell(src.getX() + 1, src.getY()) && !isCellBlocked(src.getX(), src.getY() + 1)) {
+                    return 1;
+                }
+                if (isValidCell(src.getX() - 1, src.getY() ) && !isCellBlocked(src.getX(), src.getY() + 1)){
+                    return 0;
+                }
+            }
+        }
+        else{
+            if (isValidCell(src.getX(), src.getY() - 1) && !isCellBlocked(src.getX(), src.getY() - 1)){
+                return 2;
+            }
+            if (isValidCell(src.getX(), src.getY() -1) && isCellBlocked(src.getX(), src.getY() - 1)){
+                if (isValidCell(src.getX() + 1, src.getY()) && !isCellBlocked(src.getX(), src.getY() + 1)) {
+                    return 1;
+                }
+                if (isValidCell(src.getX() - 1, src.getY() ) && !isCellBlocked(src.getX(), src.getY() + 1)){
+                    return 0;
+                }
+            }
+        }
+    }
+    return -1;
     }
 }
