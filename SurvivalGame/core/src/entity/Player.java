@@ -131,6 +131,8 @@ public class Player extends Entity {
     /******************************************************************
      * playerSprint will handle if player presses the sprint button
      * while selecting a direction
+     *
+     * @param deltaTime Game time cycle
      *****************************************************************/
     private void playerSprint(float deltaTime) {
 
@@ -179,7 +181,12 @@ public class Player extends Entity {
         }
     }
 
-    // Handle if player chooses to walk in a direction.
+    /******************************************************************
+     * playerSprint will handle if player presses a directional button
+     * without the sprint button.
+     *
+     * @param deltaTime Game time cycle
+     *****************************************************************/
     private void playerWalk(float deltaTime) {
 
         // Walk Left
@@ -220,16 +227,27 @@ public class Player extends Entity {
     }
 
     @Override
+    /**
+     * @param batch
+     */
     public void render(SpriteBatch batch) {
         batch.draw(image, pos.x, pos.y, getWidth(), getHeight());
     }
 
-    // Grabs players current tile position and checks its properties
+    /**
+     * Grabs players current tile position and checks its properties
+     * @param x
+     * @param y
+     * @return
+     */
     private boolean isCellBlocked(float x, float y) {
         TiledMapTileLayer.Cell cell = map.getCell((int) (x / map.getTileWidth()), (int) (y / map.getTileHeight()));
         return cell != null && cell.getTile() != null && cell.getTile().getProperties().containsKey("blocked");
     }
 
+    /**
+     * @return
+     */
     // Checks if the player is colliding with tile on the right
     public boolean collidesRight() {
         for(float step = 0; step < getHeight(); step += map.getTileHeight() / 2)
@@ -238,6 +256,9 @@ public class Player extends Entity {
         return false;
     }
 
+    /**
+     * @return
+     */
     // Checks if it collides on the left
     public boolean collidesLeft() {
         for(float step = 0; step < getHeight(); step += map.getTileHeight() / 2)
@@ -246,6 +267,9 @@ public class Player extends Entity {
         return false;
     }
 
+    /**
+     * @return
+     */
     // Checks for collision above the player
     public boolean collidesTop() {
         for(float step = 0; step < getWidth(); step += map.getTileWidth() / 2)
@@ -255,6 +279,9 @@ public class Player extends Entity {
 
     }
 
+    /**
+     * @return
+     */
     // Checks collision below the player
     public boolean collidesBottom() {
         for(float step = 0; step < getWidth(); step += map.getTileWidth() / 2)
@@ -263,10 +290,20 @@ public class Player extends Entity {
         return false;
     }
 
+    /******************************************************************
+     * imgPunch updates to sprite to an attack image
+     *****************************************************************/
     private void imgPunch() {
         image = new Texture("core/assets/playerMoveAssets/Green.PNG");
     }
 
+
+    //TODO add 4th animation stop? L C R C loop
+
+
+    /**
+     *
+     */
     private void imgLeft(){
 
         if (left >= 20 ){
@@ -282,6 +319,9 @@ public class Player extends Entity {
         left = left % 30;
     }
 
+    /**
+     *
+     */
     private void imgRight(){
         if (right >= 20){
             image = new Texture("core/assets/playerMoveAssets/right1.png");
@@ -296,6 +336,9 @@ public class Player extends Entity {
         right = right % 30;
     }
 
+    /**
+     *
+     */
     private void imgDown(){
         if (down >= 30){
             image =  new Texture("core/assets/playerMoveAssets/down1.png");
