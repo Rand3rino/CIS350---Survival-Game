@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 package entity;
 
 import com.badlogic.gdx.Gdx;
@@ -339,6 +340,8 @@ public class Player extends Entity {
     }
 }
 =======
+=======
+>>>>>>> 7894b78271b1275de297072bab92053815dc178e
 package entity;
 
 import com.badlogic.gdx.Gdx;
@@ -714,4 +717,7 @@ public class Player extends Entity {
         up = up % 40;
     }
 }
+<<<<<<< HEAD
+>>>>>>> 7894b78271b1275de297072bab92053815dc178e
+=======
 >>>>>>> 7894b78271b1275de297072bab92053815dc178e
