@@ -269,42 +269,49 @@ public class Player extends Entity {
 
     private void imgLeft(){
 
-        if (left >= 20 ){
+        if (left >= 30 ){
             image = new Texture("core/assets/playerMoveAssets/left1.png");
         }
+        else if (left >= 20) {
+            image = new Texture( "core/assets/playerMoveAssets/left2.png");
+        }
         else if (left >= 10){
-            image = new Texture("core/assets/playerMoveAssets/left2.png");
+            image = new Texture("core/assets/playerMoveAssets/left3.png");
         }
         else if (left >= 0){
-            image =  new Texture("core/assets/playerMoveAssets/left3.png");
+            image = new Texture("core/assets/playerMoveAssets/left2.png");
          }
         left++;
-        left = left % 30;
+        left = left % 40;
     }
 
     private void imgRight(){
-        if (right >= 20){
+
+        if (right >= 30){
             image = new Texture("core/assets/playerMoveAssets/right1.png");
         }
+        else if (right >= 20){
+            image = new Texture("core/assets/playerMoveAssets/right2.png");
+        }
         else if(right >= 10){
-            image =  new Texture("core/assets/playerMoveAssets/right2.png");
+            image = new Texture("core/assets/playerMoveAssets/right3.png");
         }
         else if(right >= 0){
-            image =  new Texture("core/assets/playerMoveAssets/right3.png");
+            image = new Texture("core/assets/playerMoveAssets/right2.png");
         }
         right++;
-        right = right % 30;
+        right = right % 40;
     }
 
     private void imgDown(){
         if (down >= 30){
-            image =  new Texture("core/assets/playerMoveAssets/down1.png");
+            image = new Texture("core/assets/playerMoveAssets/down1.png");
         }
         else if (down >= 20) {
             image = new Texture("core/assets/playerMoveAssets/down3.png");
         }
         else if (down >= 10){
-            image =  new Texture("core/assets/playerMoveAssets/down2.png");
+            image = new Texture("core/assets/playerMoveAssets/down2.png");
         }
         else if (down >= 0){
             image = new Texture("core/assets/playerMoveAssets/down3.png");
@@ -315,16 +322,16 @@ public class Player extends Entity {
 
     private void imgUp() {
         if (up >= 30){
-            image =  new Texture("core/assets/playerMoveAssets/up1.png");
+            image = new Texture("core/assets/playerMoveAssets/up1.png");
         }
         else if (up >= 20){
-            image = new Texture ("core/assets/playerMoveAssets/up3.png");
+            image = new Texture ("core/assets/playerMoveAssets/up2.png");
         }
         else if (up >= 10){
-            image =  new Texture("core/assets/playerMoveAssets/up2.png");
+            image = new Texture("core/assets/playerMoveAssets/up3.png");
         }
         else if (up >= 0){
-            image =  new Texture("core/assets/playerMoveAssets/up3.png");
+            image = new Texture("core/assets/playerMoveAssets/up2.png");
         }
         up++;
         up = up % 40;
