@@ -52,14 +52,11 @@ public class PlayScreen extends GameMap implements Screen {
         collision = (TiledMapTileLayer) map.getLayers().get("Tile Layer 1");
 
         p = new Player(300, 400, collision, null);
-        entities = new ArrayList<Entity>();
         entities.add(new AI(10,10,collision, p));
-        entities.add(new AI(200,200,collision, p));
-        entities.add(new AI(10,400,collision, p));
-        entities.add(new AI(100,70,collision, p));
-        entities.add(new AI(300,300,collision, p));
-
-
+//        entities.add(new AI(200,200,collision, p));
+//        entities.add(new AI(10,400,collision, p));
+//        entities.add(new AI(100,70,collision, p));
+//        entities.add(new AI(300,300,collision, p));
         entities.add(p);
     }
 
@@ -73,13 +70,9 @@ public class PlayScreen extends GameMap implements Screen {
     }
 
     public void update () {
-//        super.update(deltaTime);
-        for (Entity entity : entities){
-            entity.update(deltaTime);
-        }
+        super.update(deltaTime);
         gameCam.update();
         renderer.setView(gameCam);
-//        setMapArray();
     }
 
     @Override

@@ -26,28 +26,13 @@ public class SurvivalGame extends Game {
 
 		camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		batch = new SpriteBatch();
-		map1 = new TiledGameMap();
 		setScreen(new PlayScreen(this));
 		camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		camera.update();
-
 	}
 
 	@Override
-	public void render () {
-//		map1.render(camera, batch);
-		super.render();
-//		Gdx.gl.glClearColor(0, 0, 0, 0);
-//		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-//
-//		if (Gdx.input.isTouched()) {
-//		camera.translate(- Gdx.input.getDeltaX(), Gdx.input.getDeltaY());
-//		camera.update();
-//		}
-
-
-	}
+	public void render () { super.render(); }
 
 	@Override
 	public void dispose () {

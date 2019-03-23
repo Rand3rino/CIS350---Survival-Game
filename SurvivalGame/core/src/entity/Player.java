@@ -144,7 +144,7 @@ public class Player extends Entity {
                 rect.move(getX(), getY());
                 sprintBar--;
             }
-            imgRight();
+            imgLeft();
         }
 
         // Run Right
@@ -340,8 +340,11 @@ public class Player extends Entity {
      *
      */
     private void imgDown(){
-        if (down >= 20){
+        if (down >= 30){
             image =  new Texture("core/assets/playerMoveAssets/down1.png");
+        }
+        else if (down >= 20) {
+            image = new Texture("core/assets/playerMoveAssets/down3.png");
         }
         else if (down >= 10){
             image =  new Texture("core/assets/playerMoveAssets/down2.png");
@@ -350,15 +353,15 @@ public class Player extends Entity {
             image = new Texture("core/assets/playerMoveAssets/down3.png");
         }
         down++;
-        down = down % 30;
+        down = down % 40;
     }
 
-    /**
-     *
-     */
-    private void imgUp(){
-        if (up >= 20){
+    private void imgUp() {
+        if (up >= 30){
             image =  new Texture("core/assets/playerMoveAssets/up1.png");
+        }
+        else if (up >= 20){
+            image = new Texture ("core/assets/playerMoveAssets/up3.png");
         }
         else if (up >= 10){
             image =  new Texture("core/assets/playerMoveAssets/up2.png");
@@ -367,6 +370,6 @@ public class Player extends Entity {
             image =  new Texture("core/assets/playerMoveAssets/up3.png");
         }
         up++;
-        up = up % 30;
+        up = up % 40;
     }
 }
