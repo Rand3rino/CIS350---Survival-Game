@@ -18,19 +18,19 @@ public class Hud {
     private static int staminaBar;
     private static int attackGauge;
     private static int health;
-    private static int score;
+    private static int enemyCount;
 
     private static Label staminaLabel;
     private static Label attackLabel;
     private static Label healthLabel;
-    private static Label scoreLabel;
+    private static Label enemyCountLabel;
 
 
     public Hud (SpriteBatch batch) {
         staminaBar = 100;
         attackGauge = 100;
         health = 3;
-        score = 0;
+        enemyCount = 100;
 
         viewport = new StretchViewport(SurvivalGame.WIDTH, SurvivalGame.HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, batch);
@@ -39,22 +39,22 @@ public class Hud {
         table.top();
         table.setFillParent(true);
 
-        staminaLabel = new Label(String.format("%03d", staminaBar) + "% Stamina", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        attackLabel =  new Label(String.format("%03d", attackGauge) + "% Attack", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        healthLabel = new Label(String.format("%d", health) + " Health", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        scoreLabel =  new Label(String.format("%04d", score) + " Score", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        staminaLabel = new Label(String.format("%03d", staminaBar) + "% Stamina", new Label.LabelStyle(new BitmapFont(), Color.BLUE));
+        attackLabel =  new Label(String.format("%03d", attackGauge) + "% Attack", new Label.LabelStyle(new BitmapFont(), Color.BLUE));
+        healthLabel = new Label(String.format("%d", health) + " Health", new Label.LabelStyle(new BitmapFont(), Color.BLUE));
+        enemyCountLabel =  new Label(String.format("%03d", enemyCount) + " Enemies", new Label.LabelStyle(new BitmapFont(), Color.BLUE));
 
         table.add(staminaLabel).expandX();
         table.add(attackLabel).expandX();
         table.add(healthLabel).expandX();
-        table.add(scoreLabel).expandX();
+        table.add(enemyCountLabel).expandX();
         stage.addActor(table);
     }
 
     // TODO static?
-    public void addScore(int value) {
-        score += value;
-        scoreLabel.setText(String.format("%04d", score) + " Score");
+    public static void decrementEnemy() {
+        enemyCount--;
+        enemyCountLabel.setText(String.format("%04d", enemyCountLabel) + " Enemies");
     }
 
     public static void changeStamina(int value) {
