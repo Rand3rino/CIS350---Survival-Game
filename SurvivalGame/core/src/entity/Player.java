@@ -8,6 +8,7 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.mygdx.game.Collision;
 import com.mygdx.game.Hud.Hud;
 import com.mygdx.game.Screens.PlayScreen;
+import sun.reflect.annotation.ExceptionProxy;
 
 public class Player extends Entity {
 
@@ -37,6 +38,20 @@ public class Player extends Entity {
 
     // TODO
     Texture image;
+    private Texture left1 = new Texture("core/assets/playerMoveAssets/left1.png");
+    private Texture left2 = new Texture("core/assets/playerMoveAssets/left2.png");
+    private Texture left3 = new Texture("core/assets/playerMoveAssets/left3.png");
+    private Texture right1 = new Texture("core/assets/playerMoveAssets/right1.png");
+    private Texture right2 = new Texture("core/assets/playerMoveAssets/right2.png");
+    private Texture right3 = new Texture("core/assets/playerMoveAssets/right3.png");
+    private Texture up1 = new Texture("core/assets/playerMoveAssets/up1.png");
+    private Texture up2 = new Texture("core/assets/playerMoveAssets/up2.png");
+    private Texture up3 = new Texture("core/assets/playerMoveAssets/up3.png");
+    private Texture down1 = new Texture("core/assets/playerMoveAssets/down1.png");
+    private Texture down2 = new Texture("core/assets/playerMoveAssets/down2.png");
+    private Texture down3 = new Texture("core/assets/playerMoveAssets/down3.png");
+    private Texture punchLeft = new Texture("core/assets/playerMoveAssets/punchLeft.png");
+    private Texture punchRight = new Texture("core/assets/playerMoveAssets/punchRight.png");
 
     // TODO
     TiledMapTileLayer collision;
@@ -265,75 +280,63 @@ public class Player extends Entity {
     }
 
     private void imgPunch() {
-        image = new Texture("core/assets/playerMoveAssets/Green.PNG");
+        if (image.equals(left1) || image.equals(left2) || image.equals(left3))
+            image = punchLeft;
+        else if (image.equals(right1) || image.equals(right2) || image.equals(right3))
+            image = punchRight;
+
     }
 
     private void imgLeft(){
 
-        if (left >= 30 ){
-            image = new Texture("core/assets/playerMoveAssets/left1.png");
-        }
-        else if (left >= 20) {
-            image = new Texture( "core/assets/playerMoveAssets/left2.png");
-        }
-        else if (left >= 10){
-            image = new Texture("core/assets/playerMoveAssets/left3.png");
-        }
-        else if (left >= 0){
-            image = new Texture("core/assets/playerMoveAssets/left2.png");
-         }
+        if (left >= 30 )
+            image = left1;
+        else if (left >= 20)
+            image = left2;
+        else if (left >= 10)
+            image = left3;
+        else if (left >= 0)
+            image = left2;
         left++;
         left = left % 40;
     }
 
     private void imgRight(){
 
-        if (right >= 30){
-            image = new Texture("core/assets/playerMoveAssets/right1.png");
-        }
-        else if (right >= 20){
-            image = new Texture("core/assets/playerMoveAssets/right2.png");
-        }
-        else if(right >= 10){
-            image = new Texture("core/assets/playerMoveAssets/right3.png");
-        }
-        else if(right >= 0){
-            image = new Texture("core/assets/playerMoveAssets/right2.png");
-        }
+        if (right >= 30)
+            image = right1;
+        else if (right >= 20)
+            image = right2;
+        else if(right >= 10)
+            image = right3;
+        else if(right >= 0)
+            image = right2;
         right++;
         right = right % 40;
     }
 
     private void imgDown(){
-        if (down >= 30){
-            image = new Texture("core/assets/playerMoveAssets/down1.png");
-        }
-        else if (down >= 20) {
-            image = new Texture("core/assets/playerMoveAssets/down2.png");
-        }
-        else if (down >= 10){
-            image = new Texture("core/assets/playerMoveAssets/down3.png");
-        }
-        else if (down >= 0){
-            image = new Texture("core/assets/playerMoveAssets/down2.png");
-        }
+        if (down >= 30)
+            image = down1;
+        else if (down >= 20)
+            image = down2;
+        else if (down >= 10)
+            image = down3;
+        else if (down >= 0)
+            image = down2;
         down++;
         down = down % 40;
     }
 
     private void imgUp() {
-        if (up >= 30){
-            image = new Texture("core/assets/playerMoveAssets/up1.png");
-        }
-        else if (up >= 20){
-            image = new Texture ("core/assets/playerMoveAssets/up2.png");
-        }
-        else if (up >= 10){
-            image = new Texture("core/assets/playerMoveAssets/up3.png");
-        }
-        else if (up >= 0){
-            image = new Texture("core/assets/playerMoveAssets/up2.png");
-        }
+        if (up >= 30)
+            image = up1;
+        else if (up >= 20)
+            image = up2;
+        else if (up >= 10)
+            image = up3;
+        else if (up >= 0)
+            image = up2;
         up++;
         up = up % 40;
     }
