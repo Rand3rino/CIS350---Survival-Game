@@ -75,11 +75,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PlayScreen.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="PlayScreen.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/Screens/PlayScreen.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="726">
-              <caret line="64" column="11" lean-forward="true" selection-start-line="64" selection-start-column="11" selection-end-line="64" selection-end-column="11" />
+            <state relative-caret-position="-204">
+              <caret column="31" lean-forward="true" selection-start-column="31" selection-end-column="31" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#3139#3140#0" expanded="true" />
@@ -93,11 +93,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EndScreen.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/Screens/EndScreen.java">
+      <file leaf-file-name="LoseScreen.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/Screens/LoseScreen.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="17" column="16" selection-start-line="17" selection-start-column="16" selection-end-line="17" selection-end-column="16" />
+            <state relative-caret-position="289">
+              <caret line="17" column="32" selection-start-line="17" selection-start-column="32" selection-end-line="17" selection-end-column="32" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -105,11 +105,36 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Hud.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="WinScreen.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/Screens/WinScreen.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="97">
+              <caret line="33" column="34" lean-forward="true" selection-start-line="33" selection-start-column="34" selection-end-line="33" selection-end-column="34" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Hud.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/Hud/Hud.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="539">
-              <caret line="71" column="69" selection-start-line="71" selection-start-column="69" selection-end-line="71" selection-end-column="69" />
+            <state relative-caret-position="386">
+              <caret line="85" column="5" lean-forward="true" selection-start-line="85" selection-start-column="5" selection-end-line="85" selection-end-column="5" />
+              <folding>
+                <element signature="e#3267#3268#0" expanded="true" />
+                <element signature="e#3298#3299#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HealthTracking.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/src/Logic/HealthTracking.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="63">
+              <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
             </state>
           </provider>
         </entry>
@@ -870,10 +895,12 @@
         <option value="$PROJECT_DIR$/core/src/com/mygdx/game/SurvivalGame.java" />
         <option value="$PROJECT_DIR$/core/src/com/mygdx/game/Screens/HomeScreen.java" />
         <option value="$PROJECT_DIR$/core/src/entity/AI.java" />
-        <option value="$PROJECT_DIR$/core/src/com/mygdx/game/Hud/Hud.java" />
         <option value="$PROJECT_DIR$/core/src/entity/Player.java" />
         <option value="$PROJECT_DIR$/core/src/com/mygdx/game/Screens/EndScreen.java" />
         <option value="$PROJECT_DIR$/core/src/com/mygdx/game/Screens/PlayScreen.java" />
+        <option value="$PROJECT_DIR$/core/src/com/mygdx/game/Screens/LoseScreen.java" />
+        <option value="$PROJECT_DIR$/core/src/com/mygdx/game/Screens/WinScreen.java" />
+        <option value="$PROJECT_DIR$/core/src/com/mygdx/game/Hud/Hud.java" />
       </list>
     </option>
   </component>
@@ -940,6 +967,13 @@
               <item name="core" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="src" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="entity" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="SurvivalGame" type="b2602c69:ProjectViewProjectNode" />
+              <item name="SurvivalGame" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="core" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="Logic" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -1064,12 +1098,12 @@
       <window_info anchor="bottom" id="Event Log" order="2" side_tool="true" />
       <window_info anchor="right" id="Maven Projects" order="4" />
       <window_info anchor="bottom" id="Version Control" order="0" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Run" order="6" visible="true" weight="0.2678002" />
+      <window_info active="true" anchor="bottom" id="Run" order="6" visible="true" weight="0.2678002" />
       <window_info anchor="bottom" id="CheckStyle" order="11" />
       <window_info anchor="bottom" id="Terminal" order="1" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="0" />
-      <window_info active="true" content_ui="combo" id="Project" order="5" visible="true" weight="0.08476563" />
+      <window_info content_ui="combo" id="Project" order="5" visible="true" weight="0.08476563" />
       <window_info anchor="right" id="Gradle" order="8" />
       <window_info id="Structure" order="6" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="6" weight="0.25" />
@@ -1095,31 +1129,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/core/src/entity/Player.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3774">
-          <caret line="251" column="20" selection-start-line="251" selection-start-column="20" selection-end-line="251" selection-end-column="20" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#8604#8605#0" expanded="true" />
-            <element signature="e#8676#8677#0" expanded="true" />
-            <element signature="e#11688#11689#0" expanded="true" />
-            <element signature="e#11712#11713#0" expanded="true" />
-            <element signature="e#11737#11738#0" expanded="true" />
-            <element signature="e#11761#11762#0" expanded="true" />
-            <element signature="e#11914#11915#0" expanded="true" />
-            <element signature="e#11941#11942#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/desktop/src/com/mygdx/game/desktop/DesktopLauncher.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="6" column="30" selection-start-line="6" selection-start-column="30" selection-end-line="6" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/core/src/entity/Player.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2958">
@@ -1365,13 +1374,6 @@
     <entry file="file://$PROJECT_DIR$/core/assets/playerMoveAssets/OPMdown1.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/Hud/Hud.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="539">
-          <caret line="71" column="69" selection-start-line="71" selection-start-column="69" selection-end-line="71" selection-end-column="69" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/SurvivalGame.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="505">
@@ -1422,20 +1424,37 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/Screens/EndScreen.java">
+    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/Screens/LoseScreen.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="17" column="16" selection-start-line="17" selection-start-column="16" selection-end-line="17" selection-end-column="16" />
+        <state relative-caret-position="289">
+          <caret line="17" column="32" selection-start-line="17" selection-start-column="32" selection-end-line="17" selection-end-column="32" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/Screens/WinScreen.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="97">
+          <caret line="33" column="34" lean-forward="true" selection-start-line="33" selection-start-column="34" selection-end-line="33" selection-end-column="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/Logic/HealthTracking.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="63">
+          <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/Screens/PlayScreen.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="726">
-          <caret line="64" column="11" lean-forward="true" selection-start-line="64" selection-start-column="11" selection-end-line="64" selection-end-column="11" />
+        <state relative-caret-position="-204">
+          <caret column="31" lean-forward="true" selection-start-column="31" selection-end-column="31" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#3139#3140#0" expanded="true" />
@@ -1444,6 +1463,17 @@
             <element signature="e#3917#3918#0" expanded="true" />
             <element signature="e#4104#4105#0" expanded="true" />
             <element signature="e#4133#4134#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/Hud/Hud.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="386">
+          <caret line="85" column="5" lean-forward="true" selection-start-line="85" selection-start-column="5" selection-end-line="85" selection-end-column="5" />
+          <folding>
+            <element signature="e#3267#3268#0" expanded="true" />
+            <element signature="e#3298#3299#0" expanded="true" />
           </folding>
         </state>
       </provider>

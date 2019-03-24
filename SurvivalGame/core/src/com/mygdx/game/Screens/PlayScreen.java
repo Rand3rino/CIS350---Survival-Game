@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
@@ -15,10 +14,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.GameMap;
 import com.mygdx.game.Hud.Hud;
 import com.mygdx.game.SurvivalGame;
-import entity.AI;
-import entity.Entity;
 import entity.Player;
-import java.util.ArrayList;
 
 public class PlayScreen extends GameMap implements Screen {
     TiledMap map;
@@ -90,12 +86,12 @@ public class PlayScreen extends GameMap implements Screen {
         super.render(gameCam, game.batch);
         game.batch.end();
 
-                game.batch.setProjectionMatrix(gameCam.combined);
-        game.batch.begin();
-        game.batch.end();
+//                game.batch.setProjectionMatrix(gameCam.combined);
+//        game.batch.begin();
+//        game.batch.end();
 
         if(gameOver()) {
-            game.setScreen(new EndScreen(game));
+            game.setScreen(new LoseScreen(game));
             dispose();
         }
     }

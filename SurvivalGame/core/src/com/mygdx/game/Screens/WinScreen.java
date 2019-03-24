@@ -15,13 +15,13 @@ import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.SurvivalGame;
 
-public class EndScreen implements Screen {
+public class WinScreen implements Screen {
 
     private Viewport gamePort;
     private Stage stage;
     private Game game;
 
-    public EndScreen (Game game) {
+    public WinScreen(Game game) {
         this.game = game;
         gamePort = new StretchViewport(SurvivalGame.WIDTH, SurvivalGame.HEIGHT, new OrthographicCamera());
         stage = new Stage(gamePort, ((SurvivalGame) game).batch);
@@ -33,7 +33,7 @@ public class EndScreen implements Screen {
         table.center();
         table.setFillParent(true);
 
-        Label titleLabel = new Label("Game Over", font);
+        Label titleLabel = new Label("Winner Winner, Discount Dinner", font);
         Label playAgainLabel = new Label("Press ENTER to Play Again", font);
 
         table.add(titleLabel).expandX();
