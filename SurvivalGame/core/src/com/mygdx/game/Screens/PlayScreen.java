@@ -52,7 +52,7 @@ public class PlayScreen extends GameMap implements Screen {
         collision = (TiledMapTileLayer) map.getLayers().get("Collision");
 
         p = new Player(300, 400, collision, null);
-        entities.add(new AI(100,50,collision, p));
+//        entities.add(new AI(100,50,collision, p));
         gameCam.position.set(p.getX(),p.getY(),0);
         entities.add(p);
     }
@@ -62,9 +62,9 @@ public class PlayScreen extends GameMap implements Screen {
 
     }
 
-    public void handleInput(float deltaTime) {
-
-    }
+//    public void handleInput(float deltaTime) {
+//
+//    }
 
     public void update () {
         super.update(deltaTime);
@@ -93,6 +93,11 @@ public class PlayScreen extends GameMap implements Screen {
                 game.batch.setProjectionMatrix(gameCam.combined);
         game.batch.begin();
         game.batch.end();
+
+        if(gameOver()) {
+            game.setScreen(new EndScreen(game));
+            dispose();
+        }
     }
 
 
@@ -136,5 +141,12 @@ public class PlayScreen extends GameMap implements Screen {
     @Override
     public void dispose() {
         map.dispose();
+    }
+
+    public boolean gameOver() {
+        if (p.isDead()) {
+            return true;
+        }
+        return false;
     }
 }

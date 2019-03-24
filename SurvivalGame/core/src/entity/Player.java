@@ -8,6 +8,7 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.mygdx.game.Collision;
 import com.mygdx.game.Hud.Hud;
 import com.mygdx.game.Screens.PlayScreen;
+import com.sun.org.apache.xpath.internal.functions.FuncFalse;
 import sun.reflect.annotation.ExceptionProxy;
 
 public class Player extends Entity {
@@ -27,11 +28,15 @@ public class Player extends Entity {
     /** Energy Used in Attacks */
     private static final int punchBarMax = 100;
 
+    private int health;
+
     /** Stamina Bar */
     private int sprintBar;
 
     /** Attack Bar */
     private int punchBar;
+
+    private boolean dead;
 
     // TODO
     Collision rect;
@@ -52,6 +57,8 @@ public class Player extends Entity {
     private Texture down3 = new Texture("core/assets/playerMoveAssets/down3.png");
     private Texture punchLeft = new Texture("core/assets/playerMoveAssets/punchLeft.png");
     private Texture punchRight = new Texture("core/assets/playerMoveAssets/punchRight.png");
+    private Texture laydown = new Texture("core/assets/playerMoveAssets/dead.png");
+
 
     // TODO
     TiledMapTileLayer collision;
@@ -69,9 +76,11 @@ public class Player extends Entity {
     public Player (float x, float y, TiledMapTileLayer map, Entity e){
 
         super(x,y,EntityType.PLAYER, map, e);
-        image =  new Texture("core/assets/playerMoveAssets/down2.png");
+        image =  down2;
         this.rect = new Collision(getX(),getY(),getWidth(),getHeight());
         this.collision = map;
+        dead = false;
+        health = 3;
         sprintBar = sprintBarMax;
         punchBar = punchBarMax;
     }
@@ -103,28 +112,34 @@ public class Player extends Entity {
      *****************************************************************/
     public void update (float deltaTime){
 
-        // If the sprint button is not held, charge stamina till max
-        if (!Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT))
-            if (sprintBar < sprintBarMax)
-                sprintBar++;
+        if (dead == false) {
+            // If the sprint button is not held, charge stamina till max
+            if (!Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT))
+                if (sprintBar < sprintBarMax)
+                    sprintBar++;
 
-        // If the attack button is not held, charge the attack till max
-        if (!Gdx.input.isKeyPressed(Input.Keys.SPACE))
-            if (punchBar < punchBarMax)
-                punchBar++;
+            // If the attack button is not held, charge the attack till max
+            if (!Gdx.input.isKeyPressed(Input.Keys.SPACE))
+                if (punchBar < punchBarMax)
+                    punchBar++;
 
-        // Handle if character is sprinting
-        playerSprint(deltaTime);
+            // Handle if character is sprinting
+            playerSprint(deltaTime);
 
-        // Handle if character is walking
-        playerWalk(deltaTime);
+            // Handle if character is walking
+            playerWalk(deltaTime);
 
-        // Handle if character is punching
-        // TODO need deltaTime?
-        playerPunch();
+            // Handle if character is punching
+            // TODO need deltaTime?
+            playerPunch();
 
-        Hud.changeStamina(sprintBar);
-        Hud.changeAttack(punchBar);
+            Hud.changeStamina(sprintBar);
+            Hud.changeAttack(punchBar);
+            Hud.changeHealth(health);
+        }
+        else {
+            image = laydown;
+        }
     }
 
     /******************************************************************
@@ -141,7 +156,14 @@ public class Player extends Entity {
 
                 // Reset attack bar
                 punchBar = 0;
+
+                // TODO Remove after health testing
+                hit();
+                if (health == 0)
+                    dead = true;
+
             }
+
     }
 
     /******************************************************************
@@ -340,5 +362,17 @@ public class Player extends Entity {
             image = up2;
         up++;
         up = up % 40;
+    }
+
+    private void heal() {
+        health++;
+    }
+
+    public void hit() {
+        health--;
+    }
+
+    public boolean isDead() {
+        return dead;
     }
 }
