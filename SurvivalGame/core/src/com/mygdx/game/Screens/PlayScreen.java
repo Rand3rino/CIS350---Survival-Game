@@ -52,7 +52,7 @@ public class PlayScreen extends GameMap implements Screen {
         collision = (TiledMapTileLayer) map.getLayers().get("Collision");
 
         p = new Player(300, 400, collision, null);
-        entities.add(new AI(100,50,collision, p));
+//        entities.add(new AI(100,50,collision, p));
         gameCam.position.set(p.getX(),p.getY(),0);
         entities.add(p);
     }

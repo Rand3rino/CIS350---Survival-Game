@@ -44,7 +44,7 @@
       <file leaf-file-name="HomeScreen.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/Screens/HomeScreen.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="213">
+            <state relative-caret-position="114">
               <caret line="53" column="24" selection-start-line="53" selection-start-column="24" selection-end-line="53" selection-end-column="24" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -56,10 +56,16 @@
       <file leaf-file-name="Player.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/core/src/entity/Player.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-56">
-              <caret line="283" column="30" selection-start-line="283" selection-start-column="30" selection-end-line="283" selection-end-column="30" />
+            <state relative-caret-position="556">
+              <caret line="138" column="12" selection-start-line="138" selection-start-column="12" selection-end-line="138" selection-end-column="12" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#8604#8605#0" expanded="true" />
+                <element signature="e#8676#8677#0" expanded="true" />
+                <element signature="e#11688#11689#0" expanded="true" />
+                <element signature="e#11712#11713#0" expanded="true" />
+                <element signature="e#11737#11738#0" expanded="true" />
+                <element signature="e#11761#11762#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -79,15 +85,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="something.tmx" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/assets/something.tmx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" column="3" selection-start-line="5" selection-start-column="3" selection-end-line="5" selection-end-column="3" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="PlayScreen.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/Screens/PlayScreen.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -100,20 +97,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EntityType.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/src/entity/EntityType.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" column="33" selection-start-line="5" selection-start-column="33" selection-end-line="5" selection-end-column="33" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Hud.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/Hud/Hud.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="612">
-              <caret line="45" selection-start-line="45" selection-end-line="45" />
+            <state relative-caret-position="539">
+              <caret line="71" column="69" selection-start-line="71" selection-start-column="69" selection-end-line="71" selection-end-column="69" />
             </state>
           </provider>
         </entry>
@@ -870,12 +858,12 @@
         <option value="$PROJECT_DIR$/core/src/entity/Entity.java" />
         <option value="$PROJECT_DIR$/core/assets/something.tmx" />
         <option value="$PROJECT_DIR$/core/src/Logic/PathFinder.java" />
-        <option value="$PROJECT_DIR$/core/src/com/mygdx/game/Hud/Hud.java" />
         <option value="$PROJECT_DIR$/core/src/entity/EntityType.java" />
         <option value="$PROJECT_DIR$/core/src/com/mygdx/game/Screens/PlayScreen.java" />
         <option value="$PROJECT_DIR$/core/src/com/mygdx/game/SurvivalGame.java" />
         <option value="$PROJECT_DIR$/core/src/com/mygdx/game/Screens/HomeScreen.java" />
         <option value="$PROJECT_DIR$/core/src/entity/AI.java" />
+        <option value="$PROJECT_DIR$/core/src/com/mygdx/game/Hud/Hud.java" />
         <option value="$PROJECT_DIR$/core/src/entity/Player.java" />
       </list>
     </option>
@@ -1063,6 +1051,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-372" y="-1088" width="2576" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="0" />
       <window_info anchor="bottom" id="TODO" order="10" />
@@ -1111,6 +1100,12 @@
           <caret line="251" column="20" selection-start-line="251" selection-start-column="20" selection-end-line="251" selection-end-column="20" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#8604#8605#0" expanded="true" />
+            <element signature="e#8676#8677#0" expanded="true" />
+            <element signature="e#11688#11689#0" expanded="true" />
+            <element signature="e#11712#11713#0" expanded="true" />
+            <element signature="e#11737#11738#0" expanded="true" />
+            <element signature="e#11761#11762#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1128,6 +1123,12 @@
           <caret line="240" selection-start-line="240" selection-end-line="240" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#8604#8605#0" expanded="true" />
+            <element signature="e#8676#8677#0" expanded="true" />
+            <element signature="e#11688#11689#0" expanded="true" />
+            <element signature="e#11712#11713#0" expanded="true" />
+            <element signature="e#11737#11738#0" expanded="true" />
+            <element signature="e#11761#11762#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1166,6 +1167,12 @@
           <caret line="210" column="67" selection-start-line="210" selection-start-column="67" selection-end-line="210" selection-end-column="67" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#8604#8605#0" expanded="true" />
+            <element signature="e#8676#8677#0" expanded="true" />
+            <element signature="e#11688#11689#0" expanded="true" />
+            <element signature="e#11712#11713#0" expanded="true" />
+            <element signature="e#11737#11738#0" expanded="true" />
+            <element signature="e#11761#11762#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1334,13 +1341,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/Hud/Hud.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
-          <caret line="45" selection-start-line="45" selection-end-line="45" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/core/assets/something.tmx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
@@ -1377,16 +1377,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/Screens/HomeScreen.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="213">
-          <caret line="53" column="24" selection-start-line="53" selection-start-column="24" selection-end-line="53" selection-end-column="24" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/core/assets/playerMoveAssets/OPMdown1.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
@@ -1400,12 +1390,35 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/entity/Player.java">
+    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/Screens/HomeScreen.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-56">
-          <caret line="283" column="30" selection-start-line="283" selection-start-column="30" selection-end-line="283" selection-end-column="30" />
+        <state relative-caret-position="114">
+          <caret line="53" column="24" selection-start-line="53" selection-start-column="24" selection-end-line="53" selection-end-column="24" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/Hud/Hud.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="539">
+          <caret line="71" column="69" selection-start-line="71" selection-start-column="69" selection-end-line="71" selection-end-column="69" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/entity/Player.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="556">
+          <caret line="138" column="12" selection-start-line="138" selection-start-column="12" selection-end-line="138" selection-end-column="12" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#8604#8605#0" expanded="true" />
+            <element signature="e#8676#8677#0" expanded="true" />
+            <element signature="e#11688#11689#0" expanded="true" />
+            <element signature="e#11712#11713#0" expanded="true" />
+            <element signature="e#11737#11738#0" expanded="true" />
+            <element signature="e#11761#11762#0" expanded="true" />
           </folding>
         </state>
       </provider>

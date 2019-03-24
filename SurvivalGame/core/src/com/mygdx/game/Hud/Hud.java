@@ -67,13 +67,8 @@ public class Hud {
         attackLabel.setText(String.format("%03d", attackGauge) + "% Attack");
     }
 
-    public static void increaseHealth() {
-        health++;
-        healthLabel.setText(String.format("%d", health) + " Health");
-    }
-
-    public static void decreaseHealth() {
-        health--;
+    public static void changeHealth(int value) {
+        health = value;
         healthLabel.setText(String.format("%d", health) + " Health");
     }
 
