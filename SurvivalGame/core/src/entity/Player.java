@@ -371,4 +371,8 @@ public class Player extends Entity {
     public void hit() {
         health--;
     }
+
+    public boolean isDead() {
+        return dead;
+    }
 }
