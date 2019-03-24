@@ -140,7 +140,7 @@ public class PlayScreen extends GameMap implements Screen {
     }
 
     public boolean gameOver() {
-        if (p.isDead()) {
+        if (p.health.isDead()) {
             return true;
         }
         return false;
