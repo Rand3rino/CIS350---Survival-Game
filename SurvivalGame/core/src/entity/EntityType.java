@@ -2,8 +2,8 @@ package entity;
 
 
 public enum EntityType {
-    PLAYER("player", 15, 30, 40),
-    COMPUTER("computer", 15, 30, 40);
+    PLAYER("player", 30,60,80),
+    COMPUTER("computer", 30,60,80);
 
 
     private String id;

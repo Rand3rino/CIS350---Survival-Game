@@ -9,15 +9,14 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.mygdx.game.Screens.HomeScreen;
 import com.mygdx.game.Screens.PlayScreen;
 
 public class SurvivalGame extends Game {
 	public static final int WIDTH = 736;
 	public static final int HEIGHT = 736;
-	private Viewport gamePort;
 	public SpriteBatch batch;
 	Texture img;
-	GameMap map1;
 	OrthographicCamera camera;
 
 
@@ -26,7 +25,8 @@ public class SurvivalGame extends Game {
 
 		camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		batch = new SpriteBatch();
-		setScreen(new PlayScreen(this));
+		setScreen(new HomeScreen(this));
+//		setScreen(new PlayScreen(this));
 		camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		camera.update();
 	}
@@ -37,7 +37,5 @@ public class SurvivalGame extends Game {
 	@Override
 	public void dispose () {
 		batch.dispose();
-		map1.dispose();
-		img.dispose();
 	}
 }

@@ -10,8 +10,6 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.GameMap;
@@ -41,7 +39,7 @@ public class PlayScreen extends GameMap implements Screen {
     public PlayScreen (SurvivalGame game) {
         this.game = game;
         gameCam = new OrthographicCamera();
-        gamePort = new StretchViewport(SurvivalGame.WIDTH, SurvivalGame.HEIGHT, gameCam);
+        gamePort = new StretchViewport(SurvivalGame.WIDTH/2, SurvivalGame.HEIGHT/2, gameCam);
         hud = new Hud(game.batch);
 
         mapLoader = new TmxMapLoader();
@@ -54,14 +52,8 @@ public class PlayScreen extends GameMap implements Screen {
         collision = (TiledMapTileLayer) map.getLayers().get("Collision");
 
         p = new Player(300, 400, collision, null);
-        entities.add(new AI(70,50,collision, p));
-
-//        gameCam.position.x = p.getX();
-//        gameCam.position.y = p.getY();
-        entities.add(new AI(200,200,collision, p));
-        entities.add(new AI(10,400,collision, p));
-        entities.add(new AI(100,70,collision, p));
-        entities.add(new AI(300,300,collision, p));
+        entities.add(new AI(100,50,collision, p));
+        gameCam.position.set(p.getX(),p.getY(),0);
         entities.add(p);
     }
 
@@ -76,8 +68,9 @@ public class PlayScreen extends GameMap implements Screen {
 
     public void update () {
         super.update(deltaTime);
-//        gameCam.position.x = p.getX();
-//        gameCam.position.y = p.getY();
+        gameCam.position.x = p.getX();
+        gameCam.position.y = p.getY();
+        System.out.println(p.getX() + " " + p.getY());
         gameCam.update();
         renderer.setView(gameCam);
     }
@@ -85,8 +78,11 @@ public class PlayScreen extends GameMap implements Screen {
     @Override
     public void render(float deltaTime) {
         update();
-//        Gdx.gl.glClearColor(0,0,0,1);
-//        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        //Clear the surround area around map with Black
+        Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
         renderer.render();
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();
@@ -94,10 +90,9 @@ public class PlayScreen extends GameMap implements Screen {
         super.render(gameCam, game.batch);
         game.batch.end();
 
-        //        game.batch.setProjectionMatrix(gameCam.combined);
-//        game.batch.begin();
-//        game.batch.draw(texture,0,0);
-//        game.batch.end();
+                game.batch.setProjectionMatrix(gameCam.combined);
+        game.batch.begin();
+        game.batch.end();
     }
 
 
