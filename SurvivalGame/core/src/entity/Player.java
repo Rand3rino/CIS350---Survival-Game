@@ -309,13 +309,13 @@ public class Player extends Entity {
             image = new Texture("core/assets/playerMoveAssets/down1.png");
         }
         else if (down >= 20) {
-            image = new Texture("core/assets/playerMoveAssets/down3.png");
-        }
-        else if (down >= 10){
             image = new Texture("core/assets/playerMoveAssets/down2.png");
         }
-        else if (down >= 0){
+        else if (down >= 10){
             image = new Texture("core/assets/playerMoveAssets/down3.png");
+        }
+        else if (down >= 0){
+            image = new Texture("core/assets/playerMoveAssets/down2.png");
         }
         down++;
         down = down % 40;
