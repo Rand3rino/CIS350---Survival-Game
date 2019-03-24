@@ -41,13 +41,13 @@ public class PlayScreen extends GameMap implements Screen {
     public PlayScreen (SurvivalGame game) {
         this.game = game;
         gameCam = new OrthographicCamera();
-        gamePort = new StretchViewport(SurvivalGame.WIDTH, SurvivalGame.HEIGHT, gameCam);
+        gamePort = new StretchViewport(SurvivalGame.WIDTH/2, SurvivalGame.HEIGHT/2, gameCam);
         hud = new Hud(game.batch);
 
         mapLoader = new TmxMapLoader();
         map = mapLoader.load("core/assets/something.tmx");
         renderer = new OrthogonalTiledMapRenderer(map);
-        gameCam.position.set(gamePort.getWorldWidth()/2, gamePort.getWorldHeight()/2,0);
+//        gameCam.position.set(gamePort.getWorldWidth()/2, gamePort.getWorldHeight()/2,0);
 
         // Grabs the collision layer, wont work with other maps until I change em.
         // Also the boarder was not changed, resulting in no collision. Will fix.
@@ -55,13 +55,13 @@ public class PlayScreen extends GameMap implements Screen {
 
         p = new Player(300, 400, collision, null);
         entities.add(new AI(70,50,collision, p));
-
+        gameCam.position.set(p.getX(),p.getY(),0);
 //        gameCam.position.x = p.getX();
 //        gameCam.position.y = p.getY();
-        entities.add(new AI(200,200,collision, p));
-        entities.add(new AI(10,400,collision, p));
-        entities.add(new AI(100,70,collision, p));
-        entities.add(new AI(300,300,collision, p));
+//        entities.add(new AI(200,200,collision, p));
+//        entities.add(new AI(10,400,collision, p));
+//        entities.add(new AI(100,70,collision, p));
+//        entities.add(new AI(300,300,collision, p));
         entities.add(p);
     }
 
@@ -76,8 +76,8 @@ public class PlayScreen extends GameMap implements Screen {
 
     public void update () {
         super.update(deltaTime);
-//        gameCam.position.x = p.getX();
-//        gameCam.position.y = p.getY();
+        gameCam.position.x = p.getX();
+        gameCam.position.y = p.getY();
         gameCam.update();
         renderer.setView(gameCam);
     }
