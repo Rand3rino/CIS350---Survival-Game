@@ -12,8 +12,8 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Screens.PlayScreen;
 
 public class SurvivalGame extends Game {
-	public static final int WIDTH = 480;
-	public static final int HEIGHT = 480;
+	public static final int WIDTH = 736;
+	public static final int HEIGHT = 736;
 	private Viewport gamePort;
 	public SpriteBatch batch;
 	Texture img;

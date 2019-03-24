@@ -79,6 +79,7 @@ public class Player extends Entity {
         return punchBar;
     }
 
+
     /******************************************************************
      * update method handles character movement as well as stamina
      * and attack bar levels.
