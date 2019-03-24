@@ -3,7 +3,8 @@ package Logic;
 import entity.Entity;
 
 public class HealthTracking {
-    int health, totalHealth;
+    private int health;
+    private int totalHealth;
     Items buffs;
     Entity target;
     public HealthTracking(Entity e, Items buffs, int currHealth, int tHealth){
@@ -11,11 +12,13 @@ public class HealthTracking {
         buffs = this.buffs;
         health = currHealth;
         totalHealth = tHealth;
-
-
     }
 
-    void decreaseHealth(int damage){
+    public int getHealth() {
+        return health;
+    }
+
+    public void decreaseHealth(int damage){
         if (health - damage > 0) {
             health -= damage;
         }
@@ -23,7 +26,7 @@ public class HealthTracking {
             health = 0;
     }
 
-    void buffHealth(int potion){
+    public void buffHealth(int potion){
         if (health + potion < totalHealth) {
             health += potion;
         }
@@ -31,7 +34,7 @@ public class HealthTracking {
             health = totalHealth;
     }
 
-    boolean isDead(){
+    public boolean isDead(){
         if (health == 0){
             return true;
         }

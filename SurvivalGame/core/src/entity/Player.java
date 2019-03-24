@@ -1,5 +1,6 @@
 package entity;
 
+import Logic.HealthTracking;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
@@ -28,15 +29,13 @@ public class Player extends Entity {
     /** Energy Used in Attacks */
     private static final int punchBarMax = 100;
 
-    private int health;
-
     /** Stamina Bar */
     private int sprintBar;
 
     /** Attack Bar */
     private int punchBar;
 
-    private boolean dead;
+    public HealthTracking health = new HealthTracking(this, null, 3, 3);
 
     // TODO
     Collision rect;
@@ -76,11 +75,10 @@ public class Player extends Entity {
     public Player (float x, float y, TiledMapTileLayer map, Entity e){
 
         super(x,y,EntityType.PLAYER, map, e);
+
         image =  down2;
         this.rect = new Collision(getX(),getY(),getWidth(),getHeight());
         this.collision = map;
-        dead = false;
-        health = 3;
         sprintBar = sprintBarMax;
         punchBar = punchBarMax;
     }
@@ -112,7 +110,7 @@ public class Player extends Entity {
      *****************************************************************/
     public void update (float deltaTime){
 
-        if (dead == false) {
+        if (!health.isDead()) {
             // If the sprint button is not held, charge stamina till max
             if (!Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT))
                 if (sprintBar < sprintBarMax)
@@ -135,7 +133,7 @@ public class Player extends Entity {
 
             Hud.changeStamina(sprintBar);
             Hud.changeAttack(punchBar);
-            Hud.changeHealth(health);
+            Hud.changeHealth(health.getHealth());
         }
         else {
             image = laydown;
@@ -156,14 +154,7 @@ public class Player extends Entity {
 
                 // Reset attack bar
                 punchBar = 0;
-
-                // TODO Remove after health testing
-                hit();
-                if (health == 0)
-                    dead = true;
-
             }
-
     }
 
     /******************************************************************
@@ -364,15 +355,12 @@ public class Player extends Entity {
         up = up % 40;
     }
 
-    private void heal() {
-        health++;
+    private void hit(int damage) {
+        health.decreaseHealth(damage);
     }
 
-    public void hit() {
-        health--;
+    private void heal(int potion) {
+        health.buffHealth(potion);
     }
 
-    public boolean isDead() {
-        return dead;
-    }
 }
