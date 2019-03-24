@@ -281,6 +281,7 @@ public class Player extends Entity {
 
     private void imgPunch() {
         if (image.equals(left1) || image.equals(left2) || image.equals(left3))
+            //TODO some way to pause. Animation is too quick
             image = punchLeft;
         else if (image.equals(right1) || image.equals(right2) || image.equals(right3))
             image = punchRight;
