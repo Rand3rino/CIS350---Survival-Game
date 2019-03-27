@@ -2,18 +2,16 @@ package entity;
 
 
 public enum EntityType {
-    PLAYER("player", 30,60,80),
-    COMPUTER("computer", 30,60,80);
+   PLAYER("player", 20, 40),
+    COMPUTER("computer", 20, 40);
 
 
     private String id;
     private int width, height;
-    private float weight;
 
-    EntityType(String id, int width, int height, float weight) {
+    EntityType(String id, int width, int height) {
         this.height = height;
         this.width = width;
-        this.weight = weight;
         this.id = id;
     }
 

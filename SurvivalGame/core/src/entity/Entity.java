@@ -1,18 +1,13 @@
 package entity;
-
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.game.GameMap;
 public abstract class Entity {
 
     protected Vector2 pos;
     protected EntityType type;
     protected TiledMapTileLayer map;
     protected Entity player;
-    protected boolean grounded;
 
 
     public Entity(float x, float y, EntityType type, TiledMapTileLayer map, Entity e) {
@@ -22,11 +17,10 @@ public abstract class Entity {
         this.player = e;
     }
 
-    public void update(float deltaTime) {
+    public void update(float deltaTime) {   
 
     }
 
-    public abstract void render(SpriteBatch batch);
 
     protected void moveX(float amount) {
         float newX = pos.x + amount;
@@ -41,7 +35,9 @@ public abstract class Entity {
         this.pos.y = newY;
         //}
     }
+    public void render(SpriteBatch batch){
 
+    }
     public Vector2 getPos() {
         return pos;
     }
@@ -57,11 +53,6 @@ public abstract class Entity {
     public EntityType getType() {
         return type;
     }
-
-    // public boolean isGrounded(){
-    // return grounded;
-    //  }
-
 
     public int getHeight() {
         return type.getHeight();
