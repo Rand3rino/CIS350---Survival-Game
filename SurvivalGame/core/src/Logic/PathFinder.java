@@ -8,12 +8,9 @@ import java.lang.Math;
 public class PathFinder {
 
     TiledMapTileLayer map;
-    Queue<QueueNode> q = new LinkedList<QueueNode>();
     public PathFinder(TiledMapTileLayer inMap) {
         map = inMap;
     }
-    long time = System.currentTimeMillis();
-    double second = 1;
     public int minDistance(int AIPosX, int AIPosY, Entity e) {
 
         //variables are divided by 32 because float X and Y positions are provided in pixel quantities
@@ -40,16 +37,16 @@ public class PathFinder {
         return find(new Point (AIPosX, AIPosY), new Point (playerX, playerY), loc);
     }
 
-    /****
-     for (int i = 0; i < map.getHeight() ; i++){
-     for (int j = 0 ; j < map.getWidth(); j++){
-     System.out.print(loc[i][j] + " ");
-     }
-     System.out.println();
-     }
-     System.out.println();
-     System.out.println();
-     ****/
+/****
+        for (int i = 0; i < map.getHeight() ; i++){
+            for (int j = 0 ; j < map.getWidth(); j++){
+                System.out.print(loc[i][j] + " ");
+            }
+            System.out.println();
+        }
+        System.out.println();
+        System.out.println();
+****/
 
 
 
@@ -73,66 +70,78 @@ public class PathFinder {
 
     private int find(Point src, Point dest, int[][] loc) {
         Point nextMove;
-        if (Math.abs(dest.getX() - src.getX()) > Math.abs(dest.getY() - src.getY())){
-            if (dest.getX() > src.getX()){
-                if (isValidCell(src.getX() + 1, src.getY()) && !isCellBlocked(src.getX() + 1, src.getY())){
-                    return 1;
-                }
-                if (isValidCell(src.getX() + 1, src.getY()) && isCellBlocked(src.getX() + 1, src.getY())){
-                    if (isValidCell(src.getX(), src.getY() + 1) && !isCellBlocked(src.getX(), src.getY() + 1)) {
-                        return 3;
-                    }
-                    if (isValidCell(src.getX(), src.getY() - 1) && !isCellBlocked(src.getX(), src.getY() + 1)){
-                        return 1;
-                    }
-                }
+    if (Math.abs(dest.getX() - src.getX()) > Math.abs(dest.getY() - src.getY())){
+        if (dest.getX() > src.getX()){
+            if (isValidCell(src.getX() + 1, src.getY()) && !isCellBlocked(src.getX() + 1, src.getY())){
+                if (loc[src.getX() + 1][src.getY()] != 4)
+                return 1;
             }
-            else{
-                if (isValidCell(src.getX() - 1, src.getY()) && !isCellBlocked(src.getX() - 1, src.getY())){
-                    return 0;
-                }
-                if (isValidCell(src.getX() - 1, src.getY()) && isCellBlocked(src.getX() - 1, src.getY())){
-                    if (isValidCell(src.getX(), src.getY() + 1) && !isCellBlocked(src.getX(), src.getY() + 1)) {
-                        return 3;
-                    }
-                    if (isValidCell(src.getX(), src.getY() - 1) && !isCellBlocked(src.getX(), src.getY() + 1)){
-                        return 2;
-                    }
-                }
-            }
-        }
-
-
-
-        else{
-            if (dest.getY() > src.getY()){
-
-                if (isValidCell(src.getX(), src.getY() + 1) && !isCellBlocked(src.getX(), src.getY() + 1)){
+            if (isValidCell(src.getX() + 1, src.getY()) && isCellBlocked(src.getX() + 1, src.getY())){
+                if (isValidCell(src.getX(), src.getY() + 1) && !isCellBlocked(src.getX(), src.getY() + 1)) {
+                    if (loc[src.getX()][src.getY() + 1] != 4)
                     return 3;
                 }
-                if (isValidCell(src.getX(), src.getY() + 1) && isCellBlocked(src.getX(), src.getY() + 1)){
-                    if (isValidCell(src.getX() + 1, src.getY()) && !isCellBlocked(src.getX(), src.getY() + 1)) {
-                        return 1;
-                    }
-                    if (isValidCell(src.getX() - 1, src.getY() ) && !isCellBlocked(src.getX(), src.getY() + 1)){
-                        return 0;
-                    }
-                }
-            }
-            else{
-                if (isValidCell(src.getX(), src.getY() - 1) && !isCellBlocked(src.getX(), src.getY() - 1)){
-                    return 2;
-                }
-                if (isValidCell(src.getX(), src.getY() -1) && isCellBlocked(src.getX(), src.getY() - 1)){
-                    if (isValidCell(src.getX() + 1, src.getY()) && !isCellBlocked(src.getX(), src.getY() + 1)) {
-                        return 1;
-                    }
-                    if (isValidCell(src.getX() - 1, src.getY() ) && !isCellBlocked(src.getX(), src.getY() + 1)){
-                        return 0;
-                    }
+                if (isValidCell(src.getX(), src.getY() - 1) && !isCellBlocked(src.getX(), src.getY() + 1)){
+                    if (loc[src.getX() + 1][src.getY()] != 4)
+                    return 1;
                 }
             }
         }
-        return -1;
+        else{
+            if (isValidCell(src.getX() - 1, src.getY()) && !isCellBlocked(src.getX() - 1, src.getY())){
+                if (loc[src.getX() - 1][src.getY()] != 4)
+                return 0;
+            }
+            if (isValidCell(src.getX() - 1, src.getY()) && isCellBlocked(src.getX() - 1, src.getY())){
+                if (isValidCell(src.getX(), src.getY() + 1) && !isCellBlocked(src.getX(), src.getY() + 1)) {
+                    if (loc[src.getX()][src.getY() + 1] != 4)
+                        return 3;
+                }
+                if (isValidCell(src.getX(), src.getY() - 1) && !isCellBlocked(src.getX(), src.getY() + 1)){
+                    if (loc[src.getX()][src.getY() - 1] != 4)
+                        return 2;
+                }
+            }
+        }
+    }
+
+
+
+    else{
+        if (dest.getY() > src.getY()){
+
+            if (isValidCell(src.getX(), src.getY() + 1) && !isCellBlocked(src.getX(), src.getY() + 1 )){
+                if (loc[src.getX()][src.getY() + 1] != 4)
+                    return 3;
+            }
+            if (isValidCell(src.getX(), src.getY() + 1) && isCellBlocked(src.getX(), src.getY() + 1)){
+                if (isValidCell(src.getX() + 1, src.getY()) && !isCellBlocked(src.getX(), src.getY() + 1)) {
+                    if (loc[src.getX() + 1][src.getY()] != 4)
+                        return 1;
+                }
+                if (isValidCell(src.getX() - 1, src.getY() ) && !isCellBlocked(src.getX(), src.getY() + 1)){
+                    if (loc[src.getX() - 1][src.getY()] != 4)
+                        return 0;
+                }
+            }
+        }
+        else{
+            if (isValidCell(src.getX(), src.getY() - 1) && !isCellBlocked(src.getX(), src.getY() - 1)){
+                if (loc[src.getX()][src.getY() - 1] != 4)
+                    return 2;
+            }
+            if (isValidCell(src.getX(), src.getY() -1) && isCellBlocked(src.getX(), src.getY() - 1)){
+                if (isValidCell(src.getX() + 1, src.getY()) && !isCellBlocked(src.getX(), src.getY() + 1)) {
+                    if (loc[src.getX() + 1][src.getY()] != 4)
+                        return 1;
+                }
+                if (isValidCell(src.getX() - 1, src.getY() ) && !isCellBlocked(src.getX(), src.getY() + 1)){
+                    if (loc[src.getX() - 1][src.getY()] != 4)
+                        return 0;
+                }
+            }
+        }
+    }
+    return -1;
     }
 }
