@@ -1,8 +1,7 @@
 package com.mygdx.game.Screens;
 
-import com.badlogic.gdx.Gdx;
+
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -14,7 +13,10 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.GameMap;
 import com.mygdx.game.Hud.Hud;
 import com.mygdx.game.SurvivalGame;
+import entity.Walker;
 import entity.Player;
+import entity.Runner;
+
 
 public class PlayScreen extends GameMap implements Screen {
     TiledMap map;
@@ -35,22 +37,23 @@ public class PlayScreen extends GameMap implements Screen {
     public PlayScreen (SurvivalGame game) {
         this.game = game;
         gameCam = new OrthographicCamera();
-        gamePort = new StretchViewport(SurvivalGame.WIDTH/2, SurvivalGame.HEIGHT/2, gameCam);
+        gamePort = new StretchViewport(SurvivalGame.WIDTH, SurvivalGame.HEIGHT, gameCam);
         hud = new Hud(game.batch);
 
         mapLoader = new TmxMapLoader();
-        map = mapLoader.load("core/assets/something.tmx");
+        map = mapLoader.load("core/assets/map assets/battleMap.tmx");
         renderer = new OrthogonalTiledMapRenderer(map);
         gameCam.position.set(gamePort.getWorldWidth()/2, gamePort.getWorldHeight()/2,0);
 
-        // Grabs the collision layer, wont work with other maps until I change em.
-        // Also the boarder was not changed, resulting in no collision. Will fix.
+
         collision = (TiledMapTileLayer) map.getLayers().get("Collision");
 
-        p = new Player(300, 400, collision, null);
-//        entities.add(new AI(100,50,collision, p));
-        gameCam.position.set(p.getX(),p.getY(),0);
-        entities.add(p);
+        entities.add(p = new Player(300, 400, collision, null));
+        entities.add(new Walker(200,50,collision, p));
+        entities.add(new Walker(220,50,collision, p));
+        entities.add(new Runner(290,70,collision, p));
+        entities.add(new Runner(250,40,collision, p));
+
     }
 
     @Override
@@ -58,15 +61,12 @@ public class PlayScreen extends GameMap implements Screen {
 
     }
 
-//    public void handleInput(float deltaTime) {
-//
-//    }
+    public void handleInput(float deltaTime) {
+
+    }
 
     public void update () {
         super.update(deltaTime);
-        gameCam.position.x = p.getX();
-        gameCam.position.y = p.getY();
-        System.out.println(p.getX() + " " + p.getY());
         gameCam.update();
         renderer.setView(gameCam);
     }
@@ -74,11 +74,8 @@ public class PlayScreen extends GameMap implements Screen {
     @Override
     public void render(float deltaTime) {
         update();
-
-        //Clear the surround area around map with Black
-        Gdx.gl.glClearColor(0, 0, 0, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
+//        Gdx.gl.glClearColor(0,0,0,1);
+//        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         renderer.render();
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();
@@ -86,14 +83,10 @@ public class PlayScreen extends GameMap implements Screen {
         super.render(gameCam, game.batch);
         game.batch.end();
 
-//                game.batch.setProjectionMatrix(gameCam.combined);
+        //        game.batch.setProjectionMatrix(gameCam.combined);
 //        game.batch.begin();
+//        game.batch.draw(texture,0,0);
 //        game.batch.end();
-
-        if(gameOver()) {
-            game.setScreen(new LoseScreen(game));
-            dispose();
-        }
     }
 
 
@@ -137,12 +130,5 @@ public class PlayScreen extends GameMap implements Screen {
     @Override
     public void dispose() {
         map.dispose();
-    }
-
-    public boolean gameOver() {
-        if (p.health.isDead()) {
-            return true;
-        }
-        return false;
     }
 }
