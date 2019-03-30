@@ -22,7 +22,7 @@ public class Walker extends Entity {
     public Walker (float x, float y, TiledMapTileLayer map, Entity e){
         super(x,y,EntityType.COMPUTER, map, e);
         player = e;
-        image = new Texture ("core/assets/seaweed boy movement assets/down1.png");
+        image = new Texture ("seaweed boy movement assets/down1.png");
         path = new PathFinder(map);
         start = time;
     }
@@ -34,15 +34,25 @@ public class Walker extends Entity {
 
         if (move == 0) {
             moveX(-speed);
-            imgLeft();
+            if(ladder(getX(),getY())){
+                imgUp();
+            } else{
+                imgLeft();
+            }
         }
+
         else if (move == 1) {
             moveX(speed);
+            if(ladder(getX(),getY()))
             imgRight();
         }
         else if (move == 2) {
             moveY(-speed);
-            imgDown();
+            if(ladder(getX(),getY())){
+                imgUp();
+            } else {
+                imgDown();
+            }
         }
         else if (move == 3) {
             moveY(speed);
@@ -81,16 +91,16 @@ public class Walker extends Entity {
     private void imgLeft(){
 
         if (left >= 30 ){
-            image = new Texture("core/assets/seaweed boy movement assets/left1.png");
+            image = new Texture("seaweed boy movement assets/left1.png");
         }
         else if (left >= 20){
-            image = new Texture("core/assets/seaweed boy movement assets/left2.png");
+            image = new Texture("seaweed boy movement assets/left2.png");
         }
         else if (left >= 10){
-            image =  new Texture("core/assets/seaweed boy movement assets/left3.png");
+            image =  new Texture("seaweed boy movement assets/left3.png");
         }
         else if (left >= 0){
-            image = new Texture("core/assets/seaweed boy movement assets/left2.png");
+            image = new Texture("seaweed boy movement assets/left2.png");
         }
         left++;
         left = left % 40;
@@ -98,16 +108,16 @@ public class Walker extends Entity {
 
     private void imgRight(){
         if (right >= 30){
-            image = new Texture("core/assets/seaweed boy movement assets/right1.png");
+            image = new Texture("seaweed boy movement assets/right1.png");
         }
         else if(right >= 20){
-            image =  new Texture("core/assets/seaweed boy movement assets/right2.png");
+            image =  new Texture("seaweed boy movement assets/right2.png");
         }
         else if(right >= 10){
-            image =  new Texture("core/assets/seaweed boy movement assets/right3.png");
+            image =  new Texture("seaweed boy movement assets/right3.png");
         }
         else if(right >= 0){
-            image =  new Texture("core/assets/seaweed boy movement assets/right2.png");
+            image =  new Texture("seaweed boy movement assets/right2.png");
         }
         right++;
         right = right % 30;
@@ -118,16 +128,16 @@ public class Walker extends Entity {
      */
     private void imgDown(){
         if (down >= 30){
-            image =  new Texture("core/assets/seaweed boy movement assets/down1.png");
+            image =  new Texture("seaweed boy movement assets/down1.png");
         }
         else if (down >= 20) {
-            image = new Texture("core/assets/seaweed boy movement assets/down2.png");
+            image = new Texture("seaweed boy movement assets/down2.png");
         }
         else if (down >= 10){
-            image =  new Texture("core/assets/seaweed boy movement assets/down3.png");
+            image =  new Texture("seaweed boy movement assets/down3.png");
         }
         else if (down >= 0){
-            image = new Texture("core/assets/seaweed boy movement assets/down2.png");
+            image = new Texture("seaweed boy movement assets/down2.png");
         }
         down++;
         down = down % 40;
@@ -135,16 +145,16 @@ public class Walker extends Entity {
 
     private void imgUp() {
         if (up >= 30){
-            image =  new Texture("core/assets/seaweed boy movement assets/up1.png");
+            image =  new Texture("seaweed boy movement assets/up1.png");
         }
         else if (up >= 20){
-            image = new Texture ("core/assets/seaweed boy movement assets/up2.png");
+            image = new Texture ("seaweed boy movement assets/up2.png");
         }
         else if (up >= 10){
-            image =  new Texture("core/assets/seaweed boy movement assets/up3.png");
+            image =  new Texture("seaweed boy movement assets/up3.png");
         }
         else if (up >= 0){
-            image =  new Texture("core/assets/seaweed boy movement assets/up2.png");
+            image =  new Texture("seaweed boy movement assets/up2.png");
         }
         up++;
         up = up % 40;

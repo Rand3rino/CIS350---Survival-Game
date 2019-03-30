@@ -4,6 +4,8 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -20,11 +22,19 @@ public class WinScreen implements Screen {
     private Viewport gamePort;
     private Stage stage;
     private Game game;
+    private Music music;
+    private Sound sfx;
 
     public WinScreen(Game game) {
         this.game = game;
         gamePort = new StretchViewport(SurvivalGame.WIDTH, SurvivalGame.HEIGHT, new OrthographicCamera());
         stage = new Stage(gamePort, ((SurvivalGame) game).batch);
+
+        music = Gdx.audio.newMusic(Gdx.files.internal("sounds/8bitvictory.ogg"));
+        music.setVolume(0.1f);
+        music.setLooping(true);
+
+        sfx = Gdx.audio.newSound(Gdx.files.internal("sounds/hits/swish_2.wav"));
 
         Label.LabelStyle font = new Label.LabelStyle(new BitmapFont(), Color.WHITE);
 
@@ -51,7 +61,9 @@ public class WinScreen implements Screen {
 
     @Override
     public void render(float delta) {
+        music.play();
         if(Gdx.input.isKeyPressed(Input.Keys.ENTER)) {
+            sfx.play();
             game.setScreen(new PlayScreen((SurvivalGame) game));
             dispose();
         }
@@ -82,6 +94,8 @@ public class WinScreen implements Screen {
 
     @Override
     public void dispose() {
+        music.dispose();
+        sfx.dispose();
 
     }
 }

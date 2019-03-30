@@ -20,7 +20,7 @@ public class AI extends Entity {
     public AI (float x, float y, TiledMapTileLayer map, Entity e){
         super(x,y,EntityType.COMPUTER, map, e);
         player = e;
-        image = new Texture ("core/assets/aiMoveAssets/down1.png");
+        image = new Texture ("aiMoveAssets/down1.png");
         path = new PathFinder(map);
     }
 
@@ -68,19 +68,19 @@ public class AI extends Entity {
     }
 
     private void imgPunch() {
-        image = new Texture("core/assets/aiMoveAssets/Green.PNG");
+        image = new Texture("aiMoveAssets/Green.PNG");
     }
 
     private void imgLeft(){
 
         if (left >= 20 ){
-            image = new Texture("core/assets/aiMoveAssets/left1.png");
+            image = new Texture("aiMoveAssets/left1.png");
         }
         else if (left >= 10){
-            image = new Texture("core/assets/aiMoveAssets/left2.png");
+            image = new Texture("aiMoveAssets/left2.png");
         }
         else if (left >= 0){
-            image =  new Texture("core/assets/aiMoveAssets/left3.png");
+            image =  new Texture("aiMoveAssets/left3.png");
         }
         left++;
         left = left % 30;
@@ -88,13 +88,13 @@ public class AI extends Entity {
 
     private void imgRight(){
         if (right >= 20){
-            image = new Texture("core/assets/aiMoveAssets/right1.png");
+            image = new Texture("aiMoveAssets/right1.png");
         }
         else if(right >= 10){
-            image =  new Texture("core/assets/aiMoveAssets/right2.png");
+            image =  new Texture("aiMoveAssets/right2.png");
         }
         else if(right >= 0){
-            image =  new Texture("core/assets/aiMoveAssets/right3.png");
+            image =  new Texture("aiMoveAssets/right3.png");
         }
         right++;
         right = right % 30;
@@ -102,13 +102,13 @@ public class AI extends Entity {
 
     private void imgDown(){
         if (down >= 20){
-            image =  new Texture("core/assets/aiMoveAssets/down1.png");
+            image =  new Texture("aiMoveAssets/down1.png");
         }
         else if (down >= 10){
-            image =  new Texture("core/assets/aiMoveAssets/down2.png");
+            image =  new Texture("aiMoveAssets/down2.png");
         }
         else if (down >= 0){
-            image = new Texture("core/assets/aiMoveAssets/down3.png");
+            image = new Texture("aiMoveAssets/down3.png");
         }
         down++;
         down = down % 30;
@@ -116,13 +116,13 @@ public class AI extends Entity {
 
     private void imgUp(){
         if (up >= 20){
-            image =  new Texture("core/assets/aiMoveAssets/up1.png");
+            image =  new Texture("aiMoveAssets/up1.png");
         }
         else if (up >= 10){
-            image =  new Texture("core/assets/aiMoveAssets/up2.png");
+            image =  new Texture("aiMoveAssets/up2.png");
         }
         else if (up >= 0){
-            image =  new Texture("core/assets/aiMoveAssets/up3.png");
+            image =  new Texture("aiMoveAssets/up3.png");
         }
         up++;
         up = up % 30;
