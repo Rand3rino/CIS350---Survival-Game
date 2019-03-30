@@ -35,6 +35,13 @@ public abstract class Entity {
         this.pos.y = newY;
         //}
     }
+
+    protected boolean ladder(float x, float y){
+
+        TiledMapTileLayer.Cell ladder = map.getCell((int) (x / map.getTileWidth()), (int) (y / map.getTileHeight()));
+        return ladder != null && ladder.getTile() != null && ladder.getTile().getProperties().containsKey("ladder");
+
+    }
     public void render(SpriteBatch batch){
 
     }

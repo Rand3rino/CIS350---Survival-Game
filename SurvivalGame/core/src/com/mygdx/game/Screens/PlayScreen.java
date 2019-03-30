@@ -1,8 +1,13 @@
 package com.mygdx.game.Screens;
 
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
@@ -29,8 +34,13 @@ public class PlayScreen extends GameMap implements Screen {
 
     private SurvivalGame game;
     private OrthographicCamera gameCam;
+    private OrthographicCamera playCam;
     private Viewport gamePort;
     private Hud hud;
+    private Music music;
+    private boolean pause = false;
+    private Texture text_pause;
+    private Sprite sprite_pause;
 
     private TmxMapLoader mapLoader;
 
@@ -40,8 +50,13 @@ public class PlayScreen extends GameMap implements Screen {
         gamePort = new StretchViewport(SurvivalGame.WIDTH, SurvivalGame.HEIGHT, gameCam);
         hud = new Hud(game.batch);
 
+        music = Gdx.audio.newMusic(Gdx.files.internal("sounds/Boss Battle #3 V2.wav"));
+        music.setVolume(0.1f);
+        music.setLooping(true);
+        music.play();
+
         mapLoader = new TmxMapLoader();
-        map = mapLoader.load("core/assets/map assets/battleMap.tmx");
+        map = mapLoader.load("map assets/battleMap.tmx");
         renderer = new OrthogonalTiledMapRenderer(map);
         gameCam.position.set(gamePort.getWorldWidth()/2, gamePort.getWorldHeight()/2,0);
 
@@ -53,6 +68,10 @@ public class PlayScreen extends GameMap implements Screen {
         entities.add(new Walker(220,50,collision, p));
         entities.add(new Runner(290,70,collision, p));
         entities.add(new Runner(250,40,collision, p));
+
+        text_pause = new Texture(Gdx.files.internal("pause.png"));
+        sprite_pause = new Sprite(text_pause);
+
 
     }
 
@@ -66,28 +85,54 @@ public class PlayScreen extends GameMap implements Screen {
     }
 
     public void update () {
-        super.update(deltaTime);
-        gameCam.update();
-        renderer.setView(gameCam);
+
+        if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)){
+            pause();
+            music.stop();
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+        } else {
+            super.update(deltaTime);
+            gameCam.update();
+            renderer.setView(gameCam);
+        }
+
     }
 
     @Override
     public void render(float deltaTime) {
-        update();
-//        Gdx.gl.glClearColor(0,0,0,1);
-//        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        renderer.render();
-        game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
-        hud.stage.draw();
-        game.batch.begin();
-        super.render(gameCam, game.batch);
-        game.batch.end();
 
-        //        game.batch.setProjectionMatrix(gameCam.combined);
-//        game.batch.begin();
-//        game.batch.draw(texture,0,0);
-//        game.batch.end();
+        if(pause){
+
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
+                resume();
+                music.play();
+            }
+
+        } else {
+            update();
+        }
+            renderer.render();
+            game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
+            hud.stage.draw();
+            game.batch.begin();
+            super.render(gameCam, game.batch);
+
+            if(pause){
+                game.batch.draw(text_pause, 200,200,400,400);
+            }
+            game.batch.end();
     }
+
 
 
     @Override
@@ -114,12 +159,12 @@ public class PlayScreen extends GameMap implements Screen {
 
     @Override
     public void pause() {
-
+        pause = true;
     }
 
     @Override
     public void resume() {
-
+        pause = false;
     }
 
     @Override
@@ -130,5 +175,8 @@ public class PlayScreen extends GameMap implements Screen {
     @Override
     public void dispose() {
         map.dispose();
+        music.dispose();
+        text_pause.dispose();
+
     }
 }

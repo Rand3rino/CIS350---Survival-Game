@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.2" orientation="orthogonal" renderorder="left-up" width="23" height="23" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="1">
+<map version="1.2" tiledversion="1.2.2" orientation="orthogonal" renderorder="left-up" width="23" height="23" tilewidth="32" tileheight="32" infinite="0" nextlayerid="7" nextobjectid="11">
  <tileset firstgid="1" name="hyptosis_tile-art-batch-1" tilewidth="32" tileheight="32" tilecount="900" columns="30">
-  <image source="Hyptosis Tiles//hyptosis_tile-art-batch-1.png" trans="000000" width="960" height="960"/>
+  <image source="Hyptosis Tiles/hyptosis_tile-art-batch-1.png" trans="000000" width="960" height="960"/>
   <tile id="20">
    <properties>
     <property name="blocked" value="1"/>
@@ -87,6 +87,11 @@
     <property name="blocked" value="1"/>
    </properties>
   </tile>
+  <tile id="807">
+   <properties>
+    <property name="ladder" value="2"/>
+   </properties>
+  </tile>
   <tile id="894">
    <properties>
     <property name="blocked" value="1"/>
@@ -94,7 +99,7 @@
   </tile>
  </tileset>
  <tileset firstgid="901" name="hyptosis_tile-art-batch-2" tilewidth="32" tileheight="32" tilecount="900" columns="30">
-  <image source="Hyptosis Tiles//hyptosis_til-art-batch-2.png" trans="000000" width="960" height="960"/>
+  <image source="Hyptosis Tiles/hyptosis_til-art-batch-2.png" trans="000000" width="960" height="960"/>
   <tile id="24">
    <properties>
     <property name="blocked" value="1"/>
@@ -252,7 +257,7 @@
   </tile>
  </tileset>
  <tileset firstgid="1801" name="hyptosis_tile-art-batch-3" tilewidth="32" tileheight="32" tilecount="900" columns="30">
-  <image source="Hyptosis Tiles//hyptosis_tile-art-batch-3.png" trans="000000" width="960" height="960"/>
+  <image source="Hyptosis Tiles/hyptosis_tile-art-batch-3.png" trans="000000" width="960" height="960"/>
  </tileset>
  <layer id="1" name="Base" width="23" height="23">
   <data encoding="csv">
@@ -312,8 +317,8 @@
   <data encoding="csv">
 21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,
 21,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,834,835,836,21,
-21,0,0,0,0,1225,1226,1227,1228,0,0,0,0,0,0,0,0,0,0,864,865,866,143,
-21,0,0,0,0,1255,1256,1257,1258,0,0,0,0,0,0,0,0,0,0,894,895,896,143,
+21,0,0,0,0,1225,1226,1227,1228,0,0,0,0,0,0,0,0,0,0,864,865,866,21,
+21,0,0,0,0,1255,1256,1257,1258,0,0,0,0,0,0,0,0,0,0,894,895,896,21,
 21,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,925,0,21,
 323,324,324,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,21,
 203,204,296,323,324,778,778,324,1286,1287,1288,324,324,324,324,324,778,778,324,324,324,324,265,
@@ -330,14 +335,14 @@
 203,204,205,0,0,0,0,0,0,0,0,0,0,0,1342,1343,0,0,0,297,147,117,148,
 233,234,235,0,0,0,0,0,0,0,0,0,0,0,1372,1373,0,0,0,0,177,208,178,
 413,414,415,0,0,0,0,0,0,0,0,0,0,0,1402,1403,0,0,0,0,177,208,178,
-2147485356,2147485355,2147485354,2147485353,2147485352,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,177,208,178,
+21,2147485355,2147485354,2147485353,2147485352,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,177,208,178,
 2147485386,2147485385,2147485384,2147485383,2147485382,2147485381,2147485380,0,0,0,0,0,0,0,0,0,0,0,0,0,177,208,178,
-2147485416,2147485415,2147485414,2147485413,2147485412,2147485411,2147485410,2147485409,21,21,21,21,21,21,21,21,21,21,21,21,177,208,178
+2147485416,2147485415,2147485414,2147485413,2147485412,2147485411,2147485410,2147485409,208,21,2684354737,2684354737,21,2684354737,2684354737,2684354737,2684354737,21,21,21,208,208,178
 </data>
  </layer>
  <layer id="3" name="Detail" width="23" height="23">
   <data encoding="csv">
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+233,234,235,236,237,233,234,235,236,237,233,234,235,236,237,233,234,235,233,234,235,236,237,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -357,9 +362,35 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+2147485356,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,2684355964,2684355965,2684355965,2684355965,2684355965,2684355965,2684355965,2684355965,2684355965,2684355965,2684355965,2684355965,0,0,0
 </data>
  </layer>
+ <objectgroup id="6" name="collision">
+  <object id="3" x="98" y="322">
+   <polygon points="0,0 -2,305 -99,305 -98,321 39,343 158,413 191,382 540,381 543,223 509,224 509,-3 477,-1 475,-100 605,-102 638,-128 636,-291 -95,-290 -97,-137 -4,-135"/>
+  </object>
+  <object id="4" x="98" y="218">
+   <polygon points="0,0 61,2 64,106 1,105"/>
+  </object>
+  <object id="5" x="225" y="221">
+   <polygon points="0,0 -1,100 37,100 51,62 51,-3"/>
+  </object>
+  <object id="6" x="516" y="219">
+   <polygon points="0,0 -179,1 -178,101 -5,102"/>
+  </object>
+  <object id="7" x="276" y="220">
+   <polygon points="0,0 63,1 27,-25"/>
+  </object>
+  <object id="8" x="160" y="112">
+   <polygon points="0,0 29,13 121,11 126,-35 88,-48 2,-47"/>
+  </object>
+  <object id="9" x="639" y="156">
+   <polygon points="0,0 31,1 23,-29 21,-52 2,-52"/>
+  </object>
+  <object id="10" x="452" y="577">
+   <polygon points="0,0 0,32 38,35 45,24 45,1 24,-7"/>
+  </object>
+ </objectgroup>
 </map>

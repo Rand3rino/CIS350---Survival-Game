@@ -3,6 +3,7 @@ package entity;
 import Logic.HealthTracking;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
@@ -35,6 +36,9 @@ public class Player extends Entity {
     /** Attack Bar */
     private int punchBar;
 
+    /** Punch sound */
+    private Sound punch;
+
     public HealthTracking health = new HealthTracking(this, null, 3, 3);
 
     // TODO
@@ -42,21 +46,21 @@ public class Player extends Entity {
 
     // TODO
     Texture image;
-    private Texture left1 = new Texture("core/assets/playerMoveAssets/left1.png");
-    private Texture left2 = new Texture("core/assets/playerMoveAssets/left2.png");
-    private Texture left3 = new Texture("core/assets/playerMoveAssets/left3.png");
-    private Texture right1 = new Texture("core/assets/playerMoveAssets/right1.png");
-    private Texture right2 = new Texture("core/assets/playerMoveAssets/right2.png");
-    private Texture right3 = new Texture("core/assets/playerMoveAssets/right3.png");
-    private Texture up1 = new Texture("core/assets/playerMoveAssets/up1.png");
-    private Texture up2 = new Texture("core/assets/playerMoveAssets/up2.png");
-    private Texture up3 = new Texture("core/assets/playerMoveAssets/up3.png");
-    private Texture down1 = new Texture("core/assets/playerMoveAssets/down1.png");
-    private Texture down2 = new Texture("core/assets/playerMoveAssets/down2.png");
-    private Texture down3 = new Texture("core/assets/playerMoveAssets/down3.png");
-    private Texture punchLeft = new Texture("core/assets/playerMoveAssets/punchLeft.png");
-    private Texture punchRight = new Texture("core/assets/playerMoveAssets/punchRight.png");
-    private Texture laydown = new Texture("core/assets/playerMoveAssets/dead.png");
+    private Texture left1 = new Texture("OPM movement assets/left1.png");
+    private Texture left2 = new Texture("OPM movement assets/left2.png");
+    private Texture left3 = new Texture("OPM movement assets/left3.png");
+    private Texture right1 = new Texture("OPM movement assets/right1.png");
+    private Texture right2 = new Texture("OPM movement assets/right2.png");
+    private Texture right3 = new Texture("OPM movement assets/right3.png");
+    private Texture up1 = new Texture("OPM movement assets/up1.png");
+    private Texture up2 = new Texture("OPM movement assets/up2.png");
+    private Texture up3 = new Texture("OPM movement assets/up3.png");
+    private Texture down1 = new Texture("OPM movement assets/down1.png");
+    private Texture down2 = new Texture("OPM movement assets/down2.png");
+    private Texture down3 = new Texture("OPM movement assets/down3.png");
+    private Texture punchLeft = new Texture("OPM movement assets/punchLeft.png");
+    private Texture punchRight = new Texture("OPM movement assets/punchRight.png");
+    private Texture laydown = new Texture("OPM movement assets/dead.png");
 
 
     // TODO
@@ -81,6 +85,7 @@ public class Player extends Entity {
         this.collision = map;
         sprintBar = sprintBarMax;
         punchBar = punchBarMax;
+        punch = Gdx.audio.newSound(Gdx.files.internal("sounds/hits/12.ogg"));
     }
 
     /******************************************************************
@@ -151,6 +156,7 @@ public class Player extends Entity {
 
                 // Update sprite image.
                 imgPunch();
+                punch.play();
 
                 // Reset attack bar
                 punchBar = 0;
@@ -217,7 +223,11 @@ public class Player extends Entity {
                 moveX(-speed * deltaTime);
                 rect.move(getX(), getY());
             }
-            imgLeft();
+            if(ladder(getX(),getY())){
+                imgUp();
+            } else {
+                imgLeft();
+            }
         }
 
         // Walk Right
@@ -226,7 +236,11 @@ public class Player extends Entity {
                 moveX(speed * deltaTime);
                 rect.move(getX(), getY());
             }
-            imgRight();
+            if(ladder(getX(),getY())){
+                imgUp();
+            } else {
+                imgRight();
+            }
         }
 
         // Walk Up
@@ -235,6 +249,7 @@ public class Player extends Entity {
                 moveY(speed * deltaTime);
                 rect.move(getX(), getY());
             }
+
             imgUp();
         }
 
@@ -244,7 +259,11 @@ public class Player extends Entity {
                 moveY(-speed * deltaTime);
                 rect.move(getX(), getY());
             }
-            imgDown();
+            if(ladder(getX(),getY())){
+                imgUp();
+            } else {
+                imgDown();
+            }
         }
     }
 
@@ -354,6 +373,7 @@ public class Player extends Entity {
         up++;
         up = up % 40;
     }
+
 
     private void hit(int damage) {
         health.decreaseHealth(damage);
