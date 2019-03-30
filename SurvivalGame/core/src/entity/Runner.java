@@ -10,19 +10,58 @@ public class Runner extends Entity {
     private int left = 1, right = 1, up = 1, down = 1;
 
     PathFinder path;
-    private static final int speed = 2;
-    Texture image;
+    private static final int speed = 1;
+
+
+
     Vector2 vector = new Vector2();
     Entity player;
     long time = System.currentTimeMillis();
     long start;
 
+    // TODO
+    private Texture image;
+    private Texture left1;
+    private Texture left2;
+    private Texture left3;
+    private Texture right1;
+    private Texture right2;
+    private Texture right3;
+    private Texture up1;
+    private Texture up2;
+    private Texture up3;
+    private Texture down1;
+    private Texture down2;
+    private Texture down3;
+    private Texture punchLeft;
+    private Texture punchRight;
+    private Texture laydown;
+
     public Runner (float x, float y, TiledMapTileLayer map, Entity e){
         super(x,y,EntityType.COMPUTER, map, e);
         player = e;
-        image = new Texture ("vaccine man movement assets/down1.png");
+        loadTextures();
+        image = down2;
         path = new PathFinder(map);
         start = time;
+    }
+
+    private void loadTextures() {
+        left1 = new Texture("vaccine man movement assets/left1.png");
+        left2 = new Texture("vaccine man movement assets/left2.png");
+        left3 = new Texture("vaccine man movement assets/left3.png");
+        right1 = new Texture("vaccine man movement assets/right1.png");
+        right2 = new Texture("vaccine man movement assets/right2.png");
+        right3 = new Texture("vaccine man movement assets/right3.png");
+        up1 = new Texture("vaccine man movement assets/up1.png");
+        up2 = new Texture("vaccine man movement assets/up2.png");
+        up3 = new Texture("vaccine man movement assets/up3.png");
+        down1 = new Texture("vaccine man movement assets/down1.png");
+        down2 = new Texture("vaccine man movement assets/down2.png");
+        down3 = new Texture("vaccine man movement assets/down3.png");
+//        punchLeft = new Texture("vaccine man movement assets/punchLeft.png");
+//        punchRight = new Texture("vaccine man movement assets/punchRight.png");
+//        laydown = new Texture("vaccine man movement assets/dead.png");
     }
 
     public void update (float deltaTime) {
@@ -87,38 +126,28 @@ public class Runner extends Entity {
 
     private void imgLeft(){
 
-        if (left >= 30 ){
-            image = new Texture("vaccine man movement assets/left1.png");
-        }
-        else if (left >= 20){
-            image =  new Texture("vaccine man movement assets/left2.png");
-        }
-        else if (left >= 10){
-            image = new Texture("vaccine man movement assets/left3.png");
-        }
-        else if (left >= 0){
-            image =  new Texture("vaccine man movement assets/left2.png");
-        }
+        if (left >= 30 )
+            image = left1;
+        else if (left >= 20)
+            image = left2;
+        else if (left >= 10)
+            image =  left3;
+        else if (left >= 0)
+            image = left2;
         left++;
         left = left % 40;
     }
 
-    /**
-     *
-     */
     private void imgRight(){
-        if (right >= 30){
-            image = new Texture("vaccine man movement assets/right1.png");
-        }
-        else if(right >= 20){
-            image =  new Texture("vaccine man movement assets/right2.png");
-        }
-        else if(right >= 10){
-            image =  new Texture("vaccine man movement assets/right3.png");
-        }
-        else if(right >= 0){
-            image =  new Texture("vaccine man movement assets/right2.png");
-        }
+
+        if (right >= 30)
+            image = right1;
+        else if(right >= 20)
+            image =  right2;
+        else if(right >= 10)
+            image = right3;
+        else if(right >= 0)
+            image =  right2;
         right++;
         right = right % 40;
     }
@@ -127,39 +156,31 @@ public class Runner extends Entity {
      *
      */
     private void imgDown(){
-        if (down >= 30){
-            image =  new Texture("vaccine man movement assets/down1.png");
-        }
-        else if (down >= 20) {
-            image = new Texture("vaccine man movement assets/down2.png");
-        }
-        else if (down >= 10){
-            image =  new Texture("vaccine man movement assets/down3.png");
-        }
-        else if (down >= 0){
-            image = new Texture("vaccine man movement assets/down2.png");
-        }
+
+        if (down >= 30)
+            image = down1;
+        else if (down >= 20)
+            image = down2;
+        else if (down >= 10)
+            image = down3;
+        else if (down >= 0)
+            image = down2;
         down++;
         down = down % 40;
     }
 
     private void imgUp() {
-        if (up >= 30){
-            image =  new Texture("vaccine man movement assets/up1.png");
-        }
-        else if (up >= 20){
-            image = new Texture ("vaccine man movement assets/up2.png");
-        }
-        else if (up >= 10){
-            image =  new Texture("vaccine man movement assets/up3.png");
-        }
-        else if (up >= 0){
-            image =  new Texture("vaccine man movement assets/up2.png");
-        }
+
+        if (up >= 30)
+            image = up1;
+        else if (up >= 20)
+            image = up2;
+        else if (up >= 10)
+            image = up3;
+        else if (up >= 0)
+            image = up2;
         up++;
         up = up % 40;
     }
-
-
 
 }

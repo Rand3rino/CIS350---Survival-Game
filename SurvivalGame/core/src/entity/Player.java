@@ -45,22 +45,22 @@ public class Player extends Entity {
     Collision rect;
 
     // TODO
-    Texture image;
-    private Texture left1 = new Texture("OPM movement assets/left1.png");
-    private Texture left2 = new Texture("OPM movement assets/left2.png");
-    private Texture left3 = new Texture("OPM movement assets/left3.png");
-    private Texture right1 = new Texture("OPM movement assets/right1.png");
-    private Texture right2 = new Texture("OPM movement assets/right2.png");
-    private Texture right3 = new Texture("OPM movement assets/right3.png");
-    private Texture up1 = new Texture("OPM movement assets/up1.png");
-    private Texture up2 = new Texture("OPM movement assets/up2.png");
-    private Texture up3 = new Texture("OPM movement assets/up3.png");
-    private Texture down1 = new Texture("OPM movement assets/down1.png");
-    private Texture down2 = new Texture("OPM movement assets/down2.png");
-    private Texture down3 = new Texture("OPM movement assets/down3.png");
-    private Texture punchLeft = new Texture("OPM movement assets/punchLeft.png");
-    private Texture punchRight = new Texture("OPM movement assets/punchRight.png");
-    private Texture laydown = new Texture("OPM movement assets/dead.png");
+    private Texture image;
+    private Texture left1;
+    private Texture left2;
+    private Texture left3;
+    private Texture right1;
+    private Texture right2;
+    private Texture right3;
+    private Texture up1;
+    private Texture up2;
+    private Texture up3;
+    private Texture down1;
+    private Texture down2;
+    private Texture down3;
+    private Texture punchLeft;
+    private Texture punchRight;
+    private Texture laydown;
 
 
     // TODO
@@ -79,13 +79,32 @@ public class Player extends Entity {
     public Player (float x, float y, TiledMapTileLayer map, Entity e){
 
         super(x,y,EntityType.PLAYER, map, e);
-
-        image =  down2;
+        loadTextures();
+        image = down2;
         this.rect = new Collision(getX(),getY(),getWidth(),getHeight());
         this.collision = map;
         sprintBar = sprintBarMax;
         punchBar = punchBarMax;
         punch = Gdx.audio.newSound(Gdx.files.internal("sounds/hits/12.ogg"));
+
+    }
+
+    private void loadTextures() {
+        left1 = new Texture("OPM movement assets/left1.png");
+        left2 = new Texture("OPM movement assets/left2.png");
+        left3 = new Texture("OPM movement assets/left3.png");
+        right1 = new Texture("OPM movement assets/right1.png");
+        right2 = new Texture("OPM movement assets/right2.png");
+        right3 = new Texture("OPM movement assets/right3.png");
+        up1 = new Texture("OPM movement assets/up1.png");
+        up2 = new Texture("OPM movement assets/up2.png");
+        up3 = new Texture("OPM movement assets/up3.png");
+        down1 = new Texture("OPM movement assets/down1.png");
+        down2 = new Texture("OPM movement assets/down2.png");
+        down3 = new Texture("OPM movement assets/down3.png");
+        punchLeft = new Texture("OPM movement assets/punchLeft.png");
+        punchRight = new Texture("OPM movement assets/punchRight.png");
+        laydown = new Texture("OPM movement assets/dead.png");
     }
 
     /******************************************************************
@@ -151,11 +170,11 @@ public class Player extends Entity {
 
         // Perform a punch upon button press if attack bar if full
         if (Gdx.input.isKeyPressed(Input.Keys.SPACE))
-            if (punchBar == punchBarMax) {
+            if (punchBar == punchBarMax && !ladder(getX(),getY())) {
 
                 // Update sprite image.
                 imgPunch();
-                punch.play();
+                punch.play(0.15f);
 
                 // Reset attack bar
                 punchBar = 0;
@@ -317,9 +336,9 @@ public class Player extends Entity {
         else if (image.equals(right1) || image.equals(right2) || image.equals(right3))
             image = punchRight;
 
-        // TODO remove after test
-        Hud.decrementEnemy();
-        hit(1);
+//        // TODO remove after test
+//        Hud.decrementEnemy();
+//        hit(1);
     }
 
     private void imgLeft(){
