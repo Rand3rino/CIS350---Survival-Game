@@ -1,6 +1,7 @@
 package entity;
 
 import Logic.Combat;
+import Logic.HealthTracking;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
@@ -20,6 +21,8 @@ public class Walker extends Entity {
 
     /** Punch sound */
     private Sound punchSFX;
+
+    public HealthTracking health = new HealthTracking(this, null, 1, 1);
 
     Vector2 vector = new Vector2();
     Player player;

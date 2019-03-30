@@ -48,7 +48,7 @@ public class HomeScreen implements Screen {
         loadMap = new Texture(Gdx.files.internal("map assets/Title.png"));
 
 
-        Label.LabelStyle font = new Label.LabelStyle(new BitmapFont(), Color.WHITE);
+        Label.LabelStyle font = new Label.LabelStyle(new BitmapFont(), Color.BLACK);
 
 
 

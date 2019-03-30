@@ -29,7 +29,7 @@ public class Hud {
     public Hud (SpriteBatch batch) {
         staminaBar = 100;
         attackGauge = 100;
-        health = 3;
+        health = 10;
         enemyCount = 10;
 
         viewport = new StretchViewport(SurvivalGame.WIDTH, SurvivalGame.HEIGHT, new OrthographicCamera());
