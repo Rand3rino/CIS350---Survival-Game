@@ -44,6 +44,9 @@ public class PlayScreen extends GameMap implements Screen {
 
     private TmxMapLoader mapLoader;
 
+
+    private boolean wave2, wave3, waveFinal;
+
     public PlayScreen (SurvivalGame game) {
         this.game = game;
         gameCam = new OrthographicCamera();
@@ -54,6 +57,10 @@ public class PlayScreen extends GameMap implements Screen {
         music.setVolume(0.1f);
         music.setLooping(true);
         music.play();
+
+        wave2 = false;
+        wave3 = false;
+        waveFinal = false;
 
         mapLoader = new TmxMapLoader();
         map = mapLoader.load("map assets/battleMap.tmx");
@@ -66,8 +73,8 @@ public class PlayScreen extends GameMap implements Screen {
         entities.add(p = new Player(300, 400, collision, null));
         entities.add(new Walker(200,50,collision, p));
         entities.add(new Walker(220,50,collision, p));
-        entities.add(new Runner(290,70,collision, p));
-        entities.add(new Runner(250,40,collision, p));
+//        entities.add(new Runner(290,70,collision, p));
+//        entities.add(new Runner(250,40,collision, p));
 
         text_pause = new Texture(Gdx.files.internal("pause.png"));
         sprite_pause = new Sprite(text_pause);
@@ -101,6 +108,37 @@ public class PlayScreen extends GameMap implements Screen {
             renderer.setView(gameCam);
         }
 
+        spawnWaves();
+
+        if (hud.getEnemyCount() == 0){
+            game.setScreen(new WinScreen(game));
+            dispose();
+        }
+        if (p.health.isDead()) {
+            game.setScreen(new LoseScreen(game));
+            dispose();
+        }
+
+    }
+
+    private void spawnWaves() {
+        if (!wave2 && hud.getEnemyCount() == 8) {
+            wave2 = true;
+            entities.add(new Runner(290, 70, collision, p));
+            entities.add(new Runner(250, 40, collision, p));
+            entities.add(new Runner(70, 290, collision, p));
+            entities.add(new Runner(40, 250, collision, p));
+        }
+        else if (!wave3 && hud.getEnemyCount() == 4) {
+            wave3 = true;
+            entities.add(new Walker(290, 70, collision, p));
+            entities.add(new Walker(250, 40, collision, p));
+            entities.add(new Walker(40, 250, collision, p));
+        }
+        else if (!waveFinal && hud.getEnemyCount() == 1){
+            waveFinal = true;
+            // TODO Release the SLIME
+        }
     }
 
     @Override

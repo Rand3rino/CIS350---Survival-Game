@@ -106,7 +106,6 @@ public class Player extends Entity {
         return punchBar;
     }
 
-
     /******************************************************************
      * update method handles character movement as well as stamina
      * and attack bar levels.
@@ -318,6 +317,9 @@ public class Player extends Entity {
         else if (image.equals(right1) || image.equals(right2) || image.equals(right3))
             image = punchRight;
 
+        // TODO remove after test
+        Hud.decrementEnemy();
+        hit(1);
     }
 
     private void imgLeft(){
