@@ -69,5 +69,4 @@ public abstract class Entity {
         return type.getHeight();
     }
 
-
 }
