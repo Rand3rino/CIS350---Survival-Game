@@ -40,7 +40,7 @@ public class Player extends Entity {
     /** Punch sound */
     private Sound punchSFX;
 
-    public HealthTracking health = new HealthTracking(this, null, 3, 3);
+    public HealthTracking health = new HealthTracking(this, null, 10, 10);
 
     // TODO
     Collision rect;
