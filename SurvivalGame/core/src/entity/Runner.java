@@ -1,5 +1,8 @@
 package entity;
 
+import Logic.Combat;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
@@ -10,14 +13,19 @@ public class Runner extends Entity {
     private int left = 1, right = 1, up = 1, down = 1;
 
     PathFinder path;
-    private static final int speed = 1;
+    private static final int speed = 2;
 
+    private static final int punchBarMax = 100;
+    private int punchBar;
 
+    /** Punch sound */
+    private Sound punchSFX;
 
     Vector2 vector = new Vector2();
-    Entity player;
+    Player player;
     long time = System.currentTimeMillis();
     long start;
+    private Combat combat;
 
     // TODO
     private Texture image;
@@ -37,12 +45,15 @@ public class Runner extends Entity {
     private Texture punchRight;
     private Texture laydown;
 
-    public Runner (float x, float y, TiledMapTileLayer map, Entity e){
+    public Runner (float x, float y, TiledMapTileLayer map, Player e){
         super(x,y,EntityType.COMPUTER, map, e);
         player = e;
         loadTextures();
         image = down2;
         path = new PathFinder(map);
+        combat = new Combat();
+        punchBar = punchBarMax;
+        punchSFX= Gdx.audio.newSound(Gdx.files.internal("sounds/hits/12.ogg"));
         start = time;
     }
 
@@ -94,6 +105,13 @@ public class Runner extends Entity {
             moveY(speed);
             imgUp();
         }
+
+        if (combat.inCombat(this, player)) {
+            playerPunch();
+        }
+        else if (punchBar < punchBarMax){
+            punchBar++;
+        }
     }
 
 
@@ -109,7 +127,24 @@ public class Runner extends Entity {
 //        else
 //            moveY(-speed);
 
+    /******************************************************************
+     * playerPunch will handle if player presses the attack button
+     *****************************************************************/
+    private void playerPunch() {
 
+        // Perform a punch upon button press if attack bar is full
+        if (punchBar == punchBarMax && !ladder(getX(),getY())) {
+
+            // Update sprite image.
+            // imgPunch();
+            punchSFX.play(0.15f);
+
+            // Reset attack bar
+            punchBar = 0;
+            player.hit(1);
+            player.knockback(getX(), getY());
+        }
+    }
 
 
     // method "move to this point" Using tiledgamemap

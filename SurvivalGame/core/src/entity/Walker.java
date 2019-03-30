@@ -1,10 +1,11 @@
 package entity;
 
+import Logic.Combat;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import com.mygdx.game.GameMap;
-import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.math.Vector2;
 import Logic.PathFinder;
 
@@ -14,10 +15,17 @@ public class Walker extends Entity {
     PathFinder path;
     private static final int speed = 1;
 
+    private static final int punchBarMax = 100;
+    private int punchBar;
+
+    /** Punch sound */
+    private Sound punchSFX;
+
     Vector2 vector = new Vector2();
-    Entity player;
+    Player player;
     long time = System.currentTimeMillis();
     long start;
+    private Combat combat;
 
     private Texture image;
     private Texture left1;
@@ -36,12 +44,15 @@ public class Walker extends Entity {
     private Texture punchRight;
     private Texture laydown;
 
-    public Walker (float x, float y, TiledMapTileLayer map, Entity e){
+    public Walker (float x, float y, TiledMapTileLayer map, Player e){
         super(x,y,EntityType.COMPUTER, map, e);
         player = e;
         loadTextures();
         image = down2;
         path = new PathFinder(map);
+        combat = new Combat();
+        punchBar = punchBarMax;
+        punchSFX= Gdx.audio.newSound(Gdx.files.internal("sounds/hits/12.ogg"));
         start = time;
     }
 
@@ -94,6 +105,13 @@ public class Walker extends Entity {
             moveY(speed);
             imgUp();
         }
+
+        if (combat.inCombat(this, player)) {
+            playerPunch();
+        }
+        else if (punchBar < punchBarMax){
+            punchBar++;
+        }
     }
 
 
@@ -109,7 +127,24 @@ public class Walker extends Entity {
 //        else
 //            moveY(-speed);
 
+    /******************************************************************
+     * playerPunch will handle if player presses the attack button
+     *****************************************************************/
+    private void playerPunch() {
 
+        // Perform a punch upon button press if attack bar is full
+            if (punchBar == punchBarMax && !ladder(getX(),getY())) {
+
+                // Update sprite image.
+               // imgPunch();
+                punchSFX.play(0.15f);
+
+                // Reset attack bar
+                punchBar = 0;
+                player.hit(1);
+                player.knockback(getX(), getY());
+            }
+    }
 
 
     // method "move to this point" Using tiledgamemap
@@ -117,8 +152,8 @@ public class Walker extends Entity {
         vector.x = player.getX();
         vector.y = player.getY();
         return vector;
-
     }
+
     @Override
     public void render(SpriteBatch batch) {
         batch.draw(image, pos.x, pos.y, getWidth(), getHeight());

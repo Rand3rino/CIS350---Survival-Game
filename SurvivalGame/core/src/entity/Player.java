@@ -7,6 +7,7 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.Collision;
 import com.mygdx.game.Hud.Hud;
 import com.mygdx.game.Screens.PlayScreen;
@@ -37,7 +38,7 @@ public class Player extends Entity {
     private int punchBar;
 
     /** Punch sound */
-    private Sound punch;
+    private Sound punchSFX;
 
     public HealthTracking health = new HealthTracking(this, null, 3, 3);
 
@@ -85,7 +86,7 @@ public class Player extends Entity {
         this.collision = map;
         sprintBar = sprintBarMax;
         punchBar = punchBarMax;
-        punch = Gdx.audio.newSound(Gdx.files.internal("sounds/hits/12.ogg"));
+        punchSFX= Gdx.audio.newSound(Gdx.files.internal("sounds/hits/12.ogg"));
 
     }
 
@@ -168,13 +169,13 @@ public class Player extends Entity {
      *****************************************************************/
     private void playerPunch() {
 
-        // Perform a punch upon button press if attack bar if full
+        // Perform a punch upon button press if attack bar is full
         if (Gdx.input.isKeyPressed(Input.Keys.SPACE))
             if (punchBar == punchBarMax && !ladder(getX(),getY())) {
 
                 // Update sprite image.
                 imgPunch();
-                punch.play(0.15f);
+                punchSFX.play(0.15f);
 
                 // Reset attack bar
                 punchBar = 0;
@@ -396,8 +397,19 @@ public class Player extends Entity {
     }
 
 
-    private void hit(int damage) {
+    public void hit(int damage) {
         health.decreaseHealth(damage);
+    }
+
+    // TODO vertical knockback
+    public void knockback(float x, float y) {
+        if (x > getX()) {
+            // knockback left
+            pos = new Vector2(x - 32, getY());
+        } else {
+            // knockback right
+            pos = new Vector2(x + 32, getY());
+        }
     }
 
     private void heal(int potion) {

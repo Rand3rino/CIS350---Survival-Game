@@ -10,7 +10,7 @@ public class Combat{
 //    TiledMapTileLayer map;
 //    Player player;
 
-    public Combat (TiledMapTileLayer map, Player player) {
+    public Combat () {
 //        this.map = map;
 //        this.player = player;
     }
@@ -35,8 +35,10 @@ public class Combat{
         playerPosition.set(player.getX(),player.getY());
 
         // If the distance between two vcctors are within one tile, combat is true.
-        //21.2132 is sqrt(15)
-        if (aiPosition.dst(playerPosition) <= 21.2132) {
+        //45.254 = sqrt(32^2+32^2)
+        //21.213 = sqrt(15^2 + 15^2)
+        System.out.print(aiPosition.dst(playerPosition) + "\n");
+        if (aiPosition.dst(playerPosition) <= 21.213) {
             return true;
         }
         return false;

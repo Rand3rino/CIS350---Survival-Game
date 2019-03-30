@@ -71,10 +71,10 @@ public class PlayScreen extends GameMap implements Screen {
         collision = (TiledMapTileLayer) map.getLayers().get("Collision");
 
         entities.add(p = new Player(300, 400, collision, null));
-//        entities.add(new Walker(200,50,collision, p));
-//        entities.add(new Walker(220,50,collision, p));
+        entities.add(new Walker(200,50,collision, p));
+        entities.add(new Walker(220,50,collision, p));
         entities.add(new Runner(290,70,collision, p));
-//        entities.add(new Runner(250,40,collision, p));
+        entities.add(new Runner(250,40,collision, p));
 
         text_pause = new Texture(Gdx.files.internal("pause.png"));
         sprite_pause = new Sprite(text_pause);
