@@ -42,7 +42,7 @@ public class Hud {
         staminaLabel = new Label(String.format("%03d", staminaBar) + "% Stamina", new Label.LabelStyle(new BitmapFont(), Color.GREEN));
         attackLabel =  new Label(String.format("%03d", attackGauge) + "% Attack", new Label.LabelStyle(new BitmapFont(), Color.GREEN));
         healthLabel = new Label(String.format("%d", health) + " Health", new Label.LabelStyle(new BitmapFont(), Color.GREEN));
-        enemyCountLabel =  new Label(String.format("%03d", enemyCount) + " Enemies", new Label.LabelStyle(new BitmapFont(), Color.BLUE));
+        enemyCountLabel =  new Label(String.format("%03d", enemyCount) + " Enemies", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
         table.add(staminaLabel).expandX();
         table.add(attackLabel).expandX();
@@ -54,7 +54,7 @@ public class Hud {
     // TODO static?
     public static void decrementEnemy() {
         enemyCount--;
-        enemyCountLabel.setText(String.format("%04d", enemyCountLabel) + " Enemies");
+        enemyCountLabel.setText(String.format("%03d", enemyCount) + " Enemies");
     }
 
     public static void changeStamina(int value) {
@@ -66,7 +66,7 @@ public class Hud {
             staminaLabel.setStyle(new Label.LabelStyle(new BitmapFont(), Color.RED));
         }
         else {
-            staminaLabel.setStyle(new Label.LabelStyle(new BitmapFont(), Color.BLUE));
+            staminaLabel.setStyle(new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         }
         staminaLabel.setText(String.format("%03d", staminaBar) + "% Stamina");
     }
@@ -80,9 +80,13 @@ public class Hud {
             attackLabel.setStyle(new Label.LabelStyle(new BitmapFont(), Color.RED));
         }
         else {
-            attackLabel.setStyle(new Label.LabelStyle(new BitmapFont(), Color.BLUE));
+            attackLabel.setStyle(new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         }
         attackLabel.setText(String.format("%03d", attackGauge) + "% Attack");
+    }
+
+    public int getEnemyCount() {
+        return enemyCount;
     }
 
     public static void changeHealth(int value) {
@@ -94,7 +98,7 @@ public class Hud {
             healthLabel.setStyle(new Label.LabelStyle(new BitmapFont(), Color.RED));
         }
         else {
-            healthLabel.setStyle(new Label.LabelStyle(new BitmapFont(), Color.BLUE));
+            healthLabel.setStyle(new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         }
         healthLabel.setText(String.format("%d", health) + " Health");
     }
