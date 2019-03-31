@@ -46,6 +46,8 @@ public class Walker extends Entity {
     private Texture punchLeft;
     private Texture punchRight;
     private Texture laydown;
+    private Texture knockdown1;
+    private Texture knockdown2;
 
     public Walker (float x, float y, TiledMapTileLayer map, Player e){
         super(x,y,EntityType.COMPUTER, map, e);
@@ -72,9 +74,12 @@ public class Walker extends Entity {
         down1 = new Texture("deep sea king movement assets/down1.png");
         down2 = new Texture("deep sea king movement assets/down2.png");
         down3 = new Texture("deep sea king movement assets/down3.png");
-//        punchLeft = new Texture("deep sea king movement assets/punchLeft.png");
-//        punchRight = new Texture("deep sea king movement assets/punchRight.png");
-//        laydown = new Texture("deep sea king movement assets/dead.png");
+        punchLeft = new Texture("deep sea king movement assets/punchLeft.png");
+        punchRight = new Texture("deep sea king movement assets/punchRight.png");
+        laydown = new Texture("deep sea king movement assets/dead.png");
+        knockdown1 = new Texture("deep sea king movement assets/knockback1.png");
+        knockdown2 = new Texture("deep sea king movement assets/knockback2.png");
+
     }
 
     public void update (float deltaTime) {
@@ -139,7 +144,7 @@ public class Walker extends Entity {
             if (punchBar == punchBarMax && !ladder(getX(),getY())) {
 
                 // Update sprite image.
-               // imgPunch();
+                imgPunch();
                 punchSFX.play(0.15f);
 
                 // Reset attack bar
@@ -147,6 +152,14 @@ public class Walker extends Entity {
                 player.hit(1);
                 player.knockback(getX(), getY());
             }
+    }
+
+    private void imgPunch() {
+        if (image.equals(left1) || image.equals(left2) || image.equals(left3))
+            //TODO some way to pause. Animation is too quick
+            image = punchLeft;
+        else if (image.equals(right1) || image.equals(right2) || image.equals(right3))
+            image = punchRight;
     }
 
 

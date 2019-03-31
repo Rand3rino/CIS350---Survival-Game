@@ -27,6 +27,7 @@ public class Runner extends Entity {
     long start;
     private Combat combat;
 
+    boolean punch = false;
     // TODO
     private Texture image;
     private Texture left1;
@@ -44,6 +45,8 @@ public class Runner extends Entity {
     private Texture punchLeft;
     private Texture punchRight;
     private Texture laydown;
+    private Texture knockdown1;
+    private Texture knockdown2;
 
     public Runner (float x, float y, TiledMapTileLayer map, Player e){
         super(x,y,EntityType.COMPUTER, map, e);
@@ -70,48 +73,46 @@ public class Runner extends Entity {
         down1 = new Texture("vaccine man movement assets/down1.png");
         down2 = new Texture("vaccine man movement assets/down2.png");
         down3 = new Texture("vaccine man movement assets/down3.png");
-//        punchLeft = new Texture("vaccine man movement assets/punchLeft.png");
-//        punchRight = new Texture("vaccine man movement assets/punchRight.png");
-//        laydown = new Texture("vaccine man movement assets/dead.png");
+        punchLeft = new Texture("vaccine man movement assets/punchLeft.png");
+        punchRight = new Texture("vaccine man movement assets/punchRight.png");
+        laydown = new Texture("vaccine man movement assets/dead.png");
+        knockdown1 = new Texture("vaccine man movement assets/knockback1.png");
+        knockdown2 = new Texture("vaccine man movement assets/knockback2.png");
     }
 
-    public void update (float deltaTime) {
-
+    public void update(float deltaTime) {
 
         int move = path.minDistance((int) getX(), (int) getY(), player);
 
         if (move == 0) {
             moveX(-speed);
-            if(ladder((int)getX(), (int)getY()))
+            if (ladder((int) getX(), (int) getY()))
                 imgUp();
             else
                 imgLeft();
-        }
-        else if (move == 1) {
+        } else if (move == 1) {
             moveX(speed);
-            if(ladder((int)getX(), (int)getY()))
+            if (ladder((int) getX(), (int) getY()))
                 imgUp();
             else
                 imgRight();
-        }
-        else if (move == 2) {
+        } else if (move == 2) {
             moveY(-speed);
-            if(ladder((int)getX(), (int)getY()))
+            if (ladder((int) getX(), (int) getY()))
                 imgUp();
             else
                 imgDown();
-        }
-        else if (move == 3) {
+        } else if (move == 3) {
             moveY(speed);
             imgUp();
         }
 
         if (combat.inCombat(this, player)) {
             playerPunch();
-        }
-        else if (punchBar < punchBarMax){
+        } else if (punchBar < punchBarMax) {
             punchBar++;
         }
+
     }
 
 
@@ -136,7 +137,7 @@ public class Runner extends Entity {
         if (punchBar == punchBarMax && !ladder(getX(),getY())) {
 
             // Update sprite image.
-            // imgPunch();
+            imgPunch();
             punchSFX.play(0.15f);
 
             // Reset attack bar
@@ -144,6 +145,14 @@ public class Runner extends Entity {
             player.hit(1);
             player.knockback(getX(), getY());
         }
+    }
+
+    private void imgPunch() {
+        if (image.equals(left1) || image.equals(left2) || image.equals(left3))
+            //TODO some way to pause. Animation is too quick
+            image = punchLeft;
+        else if (image.equals(right1) || image.equals(right2) || image.equals(right3))
+            image = punchRight;
     }
 
 
