@@ -51,7 +51,6 @@ public class HomeScreen implements Screen {
         Label.LabelStyle font = new Label.LabelStyle(new BitmapFont(), Color.BLACK);
 
 
-
         Table table = new Table();
         table.center();
         table.setFillParent(true);
@@ -60,6 +59,10 @@ public class HomeScreen implements Screen {
         Label playAgainLabel = new Label("Press ENTER to Play", font);
         Label authorLabel = new Label ("Ramell Collins, Scott Nguyen, Isfar Baset, & Randy Nguyen", font);
         Label courseLabel = new Label ("For CIS 350-01: Introduction to Software Engineering Winter 2019", font);
+        titleLabel.setFontScale(2);
+        playAgainLabel.setFontScale(1.5f);
+        authorLabel.setFontScale(1.5f);
+        courseLabel.setFontScale(1.5f);
 
         table.add(titleLabel).expandX();
         table.row();

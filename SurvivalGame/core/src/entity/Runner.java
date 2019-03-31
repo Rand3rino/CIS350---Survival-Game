@@ -27,7 +27,7 @@ public class Runner extends Entity {
     long start;
     private Combat combat;
 
-    boolean punch = false;
+
     // TODO
     private Texture image;
     private Texture left1;

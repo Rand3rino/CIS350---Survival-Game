@@ -22,13 +22,13 @@ public class Walker extends Entity {
     /** Punch sound */
     private Sound punchSFX;
 
-    public HealthTracking health = new HealthTracking(this, null, 1, 1);
+    public HealthTracking health;
+    private Combat combat;
 
     Vector2 vector = new Vector2();
     Player player;
     long time = System.currentTimeMillis();
     long start;
-    private Combat combat;
 
     private Texture image;
     private Texture left1;
@@ -54,6 +54,7 @@ public class Walker extends Entity {
         player = e;
         loadTextures();
         image = down2;
+        health = new HealthTracking(this, null, 1, 1);
         path = new PathFinder(map);
         combat = new Combat();
         punchBar = punchBarMax;
@@ -84,42 +85,40 @@ public class Walker extends Entity {
 
     public void update (float deltaTime) {
 
+        if(!health.isDead()) {
+            int move = path.minDistance((int) getX(), (int) getY(), player);
 
-        int move = path.minDistance((int) getX(), (int) getY(), player);
-
-        if (move == 0) {
-            moveX(-speed);
-            if(ladder(getX(),getY()))
+            if (move == 0) {
+                moveX(-speed);
+                if (ladder(getX(), getY()))
+                    imgUp();
+                else
+                    imgLeft();
+            } else if (move == 1) {
+                moveX(speed);
+                if (ladder(getX(), getY()))
+                    imgUp();
+                else
+                    imgRight();
+            } else if (move == 2) {
+                moveY(-speed);
+                if (ladder(getX(), getY()))
+                    imgUp();
+                else
+                    imgDown();
+            } else if (move == 3) {
+                moveY(speed);
                 imgUp();
-            else
-                imgLeft();
-        }
+            }
 
-        else if (move == 1) {
-            moveX(speed);
-            if(ladder(getX(),getY()))
-                imgUp();
-            else
-                imgRight();
+            if (combat.inCombat(this, player)) {
+                playerPunch();
+            } else if (punchBar < punchBarMax) {
+                punchBar++;
+            }
         }
-        else if (move == 2) {
-            moveY(-speed);
-            if(ladder(getX(),getY()))
-                imgUp();
-            else
-                imgDown();
-        }
-        else if (move == 3) {
-            moveY(speed);
-            imgUp();
-        }
-
-        if (combat.inCombat(this, player)) {
-            playerPunch();
-        }
-        else if (punchBar < punchBarMax){
-            punchBar++;
-        }
+        else
+            image = laydown;
     }
 
 
