@@ -43,6 +43,10 @@ public class Hud {
         attackLabel =  new Label(String.format("%03d", attackGauge) + "% Attack", new Label.LabelStyle(new BitmapFont(), Color.GREEN));
         healthLabel = new Label(String.format("%d", health) + " Health", new Label.LabelStyle(new BitmapFont(), Color.GREEN));
         enemyCountLabel =  new Label(String.format("%03d", enemyCount) + " Enemies", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        staminaLabel.setFontScale(1.5f);
+        attackLabel.setFontScale(1.5f);
+        healthLabel.setFontScale(1.5f);
+        enemyCountLabel.setFontScale(1.5f);
 
         table.add(staminaLabel).expandX();
         table.add(attackLabel).expandX();
