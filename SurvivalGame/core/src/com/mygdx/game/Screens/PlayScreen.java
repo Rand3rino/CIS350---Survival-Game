@@ -39,6 +39,8 @@ public class PlayScreen extends GameMap implements Screen {
     private Hud hud;
     private Music music;
     private boolean pause = false;
+    private boolean finalUpdate = false;
+    private boolean secondToFinalUpdate = false;
     private Texture text_pause;
     private Sprite sprite_pause;
 
@@ -71,8 +73,8 @@ public class PlayScreen extends GameMap implements Screen {
         collision = (TiledMapTileLayer) map.getLayers().get("Collision");
 
         entities.add(p = new Player(300, 400, collision, null));
-        entities.add(new Walker(200,50,collision, p));
-        entities.add(new Walker(400,600,collision, p));
+//        entities.add(new Walker(200,50,collision, p));
+//        entities.add(new Walker(400,600,collision, p));
 //        entities.add(new Walker(220,50,collision, p));
 //        entities.add(new Runner(290,70,collision, p));
 //        entities.add(new Runner(250,40,collision, p));
@@ -110,16 +112,6 @@ public class PlayScreen extends GameMap implements Screen {
         }
 
         spawnWaves();
-
-        if (hud.getEnemyCount() == 0){
-            game.setScreen(new WinScreen(game));
-            dispose();
-        }
-        if (p.health.isDead()) {
-            game.setScreen(new LoseScreen(game));
-            dispose();
-        }
-
     }
 
     private void spawnWaves() {
@@ -145,14 +137,14 @@ public class PlayScreen extends GameMap implements Screen {
     @Override
     public void render(float deltaTime) {
 
-        if(pause){
+        if (pause) {
 
             try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
+            if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
                 resume();
                 music.play();
             }
@@ -160,16 +152,48 @@ public class PlayScreen extends GameMap implements Screen {
         } else {
             update();
         }
-            renderer.render();
-            game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
-            hud.stage.draw();
-            game.batch.begin();
-            super.render(gameCam, game.batch);
+        renderer.render();
+        game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
+        hud.stage.draw();
+        game.batch.begin();
+        super.render(gameCam, game.batch);
 
-            if(pause){
-                game.batch.draw(text_pause, 200,200,400,400);
+        if (pause) {
+            game.batch.draw(text_pause, 200, 200, 400, 400);
+        }
+        game.batch.end();
+
+
+        // Game will stop for 2 seconds before proceeding to LoseScreen
+        if (p.health.isDead() && finalUpdate) {
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
-            game.batch.end();
+            game.setScreen(new LoseScreen(game));
+            dispose();
+        }
+
+        // Game will stop for 2 seconds before proceeding to WinScreen
+        if (hud.getEnemyCount() == 0 && finalUpdate){
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            game.setScreen(new WinScreen(game));
+            dispose();
+        }
+
+        // Let the game do two more loops to render last image changes.
+        // Game ends when either player dies or all enemies die.
+        if ((p.health.isDead() || hud.getEnemyCount() == 0) && !secondToFinalUpdate) {
+            secondToFinalUpdate = true;
+        }
+        else if ((p.health.isDead() || hud.getEnemyCount() == 0) && secondToFinalUpdate) {
+            finalUpdate = true;
+        }
     }
 
 
