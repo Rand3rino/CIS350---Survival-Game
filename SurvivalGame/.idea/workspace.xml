@@ -38,20 +38,24 @@
     <splitter split-orientation="horizontal" split-proportion="0.5">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="Runner.java" pinned="false" current-in-tab="false">
+          <file leaf-file-name="Runner.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/core/src/entity/Runner.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="465">
-                  <caret line="152" column="4" lean-forward="true" selection-start-line="152" selection-start-column="4" selection-end-line="158" selection-end-column="5" />
+                <state relative-caret-position="587">
+                  <caret line="115" column="5" lean-forward="true" selection-start-line="115" selection-start-column="5" selection-end-line="115" selection-end-column="5" />
+                  <folding>
+                    <element signature="e#5513#5514#0" expanded="true" />
+                    <element signature="e#5585#5586#0" expanded="true" />
+                  </folding>
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="Walker.java" pinned="false" current-in-tab="true">
+          <file leaf-file-name="Walker.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/core/src/entity/Walker.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="405">
-                  <caret line="152" column="49" lean-forward="true" selection-start-line="152" selection-start-column="49" selection-end-line="152" selection-end-column="49" />
+                <state relative-caret-position="1755">
+                  <caret line="161" column="31" selection-start-line="161" selection-start-column="31" selection-end-line="161" selection-end-column="31" />
                 </state>
               </provider>
             </entry>
@@ -64,7 +68,7 @@
             <entry file="file://$PROJECT_DIR$/core/src/entity/Player.java">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="330">
-                  <caret line="337" column="8" lean-forward="true" selection-start-line="337" selection-start-column="8" selection-end-line="341" selection-end-column="31" />
+                  <caret line="337" column="8" selection-start-line="337" selection-start-column="8" selection-end-line="341" selection-end-column="31" />
                   <folding>
                     <element signature="imports" expanded="true" />
                   </folding>
@@ -846,7 +850,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="678" />
     <option name="y" value="-1101" />
     <option name="width" value="1152" />
@@ -1273,7 +1277,7 @@
     <entry file="file://$PROJECT_DIR$/core/src/entity/Player.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
-          <caret line="337" column="8" lean-forward="true" selection-start-line="337" selection-start-column="8" selection-end-line="341" selection-end-column="31" />
+          <caret line="337" column="8" selection-start-line="337" selection-start-column="8" selection-end-line="341" selection-end-column="31" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1282,15 +1286,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/core/src/entity/Runner.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="152" column="4" lean-forward="true" selection-start-line="152" selection-start-column="4" selection-end-line="158" selection-end-column="5" />
+        <state relative-caret-position="587">
+          <caret line="115" column="5" lean-forward="true" selection-start-line="115" selection-start-column="5" selection-end-line="115" selection-end-column="5" />
+          <folding>
+            <element signature="e#5513#5514#0" expanded="true" />
+            <element signature="e#5585#5586#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/core/src/entity/Walker.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="152" column="49" lean-forward="true" selection-start-line="152" selection-start-column="49" selection-end-line="152" selection-end-column="49" />
+        <state relative-caret-position="1755">
+          <caret line="161" column="31" selection-start-line="161" selection-start-column="31" selection-end-line="161" selection-end-column="31" />
         </state>
       </provider>
     </entry>
