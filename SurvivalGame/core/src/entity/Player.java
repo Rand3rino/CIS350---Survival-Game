@@ -62,6 +62,8 @@ public class Player extends Entity {
     private Texture punchLeft;
     private Texture punchRight;
     private Texture laydown;
+    private Texture knockback1;
+    private Texture knockback2;
 
 
     // TODO
@@ -106,6 +108,8 @@ public class Player extends Entity {
         punchLeft = new Texture("OPM movement assets/punchLeft.png");
         punchRight = new Texture("OPM movement assets/punchRight.png");
         laydown = new Texture("OPM movement assets/dead.png");
+        knockback1 = new Texture("OPM movement assets/knockback1.png");
+        knockback2 = new Texture("OPM movement assets/knockback2.png");
     }
 
     /******************************************************************
@@ -406,9 +410,11 @@ public class Player extends Entity {
         if (x > getX()) {
             // knockback left
             pos = new Vector2(x - 32, getY());
+            image = knockback2;
         } else {
             // knockback right
             pos = new Vector2(x + 32, getY());
+            image = knockback1;
         }
     }
 
