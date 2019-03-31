@@ -40,7 +40,7 @@ public class Player extends Entity {
     /** Punch sound */
     private Sound punchSFX;
 
-    public HealthTracking health = new HealthTracking(this, null, 10, 10);
+    public HealthTracking health;
 
     // TODO
     Collision rect;
@@ -84,6 +84,7 @@ public class Player extends Entity {
         super(x,y,EntityType.PLAYER, map, e);
         loadTextures();
         image = down2;
+        health = new HealthTracking(this, null, 3, 3);
         this.rect = new Collision(getX(),getY(),getWidth(),getHeight());
         this.collision = map;
         sprintBar = sprintBarMax;
