@@ -9,7 +9,7 @@ public abstract class Entity {
     protected EntityType type;
     protected TiledMapTileLayer map;
     protected Entity player;
-
+    protected Boolean dead = false;
 
     public Entity(float x, float y, EntityType type, TiledMapTileLayer map, Entity e) {
         this.type = type;
@@ -69,5 +69,9 @@ public abstract class Entity {
     public int getWidth() {
         return type.getHeight();
     }
+
+    public void killed() {dead = true;}
+    public boolean isDead() {return dead;}
+
 
 }
