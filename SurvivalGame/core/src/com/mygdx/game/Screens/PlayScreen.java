@@ -4,6 +4,7 @@ package com.mygdx.game.Screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -54,7 +55,6 @@ public class PlayScreen extends GameMap implements Screen {
         gameCam = new OrthographicCamera();
         gamePort = new StretchViewport(SurvivalGame.WIDTH, SurvivalGame.HEIGHT, gameCam);
         hud = new Hud(game.batch);
-
         music = Gdx.audio.newMusic(Gdx.files.internal("sounds/Boss Battle #3 V2.wav"));
         music.setVolume(0.1f);
         music.setLooping(true);
@@ -76,7 +76,7 @@ public class PlayScreen extends GameMap implements Screen {
 //        entities.add(new Walker(200,50,collision, p));
 //        entities.add(new Walker(400,600,collision, p));
 //        entities.add(new Walker(220,50,collision, p));
-//        entities.add(new Runner(290,70,collision, p));
+        entities.add(new Runner(290,70,collision, p));
 //        entities.add(new Runner(250,40,collision, p));
 
         text_pause = new Texture(Gdx.files.internal("pause.png"));

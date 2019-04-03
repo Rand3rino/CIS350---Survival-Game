@@ -38,7 +38,7 @@ public class Combat{
         //45.254 = sqrt(32^2+32^2)
         //21.213 = sqrt(15^2 + 15^2)
         System.out.print(aiPosition.dst(playerPosition) + "\n");
-        if (aiPosition.dst(playerPosition) <= 21.213) {
+        if (aiPosition.dst(playerPosition) <= 27.5) {
             return true;
         }
         return false;

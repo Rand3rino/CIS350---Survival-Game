@@ -41,36 +41,61 @@
           <file leaf-file-name="Runner.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/core/src/entity/Runner.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="15">
-                  <caret line="20" column="22" selection-start-line="20" selection-start-column="22" selection-end-line="20" selection-end-column="22" />
+                <state relative-caret-position="2125">
+                  <caret line="135" column="30" selection-start-line="135" selection-start-column="30" selection-end-line="135" selection-end-column="30" />
+                  <folding>
+                    <element signature="e#6095#6096#0" expanded="true" />
+                    <element signature="e#6167#6168#0" expanded="true" />
+                    <element signature="e#6174#6466#0" />
+                    <element signature="e#6472#6773#0" />
+                    <element signature="e#6779#7092#0" />
+                    <element signature="e#7098#7365#0" />
+                  </folding>
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="Walker.java" pinned="false" current-in-tab="false">
+          <file leaf-file-name="Walker.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/core/src/entity/Walker.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1980">
-                  <caret line="140" selection-start-line="140" selection-end-line="140" />
+                <state relative-caret-position="425">
+                  <caret line="35" column="31" selection-start-line="35" selection-start-column="31" selection-end-line="35" selection-end-column="31" />
+                  <folding>
+                    <element signature="e#5715#5716#0" expanded="true" />
+                    <element signature="e#5787#5788#0" expanded="true" />
+                  </folding>
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="PlayScreen.java" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/Screens/PlayScreen.java">
+          <file leaf-file-name="GameMap.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/GameMap.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="345">
-                  <caret line="178" column="51" selection-start-line="178" selection-start-column="51" selection-end-line="178" selection-end-column="51" />
+                <state relative-caret-position="303">
+                  <caret line="27" column="33" lean-forward="true" selection-start-line="27" selection-start-column="33" selection-end-line="27" selection-end-column="33" />
                   <folding>
                     <element signature="imports" expanded="true" />
-                    <element signature="e#5483#5484#0" expanded="true" />
-                    <element signature="e#5529#5530#0" expanded="true" />
-                    <element signature="e#6237#6238#0" expanded="true" />
-                    <element signature="e#6261#6262#0" expanded="true" />
-                    <element signature="e#6302#6303#0" expanded="true" />
-                    <element signature="e#6330#6331#0" expanded="true" />
-                    <element signature="e#6372#6373#0" expanded="true" />
-                    <element signature="e#6401#6402#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="Entity.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/core/src/entity/Entity.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="580">
+                  <caret line="71" selection-start-line="71" selection-end-line="71" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="PlayScreen.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/Screens/PlayScreen.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="326">
+                  <caret line="178" column="51" selection-start-line="178" selection-start-column="36" selection-end-line="178" selection-end-column="51" />
+                  <folding>
+                    <element signature="imports" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -83,17 +108,21 @@
           <file leaf-file-name="Player.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/core/src/entity/Player.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="197">
-                  <caret line="346" column="17" lean-forward="true" selection-start-line="346" selection-start-column="17" selection-end-line="346" selection-end-column="17" />
+                <state relative-caret-position="3944">
+                  <caret line="351" column="28" selection-start-line="351" selection-start-column="28" selection-end-line="351" selection-end-column="28" />
                   <folding>
                     <element signature="imports" expanded="true" />
-                    <element signature="e#6396#8127#0" />
-                    <element signature="e#8133#9505#0" />
-                    <element signature="e#9642#9994#0" />
-                    <element signature="e#10000#10300#0" />
-                    <element signature="e#10306#10569#0" />
-                    <element signature="e#10575#10854#0" />
-                    <element signature="e#10860#11123#0" />
+                    <element signature="e#2822#3944#0" />
+                    <element signature="e#6477#8208#0" />
+                    <element signature="e#8214#9586#0" />
+                    <element signature="e#11624#11915#0" />
+                    <element signature="e#11921#12221#0" />
+                    <element signature="e#12227#12516#0" />
+                    <element signature="e#12522#12788#0" />
+                    <element signature="e#12948#12949#0" expanded="true" />
+                    <element signature="e#12993#12994#0" expanded="true" />
+                    <element signature="e#13646#13647#0" expanded="true" />
+                    <element signature="e#13687#13688#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -102,8 +131,35 @@
           <file leaf-file-name="Hud.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/Hud/Hud.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="345">
-                  <caret line="32" column="23" selection-start-line="32" selection-start-column="23" selection-end-line="32" selection-end-column="23" />
+                <state relative-caret-position="340">
+                  <caret line="56" lean-forward="true" selection-start-line="56" selection-end-line="56" />
+                  <folding>
+                    <element signature="e#3578#3579#0" expanded="true" />
+                    <element signature="e#3611#3612#0" expanded="true" />
+                    <element signature="e#4152#4153#0" expanded="true" />
+                    <element signature="e#4183#4184#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="SurvivalGame.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/SurvivalGame.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="493">
+                  <caret line="29" selection-start-line="29" selection-end-line="29" />
+                  <folding>
+                    <element signature="imports" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="HomeScreen.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/Screens/HomeScreen.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="408">
+                  <caret line="43" column="30" selection-start-line="43" selection-start-column="30" selection-end-line="43" selection-end-column="30" />
                 </state>
               </provider>
             </entry>
@@ -111,7 +167,7 @@
           <file leaf-file-name="HealthTracking.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/core/src/Logic/HealthTracking.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="197">
+                <state relative-caret-position="255">
                   <caret line="15" selection-start-line="15" selection-end-line="15" />
                 </state>
               </provider>
@@ -120,8 +176,17 @@
           <file leaf-file-name="Combat.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/core/src/Logic/Combat.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="555">
-                  <caret line="40" column="52" selection-start-line="40" selection-start-column="52" selection-end-line="40" selection-end-column="52" />
+                <state relative-caret-position="374">
+                  <caret line="40" column="53" lean-forward="true" selection-start-line="40" selection-start-column="53" selection-end-line="40" selection-end-column="53" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="Collision.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/Collision.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="323">
+                  <caret line="19" column="48" lean-forward="true" selection-start-line="19" selection-start-column="48" selection-end-line="19" selection-end-column="48" />
                 </state>
               </provider>
             </entry>
@@ -141,6 +206,8 @@
     <findStrings>
       <find>white</find>
       <find>stage</find>
+      <find>rect</find>
+      <find>lose</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -879,7 +946,6 @@
       <list>
         <option value="$PROJECT_DIR$/core/src/com/mygdx/game/TiledGameMap.java" />
         <option value="$PROJECT_DIR$/core/src/Screen/PlayScreen.java" />
-        <option value="$PROJECT_DIR$/core/src/com/mygdx/game/GameMap.java" />
         <option value="$PROJECT_DIR$/core/assets/something.tmx" />
         <option value="$PROJECT_DIR$/core/src/Logic/PathFinder.java" />
         <option value="$PROJECT_DIR$/core/src/entity/EntityType.java" />
@@ -887,22 +953,23 @@
         <option value="$PROJECT_DIR$/core/src/com/mygdx/game/Screens/EndScreen.java" />
         <option value="$PROJECT_DIR$/core/src/com/mygdx/game/Screens/LoseScreen.java" />
         <option value="$PROJECT_DIR$/core/src/com/mygdx/game/Screens/WinScreen.java" />
-        <option value="$PROJECT_DIR$/core/src/Logic/Combat.java" />
-        <option value="$PROJECT_DIR$/core/src/entity/Entity.java" />
-        <option value="$PROJECT_DIR$/core/src/entity/Runner.java" />
-        <option value="$PROJECT_DIR$/core/src/entity/Walker.java" />
         <option value="$PROJECT_DIR$/core/src/com/mygdx/game/Screens/HomeScreen.java" />
         <option value="$PROJECT_DIR$/core/src/com/mygdx/game/SurvivalGame.java" />
         <option value="$PROJECT_DIR$/core/src/Logic/HealthTracking.java" />
         <option value="$PROJECT_DIR$/core/src/com/mygdx/game/Screens/PlayScreen.java" />
+        <option value="$PROJECT_DIR$/core/src/Logic/Combat.java" />
         <option value="$PROJECT_DIR$/core/src/entity/Player.java" />
+        <option value="$PROJECT_DIR$/core/src/com/mygdx/game/GameMap.java" />
+        <option value="$PROJECT_DIR$/core/src/entity/Entity.java" />
+        <option value="$PROJECT_DIR$/core/src/entity/Runner.java" />
+        <option value="$PROJECT_DIR$/core/src/entity/Walker.java" />
         <option value="$PROJECT_DIR$/core/src/com/mygdx/game/Hud/Hud.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="678" />
-    <option name="y" value="-1101" />
+    <option name="x" value="507" />
+    <option name="y" value="-956" />
     <option name="width" value="1152" />
     <option name="height" value="612" />
   </component>
@@ -924,6 +991,19 @@
               <item name="SurvivalGame" type="b2602c69:ProjectViewProjectNode" />
               <item name="SurvivalGame" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="core" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+            </path>
+            <path>
+              <item name="SurvivalGame" type="b2602c69:ProjectViewProjectNode" />
+              <item name="SurvivalGame" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="core" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="SurvivalGame" type="b2602c69:ProjectViewProjectNode" />
+              <item name="SurvivalGame" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="core" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+              <item name="sounds" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="SurvivalGame" type="b2602c69:ProjectViewProjectNode" />
@@ -985,8 +1065,8 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
       <pane id="AndroidView" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1091,7 +1171,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-372" y="-1088" width="2576" height="1056" extended-state="6" />
+    <frame x="-359" y="-1088" width="2576" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="0" />
@@ -1102,13 +1182,13 @@
       <window_info anchor="right" id="Capture Analysis" order="1" />
       <window_info anchor="bottom" id="Event Log" order="2" side_tool="true" />
       <window_info anchor="right" id="Maven Projects" order="4" />
-      <window_info active="true" anchor="bottom" id="Run" order="6" visible="true" weight="0.21360256" />
+      <window_info active="true" anchor="bottom" id="Run" order="6" visible="true" weight="0.20616366" />
       <window_info anchor="bottom" id="Version Control" order="0" />
       <window_info anchor="bottom" id="CheckStyle" order="11" />
       <window_info anchor="bottom" id="Terminal" order="1" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="0" />
-      <window_info content_ui="combo" id="Project" order="5" visible="true" weight="0.099609375" />
+      <window_info content_ui="combo" id="Project" order="5" visible="true" weight="0.10703125" />
       <window_info anchor="right" id="Gradle" order="8" />
       <window_info id="Structure" order="6" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="6" weight="0.25" />
@@ -1116,13 +1196,13 @@
       <window_info anchor="right" id="Theme Preview" order="2" />
       <window_info anchor="bottom" id="Debug" order="7" weight="0.4" />
       <window_info id="Favorites" order="4" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="7" weight="0.25" />
+      <window_info anchor="bottom" id="Cvs" order="8" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="5" type="SLIDING" weight="0.4" />
       <window_info anchor="bottom" id="Inspection" order="9" weight="0.4" />
-      <window_info anchor="bottom" id="Find" order="5" weight="0.32943678" />
-      <window_info anchor="bottom" id="Cvs" order="8" weight="0.25" />
       <window_info anchor="bottom" id="Build" order="11" weight="0.32965517" />
-      <window_info anchor="bottom" id="Message" order="4" />
+      <window_info anchor="bottom" id="Find" order="5" weight="0.32943678" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -1130,19 +1210,12 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="13" />
+      <option name="time" value="15" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/core/assets/playerMoveAssets/down1.png" />
     <entry file="file://$PROJECT_DIR$/core/assets/playerMoveAssets/down3.png" />
-    <entry file="file://$PROJECT_DIR$/desktop/src/com/mygdx/game/desktop/DesktopLauncher.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/core/assets/playerMoveAssets/left3.png" />
     <entry file="file://$PROJECT_DIR$/core/assets/playerMoveAssets/left1.png" />
     <entry file="file://$PROJECT_DIR$/core/assets/playerMoveAssets/left2.png" />
@@ -1245,9 +1318,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="360">
           <caret line="32" lean-forward="true" selection-start-line="32" selection-end-line="32" />
-          <folding>
-            <element signature="e#563#579#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1258,114 +1328,135 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/entity/Entity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="825">
-          <caret line="69" column="5" selection-start-line="69" selection-start-column="5" selection-end-line="69" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/entity/Walker.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1980">
-          <caret line="140" selection-start-line="140" selection-end-line="140" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/Logic/Combat.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="555">
-          <caret line="40" column="52" selection-start-line="40" selection-start-column="52" selection-end-line="40" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/Screens/HomeScreen.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="61" column="8" selection-start-line="61" selection-start-column="8" selection-end-line="64" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/entity/Runner.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="20" column="22" selection-start-line="20" selection-start-column="22" selection-end-line="20" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/SurvivalGame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="30" column="23" selection-start-line="30" selection-start-column="23" selection-end-line="30" selection-end-column="23" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/GameMap.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="27" selection-start-line="27" selection-end-line="27" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/Collision.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="48" lean-forward="true" selection-start-line="19" selection-start-column="48" selection-end-line="19" selection-end-column="48" />
+        <state relative-caret-position="408">
+          <caret line="43" column="30" selection-start-line="43" selection-start-column="30" selection-end-line="43" selection-end-column="30" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/core/src/Logic/HealthTracking.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="197">
+        <state relative-caret-position="255">
           <caret line="15" selection-start-line="15" selection-end-line="15" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/Screens/PlayScreen.java">
+    <entry file="file://$PROJECT_DIR$/desktop/src/com/mygdx/game/desktop/DesktopLauncher.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="178" column="51" selection-start-line="178" selection-start-column="51" selection-end-line="178" selection-end-column="51" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#5483#5484#0" expanded="true" />
-            <element signature="e#5529#5530#0" expanded="true" />
-            <element signature="e#6237#6238#0" expanded="true" />
-            <element signature="e#6261#6262#0" expanded="true" />
-            <element signature="e#6302#6303#0" expanded="true" />
-            <element signature="e#6330#6331#0" expanded="true" />
-            <element signature="e#6372#6373#0" expanded="true" />
-            <element signature="e#6401#6402#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="119">
+          <caret line="9" selection-start-line="9" selection-end-line="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/Logic/Combat.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="40" column="53" lean-forward="true" selection-start-line="40" selection-start-column="53" selection-end-line="40" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/Collision.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="19" column="48" lean-forward="true" selection-start-line="19" selection-start-column="48" selection-end-line="19" selection-end-column="48" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/core/src/entity/Player.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="197">
-          <caret line="346" column="17" lean-forward="true" selection-start-line="346" selection-start-column="17" selection-end-line="346" selection-end-column="17" />
+        <state relative-caret-position="3944">
+          <caret line="351" column="28" selection-start-line="351" selection-start-column="28" selection-end-line="351" selection-end-column="28" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#6396#8127#0" />
-            <element signature="e#8133#9505#0" />
-            <element signature="e#9642#9994#0" />
-            <element signature="e#10000#10300#0" />
-            <element signature="e#10306#10569#0" />
-            <element signature="e#10575#10854#0" />
-            <element signature="e#10860#11123#0" />
+            <element signature="e#2822#3944#0" />
+            <element signature="e#6477#8208#0" />
+            <element signature="e#8214#9586#0" />
+            <element signature="e#11624#11915#0" />
+            <element signature="e#11921#12221#0" />
+            <element signature="e#12227#12516#0" />
+            <element signature="e#12522#12788#0" />
+            <element signature="e#12948#12949#0" expanded="true" />
+            <element signature="e#12993#12994#0" expanded="true" />
+            <element signature="e#13646#13647#0" expanded="true" />
+            <element signature="e#13687#13688#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/SurvivalGame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="29" selection-start-line="29" selection-end-line="29" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/entity/Entity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="580">
+          <caret line="71" selection-start-line="71" selection-end-line="71" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/GameMap.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="303">
+          <caret line="27" column="33" lean-forward="true" selection-start-line="27" selection-start-column="33" selection-end-line="27" selection-end-column="33" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/Screens/PlayScreen.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="326">
+          <caret line="178" column="51" selection-start-line="178" selection-start-column="36" selection-end-line="178" selection-end-column="51" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/entity/Runner.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2125">
+          <caret line="135" column="30" selection-start-line="135" selection-start-column="30" selection-end-line="135" selection-end-column="30" />
+          <folding>
+            <element signature="e#6095#6096#0" expanded="true" />
+            <element signature="e#6167#6168#0" expanded="true" />
+            <element signature="e#6174#6466#0" />
+            <element signature="e#6472#6773#0" />
+            <element signature="e#6779#7092#0" />
+            <element signature="e#7098#7365#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/entity/Walker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="35" column="31" selection-start-line="35" selection-start-column="31" selection-end-line="35" selection-end-column="31" />
+          <folding>
+            <element signature="e#5715#5716#0" expanded="true" />
+            <element signature="e#5787#5788#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/core/src/com/mygdx/game/Hud/Hud.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="32" column="23" selection-start-line="32" selection-start-column="23" selection-end-line="32" selection-end-column="23" />
+        <state relative-caret-position="340">
+          <caret line="56" lean-forward="true" selection-start-line="56" selection-end-line="56" />
+          <folding>
+            <element signature="e#3578#3579#0" expanded="true" />
+            <element signature="e#3611#3612#0" expanded="true" />
+            <element signature="e#4152#4153#0" expanded="true" />
+            <element signature="e#4183#4184#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
