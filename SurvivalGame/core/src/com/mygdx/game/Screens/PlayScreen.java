@@ -23,6 +23,8 @@ import entity.Walker;
 import entity.Player;
 import entity.Runner;
 
+import java.util.Iterator;
+
 
 public class PlayScreen extends GameMap implements Screen {
     TiledMap map;
@@ -73,7 +75,7 @@ public class PlayScreen extends GameMap implements Screen {
         collision = (TiledMapTileLayer) map.getLayers().get("Collision");
 
         entities.add(p = new Player(300, 400, collision, null));
-//        entities.add(new Walker(200,50,collision, p));
+        entities.add(new Walker(200,50,collision, p));
 //        entities.add(new Walker(400,600,collision, p));
 //        entities.add(new Walker(220,50,collision, p));
         entities.add(new Runner(290,70,collision, p));
@@ -240,6 +242,5 @@ public class PlayScreen extends GameMap implements Screen {
         map.dispose();
         music.dispose();
         text_pause.dispose();
-
     }
 }

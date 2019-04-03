@@ -33,7 +33,7 @@ public class Walker extends Entity {
     long start;
 
     private Collision rect;
-    private Boolean updateDead;
+    private Boolean updateDead = false;
 
     private Texture image;
     private Texture left1;
@@ -135,6 +135,7 @@ public class Walker extends Entity {
             image = laydown;
             updateDead = true;
             Hud.decrementEnemy();
+            this.killed();
         }
     }
 

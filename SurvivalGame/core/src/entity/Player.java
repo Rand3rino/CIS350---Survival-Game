@@ -157,6 +157,10 @@ public class Player extends Entity {
         Hud.changeStamina(sprintBar);
         Hud.changeAttack(punchBar);
         Hud.changeHealth(health.getHealth());
+
+        // Clear the punch area
+        punchArea = new Collision(0,0,0,0);
+
         if (!health.isDead() && punchBar > 10) {
 
             // Handle if character is sprinting

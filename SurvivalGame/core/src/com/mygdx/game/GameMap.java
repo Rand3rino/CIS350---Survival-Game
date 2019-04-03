@@ -8,6 +8,7 @@ import entity.EntityType;
 import entity.Player;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public abstract class GameMap {
     public ArrayList<Entity> entities;
@@ -19,6 +20,13 @@ public abstract class GameMap {
         entities = new ArrayList<Entity>();
     }
     public void render (OrthographicCamera camera, SpriteBatch batch){
+        Iterator<Entity> iterator = entities.iterator();
+        while(iterator.hasNext()) {
+            Entity current = iterator.next();
+            if(current.isDead()) {
+                iterator.remove(); // Removes the current object.
+            }
+        }
         for (Entity entity : entities){
             entity.render(batch);
         }

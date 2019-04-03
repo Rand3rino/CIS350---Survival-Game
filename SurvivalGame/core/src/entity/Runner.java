@@ -135,6 +135,7 @@ public class Runner extends Entity {
             image = laydown;
             updateDead = true;
             Hud.decrementEnemy();
+            this.killed();
         }
 
     }
