@@ -13,6 +13,7 @@ import com.mygdx.game.Hud.Hud;
 import com.mygdx.game.Screens.PlayScreen;
 import com.sun.org.apache.xpath.internal.functions.FuncFalse;
 import sun.reflect.annotation.ExceptionProxy;
+import com.badlogic.gdx.utils.Timer;
 
 public class Player extends Entity {
 
@@ -44,6 +45,7 @@ public class Player extends Entity {
 
     // TODO
     Collision rect;
+    protected Collision punchArea;
 
     // TODO
     private Texture image;
@@ -65,6 +67,7 @@ public class Player extends Entity {
     private Texture knockback1;
     private Texture knockback2;
 
+    private Timer timer;
 
     // TODO
     TiledMapTileLayer collision;
@@ -86,6 +89,7 @@ public class Player extends Entity {
         image = down2;
         health = new HealthTracking(this, null, 3, 3);
         this.rect = new Collision(getX(),getY(),getWidth(),getHeight());
+        punchArea = new Collision(0,0,0,0);
         this.collision = map;
         sprintBar = sprintBarMax;
         punchBar = punchBarMax;
@@ -139,16 +143,21 @@ public class Player extends Entity {
      *****************************************************************/
     public void update (float deltaTime){
 
-        if (!health.isDead()) {
-            // If the sprint button is not held, charge stamina till max
-            if (!Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT))
-                if (sprintBar < sprintBarMax)
-                    sprintBar++;
 
-            // If the attack button is not held, charge the attack till max
-            if (!Gdx.input.isKeyPressed(Input.Keys.SPACE))
-                if (punchBar < punchBarMax)
-                    punchBar++;
+        // If the sprint button is not held, charge stamina till max
+        if (!Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT))
+            if (sprintBar < sprintBarMax)
+                sprintBar++;
+
+        // If the attack button is not held, charge the attack till max
+        if (!Gdx.input.isKeyPressed(Input.Keys.SPACE))
+            if (punchBar < punchBarMax)
+                punchBar++;
+
+        Hud.changeStamina(sprintBar);
+        Hud.changeAttack(punchBar);
+        Hud.changeHealth(health.getHealth());
+        if (!health.isDead() && punchBar > 10) {
 
             // Handle if character is sprinting
             playerSprint(deltaTime);
@@ -160,12 +169,10 @@ public class Player extends Entity {
             // TODO need deltaTime?
             playerPunch();
 
-            Hud.changeStamina(sprintBar);
-            Hud.changeAttack(punchBar);
-            Hud.changeHealth(health.getHealth());
         }
-        else {
+        else if (health.isDead()){
             image = laydown;
+            Hud.changeHealth(health.getHealth());
         }
     }
 
@@ -178,8 +185,8 @@ public class Player extends Entity {
         if (Gdx.input.isKeyPressed(Input.Keys.SPACE))
             if (punchBar == punchBarMax && !ladder(getX(),getY())) {
 
-                // Update sprite image.
-                imgPunch();
+                // Update sprite image and ake a collision object on map
+                punch();
                 punchSFX.play(0.15f);
 
                 // Reset attack bar
@@ -296,7 +303,7 @@ public class Player extends Entity {
         batch.draw(image, pos.x, pos.y, getWidth(), getHeight());
     }
 
-    // Grabs players current tile position and checks its properties
+    // Given a tile position, checks its properties
     private boolean isCellBlocked(float x, float y) {
         TiledMapTileLayer.Cell cell = map.getCell((int) (x / map.getTileWidth()), (int) (y / map.getTileHeight()));
         return cell != null && cell.getTile() != null && cell.getTile().getProperties().containsKey("blocked");
@@ -335,17 +342,18 @@ public class Player extends Entity {
         return false;
     }
 
-    private void imgPunch() {
-        if (image.equals(left1) || image.equals(left2) || image.equals(left3))
-            //TODO some way to pause. Animation is too quick
+    private void punch() {
+        if (image.equals(left1) || image.equals(left2) || image.equals(left3)) {
             image = punchLeft;
-        else if (image.equals(right1) || image.equals(right2) || image.equals(right3))
+            punchArea = new Collision(getX()-32,getY(),getWidth(),getHeight());
+        }
+        else if (image.equals(right1) || image.equals(right2) || image.equals(right3)) {
             image = punchRight;
-
-//        // TODO remove after test
-//        Hud.decrementEnemy();
-//        hit(1);
+            punchArea = new Collision(getX() + 32, getY(), getWidth(), getHeight());
+        }
     }
+
+
 
     private void imgLeft(){
 
@@ -401,21 +409,29 @@ public class Player extends Entity {
         up = up % 40;
     }
 
-
     public void hit(int damage) {
         health.decreaseHealth(damage);
     }
 
     // TODO vertical knockback
     public void knockback(float x, float y) {
-        if (x > getX()) {
-            // knockback left
-            pos = new Vector2(x - 32, getY());
+
+        // Knockback left
+        if (x > getX() ) {
             image = knockback2;
-        } else {
-            // knockback right
-            pos = new Vector2(x + 32, getY());
+
+            // Change position if it does not result in a collision
+            if (!isCellBlocked(x-32, getY()))
+                pos = new Vector2(x - 32, getY());
+        }
+
+        // Knockback right
+        else if (x < getX() ) {
             image = knockback1;
+
+            // Change position if it does not result in a collision
+            if (!isCellBlocked(x - 32, getY()))
+                pos = new Vector2(x + 32, getY());
         }
     }
 

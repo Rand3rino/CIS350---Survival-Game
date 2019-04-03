@@ -9,6 +9,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector2;
 import Logic.PathFinder;
+import com.mygdx.game.Collision;
+import com.mygdx.game.Hud.Hud;
 
 public class Walker extends Entity {
     private int left = 1, right = 1, up = 1, down = 1;
@@ -29,6 +31,9 @@ public class Walker extends Entity {
     Player player;
     long time = System.currentTimeMillis();
     long start;
+
+    private Collision rect;
+    private Boolean updateDead;
 
     private Texture image;
     private Texture left1;
@@ -54,6 +59,7 @@ public class Walker extends Entity {
         player = e;
         loadTextures();
         image = down2;
+        this.rect = new Collision(getX(),getY(),getWidth(),getHeight());
         health = new HealthTracking(this, null, 1, 1);
         path = new PathFinder(map);
         combat = new Combat();
@@ -85,40 +91,51 @@ public class Walker extends Entity {
 
     public void update (float deltaTime) {
 
-        if(!health.isDead()) {
+        if (punchBar < punchBarMax)
+            punchBar++;
+
+        if (player.punchArea.doesCollide(rect))
+            health.decreaseHealth(1);
+
+        if(!health.isDead() && punchBar > 25) {
             int move = path.minDistance((int) getX(), (int) getY(), player);
 
             if (move == 0) {
                 moveX(-speed);
+                rect.move(getX(),getY());
                 if (ladder(getX(), getY()))
                     imgUp();
                 else
                     imgLeft();
             } else if (move == 1) {
                 moveX(speed);
+                rect.move(getX(),getY());
                 if (ladder(getX(), getY()))
                     imgUp();
                 else
                     imgRight();
             } else if (move == 2) {
                 moveY(-speed);
+                rect.move(getX(),getY());
                 if (ladder(getX(), getY()))
                     imgUp();
                 else
                     imgDown();
             } else if (move == 3) {
                 moveY(speed);
+                rect.move(getX(),getY());
                 imgUp();
             }
 
-            if (combat.inCombat(this, player)) {
+            if (combat.inCombat(this, player))
                 playerPunch();
-            } else if (punchBar < punchBarMax) {
-                punchBar++;
-            }
+
         }
-        else
+        else if (health.isDead() && !updateDead) {
             image = laydown;
+            updateDead = true;
+            Hud.decrementEnemy();
+        }
     }
 
 

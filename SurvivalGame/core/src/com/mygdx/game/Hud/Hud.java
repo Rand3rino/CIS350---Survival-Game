@@ -30,7 +30,7 @@ public class Hud {
         staminaBar = 100;
         attackGauge = 100;
         health = 10;
-        enemyCount = 10;
+        enemyCount = 2;
 
         viewport = new StretchViewport(SurvivalGame.WIDTH, SurvivalGame.HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, batch);
@@ -58,7 +58,12 @@ public class Hud {
     // TODO static?
     public static void decrementEnemy() {
         enemyCount--;
-        enemyCountLabel.setText(String.format("%03d", enemyCount) + " Enemies");
+        if (enemyCount == 1) {
+            enemyCountLabel.setStyle(new Label.LabelStyle(new BitmapFont(), Color.CYAN));
+            enemyCountLabel.setText(String.format("BOSS BATTLE"));
+        }
+        else
+            enemyCountLabel.setText(String.format("%03d", enemyCount) + " Enemies");
     }
 
     public static void changeStamina(int value) {
