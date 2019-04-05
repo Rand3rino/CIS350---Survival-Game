@@ -4,7 +4,6 @@ package com.mygdx.game.Screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -22,8 +21,8 @@ import com.mygdx.game.SurvivalGame;
 import entity.Walker;
 import entity.Player;
 import entity.Runner;
+import java.util.ArrayList;
 
-import java.util.Iterator;
 
 
 public class PlayScreen extends GameMap implements Screen {
@@ -74,11 +73,11 @@ public class PlayScreen extends GameMap implements Screen {
 
         collision = (TiledMapTileLayer) map.getLayers().get("Collision");
 
-        entities.add(p = new Player(300, 400, collision, null));
-        entities.add(new Walker(200,50,collision, p));
+        entities.add(p = new Player(600, 600, collision, null));
+        entities.add(new Walker(530,100,collision, p, this));
 //        entities.add(new Walker(400,600,collision, p));
 //        entities.add(new Walker(220,50,collision, p));
-        entities.add(new Runner(290,70,collision, p));
+        entities.add(new Runner(290,100,collision, p, this));
 //        entities.add(new Runner(250,40,collision, p));
 
         text_pause = new Texture(Gdx.files.internal("pause.png"));
@@ -113,9 +112,9 @@ public class PlayScreen extends GameMap implements Screen {
             renderer.setView(gameCam);
         }
 
-        spawnWaves();
+//        spawnWaves();
     }
-
+/***
     private void spawnWaves() {
         if (!wave2 && hud.getEnemyCount() == 8) {
             wave2 = true;
@@ -135,7 +134,7 @@ public class PlayScreen extends GameMap implements Screen {
             // TODO Release the SLIME
         }
     }
-
+****/
     @Override
     public void render(float deltaTime) {
 
@@ -243,4 +242,58 @@ public class PlayScreen extends GameMap implements Screen {
         music.dispose();
         text_pause.dispose();
     }
+
+    public int[][] devPath(){
+        ArrayList<Walker> walkers;
+        ArrayList<Runner> runners;
+        int playerX = (int) p.getX() / 32;
+        int playerY = (int) p.getY() / 32;
+
+        int loc[][] = new int[collision.getWidth()][collision.getHeight()]; // array generated from map blocks
+        for (int i = 0; i < collision.getHeight(); i++) {
+            for (int j = 0; j < collision.getWidth(); j++) {
+                if (isCellBlocked(i, j)) {
+                    loc[i][j] = 2; //sets all blocked locations on array map to 2
+                } else
+                    loc[i][j] = 0; // sets all accessible spaces to 0
+            }
+        }
+
+
+
+        walkers = new ArrayList<Walker>();
+        for (Walker walk: walkers ) {
+            int AIX = (int)walk.getX() / 32;
+            int AIY = (int)walk.getY() / 32;
+            loc[AIX][AIY] = 4;
+        }
+        runners = new ArrayList<Runner>();
+        for (Runner run: runners ) {
+            int AIX = (int)run.getX() / 32;
+            int AIY = (int)run.getY() / 32;
+            loc[AIX][AIY] = 4;
+        }
+
+        loc[playerX][playerY] = 3;
+/***
+        for (int i = collision.getHeight() - 1; i > 0; i--){
+            for (int j = 0; j < collision.getWidth(); j++){
+                System.out.print(loc[j][i] + " ");
+            }
+            System.out.println();
+        }
+        System.out.println();
+        System.out.println();
+ *****/
+        return loc;
+    }
+    private boolean isCellBlocked(int x, int y) {
+        TiledMapTileLayer.Cell cell = collision.getCell(x, y);
+        return cell != null && cell.getTile() != null && cell.getTile().getProperties().containsKey("blocked");
+    }
+
+
+
+
 }
+

@@ -2,6 +2,7 @@ package entity;
 
 import Logic.Combat;
 import Logic.HealthTracking;
+import Logic.Point;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
@@ -11,6 +12,7 @@ import com.badlogic.gdx.math.Vector2;
 import Logic.PathFinder;
 import com.mygdx.game.Collision;
 import com.mygdx.game.Hud.Hud;
+import com.mygdx.game.Screens.PlayScreen;
 
 public class Runner extends Entity {
     private int left = 1, right = 1, up = 1, down = 1;
@@ -54,8 +56,9 @@ public class Runner extends Entity {
     private Texture laydown;
     private Texture knockdown1;
     private Texture knockdown2;
+    private PlayScreen screenInfo;
 
-    public Runner (float x, float y, TiledMapTileLayer map, Player e){
+    public Runner (float x, float y, TiledMapTileLayer map, Player e, PlayScreen info){
         super(x,y,EntityType.COMPUTER, map, e);
         player = e;
         loadTextures();
@@ -67,6 +70,7 @@ public class Runner extends Entity {
         punchBar = punchBarMax;
         punchSFX= Gdx.audio.newSound(Gdx.files.internal("sounds/hits/12.ogg"));
         start = time;
+        screenInfo = info;
     }
 
     private void loadTextures() {
@@ -89,7 +93,7 @@ public class Runner extends Entity {
         knockdown2 = new Texture("vaccine man movement assets/knockback2.png");
     }
 
-    public void update(float deltaTime) {
+    public void update (float deltaTime) {
 
         if (punchBar < punchBarMax)
             punchBar++;
@@ -98,7 +102,7 @@ public class Runner extends Entity {
             health.decreaseHealth(1);
 
         if(!health.isDead() && punchBar > 25) {
-            int move = path.minDistance((int) getX(), (int) getY(), player);
+            int move = path.find(new Point((int)getX(), (int)getY()), new Point((int)player.getX(), (int)player.getY()), screenInfo.devPath());
 
             if (move == 0) {
                 moveX(-speed);
@@ -137,8 +141,8 @@ public class Runner extends Entity {
             Hud.decrementEnemy();
             this.killed();
         }
-
     }
+
 
 
 

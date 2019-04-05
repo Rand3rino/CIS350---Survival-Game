@@ -4,63 +4,17 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import entity.Entity;
 import java.util.*;
 import java.lang.Math;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+
 
 public class PathFinder {
-
-    TiledMapTileLayer map;
-    public PathFinder(TiledMapTileLayer inMap) {
-        map = inMap;
+    TiledMapTileLayer mapIn;
+    public PathFinder(TiledMapTileLayer map) {
+       mapIn = map;
     }
-    public int minDistance(int AIPosX, int AIPosY, Entity e) {
-
-        //variables are divided by 32 because float X and Y positions are provided in pixel quantities
-        //each tile on map is 32 pixels
-
-
-        int playerX = (int) e.getX() / 32;
-        int playerY = (int) e.getY() / 32;
-        AIPosX /= 32;
-        AIPosY /= 32;
-        int loc[][] = new int[map.getWidth()][map.getHeight()]; // array generated from map blocks
-        for (int i = 0; i < map.getHeight(); i++) {
-            for (int j = 0; j < map.getWidth(); j++) {
-                if (isCellBlocked(i, j)) {
-                    loc[i][j] = 2; //sets all blocked locations on array map to 2
-                } else
-                    loc[i][j] = 0; // sets all accessible spaces to 0
-            }
-        }
-        //places player location on map array using a 3
-        loc[playerX][playerY] = 3;
-        //places AI location on map array using a 4
-        loc[AIPosX][AIPosY] = 4;
-        return find(new Point (AIPosX, AIPosY), new Point (playerX, playerY), loc);
-    }
-
-/****
-        for (int i = 0; i < map.getHeight() ; i++){
-            for (int j = 0 ; j < map.getWidth(); j++){
-                System.out.print(loc[i][j] + " ");
-            }
-            System.out.println();
-        }
-        System.out.println();
-        System.out.println();
-****/
-
-
-
-    // same is blocked method from player entity but adjusted to read tile data from x and y coordinates
-    private boolean isCellBlocked(int x, int y) {
-        TiledMapTileLayer.Cell cell = map.getCell(x, y);
-        return cell != null && cell.getTile() != null && cell.getTile().getProperties().containsKey("blocked");
-    }
-
-
-
 
     private boolean isValidCell(int row, int col){
-        if (row < map.getHeight() && row >= 0 && col < map.getWidth() && col >= 0){
+        if (row < mapIn.getHeight() && row >= 0 && col < mapIn.getWidth() && col >= 0){
             return true;
         }
         else{
@@ -68,80 +22,136 @@ public class PathFinder {
         }
     }
 
-    private int find(Point src, Point dest, int[][] loc) {
-        Point nextMove;
-    if (Math.abs(dest.getX() - src.getX()) > Math.abs(dest.getY() - src.getY())){
-        if (dest.getX() > src.getX()){
-            if (isValidCell(src.getX() + 1, src.getY()) && !isCellBlocked(src.getX() + 1, src.getY())){
-                if (loc[src.getX() + 1][src.getY()] != 4)
-                return 1;
+    public int find(Point src, Point dest, int[][] loc) {
+        int AIX = src.getX() / 32;
+        int AIY = src.getY() / 32;
+        int playerX = dest.getX() / 32;
+        int playerY = dest.getY() / 32;
+
+        if (playerY > 12 && AIY < 12){
+            if (AIX < 11){
+                playerX = 4 ;
+                playerY = 12 ;
             }
-            if (isValidCell(src.getX() + 1, src.getY()) && isCellBlocked(src.getX() + 1, src.getY())){
-                if (isValidCell(src.getX(), src.getY() + 1) && !isCellBlocked(src.getX(), src.getY() + 1)) {
-                    if (loc[src.getX()][src.getY() + 1] != 4)
-                    return 3;
+            else{
+                playerX = 16;
+                playerY = 12;
+            }
+        }
+
+        else if (AIY > 11 && AIY < 16 && playerY > 16){
+            if (AIX < 11){
+                playerX = 4 ;
+                playerY = 16 ;
+            }
+            else{
+                playerX = 16;
+                playerY = 16;
+            }
+        }
+
+        else if (playerY < 16 && AIY > 16){
+            if (AIX < 11){
+                playerX = 4 ;
+                playerY = 16 ;
+            }
+            else{
+                playerX = 16;
+                playerY = 16;
+            }
+        }
+
+        else if (AIY > 11 && AIY < 16 && playerY < 12){
+            if (AIX < 11){
+                playerX = 4 ;
+                playerY = 11 ;
+            }
+            else{
+                playerX = 16;
+                playerY = 11;
+            }
+        }
+    //to read current player x and y location for testing
+    //    System.out.println("player X: " + playerX );
+    //    System.out.println("player Y: " + playerY );
+
+        if (Math.abs(playerX - AIX) > Math.abs(playerY - AIY)) {
+            if (playerX > AIX) {
+                if (isValidCell(AIX + 1, AIY) && !isCellBlocked(AIX + 1, AIY)) {
+                    if (loc[AIX + 1][AIY] != 4)
+                        return 1;
                 }
-                if (isValidCell(src.getX(), src.getY() - 1) && !isCellBlocked(src.getX(), src.getY() + 1)){
-                    if (loc[src.getX() + 1][src.getY()] != 4)
-                    return 1;
+                if (isValidCell(AIX + 1, AIY) && isCellBlocked(AIX + 1, AIY)) {
+                    if (isValidCell(AIX, AIY + 1) && !isCellBlocked(AIX, AIY + 1)) {
+                        if (loc[AIX][AIY + 1] != 4)
+                            return 3;
+                    }
+                    if (isValidCell(AIX, AIY - 1) && !isCellBlocked(AIX, AIY + 1)) {
+                        if (loc[AIX+ 1][AIY] != 4)
+                            return 1;
+                    }
+                }
+            } else {
+                if (isValidCell(AIX - 1, AIY) && !isCellBlocked(AIX - 1, AIY)) {
+                    if (loc[AIX - 1][AIY] != 4)
+                        return 0;
+                }
+                if (isValidCell(AIX - 1, AIY) && isCellBlocked(AIX - 1, AIY)) {
+                    if (isValidCell(AIX, AIY + 1) && !isCellBlocked(AIX, AIY + 1)) {
+                        if (loc[AIX][AIY + 1] != 4)
+                            return 3;
+                    }
+                    if (isValidCell(AIX, AIY - 1) && !isCellBlocked(AIX, AIY + 1)) {
+                        if (loc[AIX][AIY - 1] != 4)
+                            return 2;
+                    }
                 }
             }
         }
-        else{
-            if (isValidCell(src.getX() - 1, src.getY()) && !isCellBlocked(src.getX() - 1, src.getY())){
-                if (loc[src.getX() - 1][src.getY()] != 4)
-                return 0;
-            }
-            if (isValidCell(src.getX() - 1, src.getY()) && isCellBlocked(src.getX() - 1, src.getY())){
-                if (isValidCell(src.getX(), src.getY() + 1) && !isCellBlocked(src.getX(), src.getY() + 1)) {
-                    if (loc[src.getX()][src.getY() + 1] != 4)
-                        return 3;
-                }
-                if (isValidCell(src.getX(), src.getY() - 1) && !isCellBlocked(src.getX(), src.getY() + 1)){
-                    if (loc[src.getX()][src.getY() - 1] != 4)
-                        return 2;
-                }
-            }
-        }
-    }
+
 
 
 
     else{
-        if (dest.getY() > src.getY()){
+        if (playerY > AIY){
 
-            if (isValidCell(src.getX(), src.getY() + 1) && !isCellBlocked(src.getX(), src.getY() + 1 )){
-                if (loc[src.getX()][src.getY() + 1] != 4)
+            if (isValidCell(AIX, AIY + 1) && !isCellBlocked(AIX, AIY + 1 )){
+                if (loc[AIX][AIY + 1] != 4)
                     return 3;
             }
-            if (isValidCell(src.getX(), src.getY() + 1) && isCellBlocked(src.getX(), src.getY() + 1)){
-                if (isValidCell(src.getX() + 1, src.getY()) && !isCellBlocked(src.getX(), src.getY() + 1)) {
-                    if (loc[src.getX() + 1][src.getY()] != 4)
+            if (isValidCell(AIX, AIY + 1) && isCellBlocked(AIX, AIY + 1)){
+                if (isValidCell(AIX + 1, AIY) && !isCellBlocked(AIX, AIY + 1)) {
+                    if (loc[AIX + 1][AIY] != 4)
                         return 1;
                 }
-                if (isValidCell(src.getX() - 1, src.getY() ) && !isCellBlocked(src.getX(), src.getY() + 1)){
-                    if (loc[src.getX() - 1][src.getY()] != 4)
+                if (isValidCell(AIX - 1, AIY ) && !isCellBlocked(AIX, AIY + 1)){
+                    if (loc[AIX - 1][AIY] != 4)
                         return 0;
                 }
             }
         }
         else{
-            if (isValidCell(src.getX(), src.getY() - 1) && !isCellBlocked(src.getX(), src.getY() - 1)){
-                if (loc[src.getX()][src.getY() - 1] != 4)
+            if (isValidCell(AIX, AIY - 1) && !isCellBlocked(AIX, AIY - 1)){
+                if (loc[AIX][AIY - 1] != 4)
                     return 2;
             }
-            if (isValidCell(src.getX(), src.getY() -1) && isCellBlocked(src.getX(), src.getY() - 1)){
-                if (isValidCell(src.getX() + 1, src.getY()) && !isCellBlocked(src.getX(), src.getY() + 1)) {
-                    if (loc[src.getX() + 1][src.getY()] != 4)
+            if (isValidCell(AIX, AIY -1) && isCellBlocked(AIX, AIY - 1)){
+                if (isValidCell(AIX + 1, AIY) && !isCellBlocked(AIX, AIY + 1)) {
+                    if (loc[AIX + 1][AIY] != 4)
                         return 1;
                 }
-                if (isValidCell(src.getX() - 1, src.getY() ) && !isCellBlocked(src.getX(), src.getY() + 1)){
-                    if (loc[src.getX() - 1][src.getY()] != 4)
+                if (isValidCell(AIX - 1, AIY ) && !isCellBlocked(AIX, AIY + 1)){
+                    if (loc[AIX - 1][AIY] != 4)
                         return 0;
                 }
             }
         }
     }
     return -1;
+    }
+
+    private boolean isCellBlocked(int x, int y) {
+        TiledMapTileLayer.Cell cell = mapIn.getCell(x, y);
+        return cell != null && cell.getTile() != null && cell.getTile().getProperties().containsKey("blocked");
     }
 }

@@ -21,28 +21,10 @@ public class AI extends Entity {
         super(x,y,EntityType.COMPUTER, map, e);
         player = e;
         image = new Texture ("aiMoveAssets/down1.png");
-        path = new PathFinder(map);
     }
 
     public void update (float deltaTime) {
-            int move = path.minDistance((int) getX(), (int) getY(), player);
 
-            if (move == 0) {
-                moveX(-speed);
-                imgLeft();
-            }
-            else if (move == 1) {
-                moveX(speed);
-                imgRight();
-            }
-            else if (move == 2) {
-                moveY(-speed);
-                imgDown();
-            }
-            else if (move == 3) {
-                moveY(speed);
-                imgUp();
-            }
             // AI can move in a square **/
 //        if (pos.x  < 400 && pos.y == 300)
 //            moveX(speed);
