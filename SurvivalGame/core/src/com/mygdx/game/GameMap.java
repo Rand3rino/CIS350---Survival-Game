@@ -1,12 +1,8 @@
 package com.mygdx.game;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import entity.Entity;
-import entity.EntityType;
-import entity.Player;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 

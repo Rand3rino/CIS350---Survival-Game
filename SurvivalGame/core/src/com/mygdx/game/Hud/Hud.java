@@ -30,7 +30,7 @@ public class Hud {
         staminaBar = 100;
         attackGauge = 100;
         health = 10;
-        enemyCount = 2;
+        enemyCount = 4;
 
         viewport = new StretchViewport(SurvivalGame.WIDTH, SurvivalGame.HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, batch);

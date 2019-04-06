@@ -18,11 +18,10 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.GameMap;
 import com.mygdx.game.Hud.Hud;
 import com.mygdx.game.SurvivalGame;
-import entity.Walker;
-import entity.Player;
-import entity.Runner;
-import java.util.ArrayList;
+import entity.*;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 
 
 public class PlayScreen extends GameMap implements Screen {
@@ -49,7 +48,7 @@ public class PlayScreen extends GameMap implements Screen {
     private TmxMapLoader mapLoader;
 
 
-    private boolean wave2, wave3, waveFinal;
+    private boolean wave1, wave2, wave3, wave4, wave5, wave6, wave7, wave8, wave9, wave10, waveFinal;
 
     public PlayScreen (SurvivalGame game) {
         this.game = game;
@@ -61,8 +60,11 @@ public class PlayScreen extends GameMap implements Screen {
         music.setLooping(true);
         music.play();
 
+        wave1 = false;
         wave2 = false;
         wave3 = false;
+        wave4 = false;
+        wave5 = false;
         waveFinal = false;
 
         mapLoader = new TmxMapLoader();
@@ -72,14 +74,7 @@ public class PlayScreen extends GameMap implements Screen {
 
 
         collision = (TiledMapTileLayer) map.getLayers().get("Collision");
-
         entities.add(p = new Player(600, 600, collision, null));
-        entities.add(new Walker(530,100,collision, p, this));
-//        entities.add(new Walker(400,600,collision, p));
-//        entities.add(new Walker(220,50,collision, p));
-        entities.add(new Runner(290,100,collision, p, this));
-//        entities.add(new Runner(250,40,collision, p));
-
         text_pause = new Texture(Gdx.files.internal("pause.png"));
         sprite_pause = new Sprite(text_pause);
 
@@ -112,29 +107,38 @@ public class PlayScreen extends GameMap implements Screen {
             renderer.setView(gameCam);
         }
 
-//        spawnWaves();
+       spawnWaves();
     }
-/***
+
     private void spawnWaves() {
+        if (wave1){
+            wave1 = false;
+            entities.add(new Walker(530,100,collision, p, this));
+            entities.add(new Walker(430,120,collision, p, this));
+            entities.add (new Potion(290, 50, collision, p ));
+        }
         if (!wave2 && hud.getEnemyCount() == 8) {
             wave2 = true;
-            entities.add(new Runner(290, 70, collision, p));
-            entities.add(new Runner(250, 40, collision, p));
-            entities.add(new Runner(70, 290, collision, p));
-            entities.add(new Runner(40, 250, collision, p));
+            entities.add(new Runner(290, 70, collision, p,this));
+            entities.add(new Runner(250, 40, collision, p,this));
+            entities.add(new Runner(70, 290, collision, p, this));
+            entities.add(new Runner(40, 250, collision, p, this));
         }
         else if (!wave3 && hud.getEnemyCount() == 4) {
             wave3 = true;
-            entities.add(new Walker(290, 70, collision, p));
-            entities.add(new Walker(250, 40, collision, p));
-            entities.add(new Walker(40, 250, collision, p));
+            entities.add(new Walker(290, 70, collision, p, this));
+            entities.add(new Walker(250, 40, collision, p, this));
+            entities.add(new Walker(40, 250, collision, p, this));
         }
         else if (!waveFinal && hud.getEnemyCount() == 1){
+        //    music.stop();
+        //    music = Gdx.audio.newMusic(Gdx.files.internal("sounds/bittersweet.mp3"));
+        //    music.play();
             waveFinal = true;
+            entities.add(new Slime (300, 250, collision, p, this));
             // TODO Release the SLIME
         }
     }
-****/
     @Override
     public void render(float deltaTime) {
 
@@ -244,8 +248,8 @@ public class PlayScreen extends GameMap implements Screen {
     }
 
     public int[][] devPath(){
-        ArrayList<Walker> walkers;
-        ArrayList<Runner> runners;
+//        entities = new ArrayList<Entity>();
+        Iterator<Entity> iterator = entities.iterator();
         int playerX = (int) p.getX() / 32;
         int playerY = (int) p.getY() / 32;
 
@@ -260,22 +264,15 @@ public class PlayScreen extends GameMap implements Screen {
         }
 
 
+         for (Entity ent: entities ) {
+            int AIX = (int)ent.getX() / 32;
+            int AIY = (int)ent.getY() / 32;
+            loc[AIX][AIY] = 4;
+        }
 
-        walkers = new ArrayList<Walker>();
-        for (Walker walk: walkers ) {
-            int AIX = (int)walk.getX() / 32;
-            int AIY = (int)walk.getY() / 32;
-            loc[AIX][AIY] = 4;
-        }
-        runners = new ArrayList<Runner>();
-        for (Runner run: runners ) {
-            int AIX = (int)run.getX() / 32;
-            int AIY = (int)run.getY() / 32;
-            loc[AIX][AIY] = 4;
-        }
 
         loc[playerX][playerY] = 3;
-/***
+
         for (int i = collision.getHeight() - 1; i > 0; i--){
             for (int j = 0; j < collision.getWidth(); j++){
                 System.out.print(loc[j][i] + " ");
@@ -284,7 +281,7 @@ public class PlayScreen extends GameMap implements Screen {
         }
         System.out.println();
         System.out.println();
- *****/
+
         return loc;
     }
     private boolean isCellBlocked(int x, int y) {

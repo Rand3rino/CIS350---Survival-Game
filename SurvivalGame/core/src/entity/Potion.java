@@ -9,10 +9,11 @@ import com.mygdx.game.Collision;
 
 
 
-public class Potion  extends Entity {
+public class Potion extends Entity {
 
     TiledMapTileLayer collision;
     Collision rect;
+    Player player;
 
     public HealthTracking health = new HealthTracking(this, null, 10, 10);
 
@@ -30,12 +31,12 @@ public class Potion  extends Entity {
      * @param map The map that the potion is placed on
      * @param e An entity object for entities to track
      *****************************************************************/
-    public Potion (float x, float y, TiledMapTileLayer map, Entity e){
+    public Potion (float x, float y, TiledMapTileLayer map, Player e){
 
         super(x,y,EntityType.POTION, map, e);
         loadTextures();
         image = potion;
-
+        player = e;
         this.rect = new Collision(getX(),getY(),getWidth(),getHeight());
         this.collision = map;
 
@@ -51,8 +52,15 @@ public class Potion  extends Entity {
         batch.draw(image, pos.x, pos.y, getWidth(), getHeight());
     }
 
+    public void update(float deltaTime){
+        if (player.punchArea.doesCollide(rect)){
+        this.killed();
+        player.health.buffHealth(2);
+        }
+    }
 
-    // Checks if the player is colliding with the potion
+
+   /**** // Checks if the player is colliding with the potion
     public boolean PotionCollide() {
         for(float step = 0; step < getHeight(); step += map.getTileHeight() / 2)
             if(isPotion(getX() + getWidth(), getY() + step))
@@ -65,7 +73,7 @@ public class Potion  extends Entity {
         TiledMapTileLayer.Cell cell = map.getCell((int) (x / map.getTileWidth()), (int) (y / map.getTileHeight()));
         return cell != null && cell.getTile() != null && cell.getTile().getProperties().containsKey("potion");
     }
-
+    *****/
 
 
 
