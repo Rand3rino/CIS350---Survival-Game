@@ -66,6 +66,8 @@ public class Player extends Entity {
     private Texture laydown;
     private Texture knockback1;
     private Texture knockback2;
+    private Texture punchUp;
+    private Texture punchDown;
 
     private Timer timer;
 
@@ -112,6 +114,8 @@ public class Player extends Entity {
         down3 = new Texture("OPM movement assets/down3.png");
         punchLeft = new Texture("OPM movement assets/punchLeft.png");
         punchRight = new Texture("OPM movement assets/punchRight.png");
+        punchUp = new Texture("OPM movement assets/punchUp.png");
+        punchDown = new Texture("OPM movement assets/punchDown.png");
         laydown = new Texture("OPM movement assets/dead.png");
         knockback1 = new Texture("OPM movement assets/knockback1.png");
         knockback2 = new Texture("OPM movement assets/knockback2.png");
@@ -349,11 +353,21 @@ public class Player extends Entity {
     private void punch() {
         if (image.equals(left1) || image.equals(left2) || image.equals(left3)) {
             image = punchLeft;
-            punchArea = new Collision(getX()-32,getY(),getWidth(),getHeight());
+            punchArea = new Collision(getX()-16,getY(),getWidth()/2,getHeight()/2);
         }
         else if (image.equals(right1) || image.equals(right2) || image.equals(right3)) {
             image = punchRight;
-            punchArea = new Collision(getX() + 32, getY(), getWidth(), getHeight());
+            punchArea = new Collision(getX() + 16, getY(), getWidth(), getHeight());
+        }
+
+        else if(image.equals(up1) || image.equals(up2) ||  image.equals(up3)) {
+            image = punchUp;
+            punchArea = new Collision(getX(), getY() + 16, getWidth() / 2, getHeight() / 2);
+        }
+
+        else if(image.equals(down1) || image.equals(down2) || image.equals(down3)) {
+            image = punchDown;
+            punchArea = new Collision(getX(), getY() - 16, getWidth()/2,getHeight()/2);
         }
     }
 
