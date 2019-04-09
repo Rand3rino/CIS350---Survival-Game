@@ -5,7 +5,7 @@ public enum EntityType {
    PLAYER("player", 20, 40),
     COMPUTER("computer", 20, 40),
    SLIME("slime", 50, 80),
-    KINGSLIME("king slime", 80, 110),
+    KINGSLIME("king slime", 100, 120),
     POTION ("potion", 20, 40);
 
 

@@ -58,7 +58,7 @@ public class KingSlime extends Entity{
     private TiledMapTileLayer map;
 
     public KingSlime (float x, float y, TiledMapTileLayer map, Player e, PlayScreen info){
-        super(x,y,EntityType.SLIME, map, e);
+        super(x,y,EntityType.KINGSLIME, map, e);
         player = e;
         loadTextures();
         image = down2;
@@ -88,8 +88,6 @@ public class KingSlime extends Entity{
         punchLeft = new Texture("KingSlime movement assets/down1.png");
         punchRight = new Texture("KingSlime movement assets/down2.png");
         laydown = new Texture("KingSlime movement assets/down3.png");
-
-
     }
 
     public void update (float deltaTime) {
