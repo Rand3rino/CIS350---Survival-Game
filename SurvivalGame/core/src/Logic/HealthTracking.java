@@ -5,11 +5,9 @@ import entity.Entity;
 public class HealthTracking {
     private int health;
     private int totalHealth;
-    Items buffs;
     Entity target;
-    public HealthTracking(Entity e, Items buffs, int currHealth, int tHealth){
+    public HealthTracking(Entity e, int currHealth, int tHealth){
         target = e;
-        buffs = this.buffs;
         health = currHealth;
         totalHealth = tHealth;
     }
