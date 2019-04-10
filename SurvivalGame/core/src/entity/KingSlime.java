@@ -63,7 +63,7 @@ public class KingSlime extends Entity{
         loadTextures();
         image = down2;
         this.rect = new Collision(getX(),getY(),getWidth(),getHeight());
-        health = new HealthTracking(this, null, 1, 1);
+        health = new HealthTracking(this, 1, 1);
         path = new PathFinder(map);
         combat = new Combat();
         punchBar = punchBarMax;

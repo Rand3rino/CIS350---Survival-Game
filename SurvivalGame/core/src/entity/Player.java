@@ -89,7 +89,7 @@ public class Player extends Entity {
         super(x,y,EntityType.PLAYER, map, e);
         loadTextures();
         image = down2;
-        health = new HealthTracking(this, null, 3, 3);
+        health = new HealthTracking(this, 3, 3);
         this.rect = new Collision(getX(),getY(),getWidth(),getHeight());
         punchArea = new Collision(0,0,0,0);
         this.collision = map;

@@ -15,7 +15,7 @@ public class Potion extends Entity {
     Collision rect;
     Player player;
 
-    public HealthTracking health = new HealthTracking(this, null, 10, 10);
+    public HealthTracking health = new HealthTracking(this, 1, 1);
 
     public Texture image;
 
