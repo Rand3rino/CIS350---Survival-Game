@@ -1,6 +1,5 @@
 package com.mygdx.game.Screens;
 
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
@@ -19,6 +18,7 @@ import com.mygdx.game.GameMap;
 import com.mygdx.game.Hud.Hud;
 import com.mygdx.game.SurvivalGame;
 import entity.*;
+
 import java.util.Iterator;
 
 
@@ -44,14 +44,7 @@ public class PlayScreen extends GameMap implements Screen {
     private TmxMapLoader mapLoader;
     private boolean wave1, wave2, wave3, waveFinal;
 
-<<<<<<< HEAD
     public PlayScreen(SurvivalGame game) {
-=======
-
-    private boolean wave1, wave2, wave3, waveFinal;
-
-    public PlayScreen (SurvivalGame game) {
->>>>>>> c8ff750c48c26fca6f817bc0e937dc426cbc9b73
         this.game = game;
         gameCam = new OrthographicCamera();
         gamePort = new StretchViewport(SurvivalGame.WIDTH, SurvivalGame.HEIGHT, gameCam);
@@ -107,51 +100,30 @@ public class PlayScreen extends GameMap implements Screen {
     private void spawnWaves() {
         if (wave1) {
             wave1 = false;
-<<<<<<< HEAD
             entities.add(new Walker(530, 100, collision, p, this));
             entities.add(new Walker(430, 120, collision, p, this));
         }
-        if (!wave2 && hud.getEnemyCount() == 8) {
+        else if (!wave2 && hud.getEnemyCount() == 8) {
             wave2 = true;
             entities.add(new Walker(290, 70, collision, p, this));
             entities.add(new Walker(250, 40, collision, p, this));
             entities.add(new Potion(290, 50, collision, p));
             entities.add(new Runner(70, 290, collision, p, this));
-        } else if (!wave3 && hud.getEnemyCount() == 5) {
-=======
-            entities.add(new Walker(530,100,collision, p, this));
-            entities.add(new Walker(430,120,collision, p, this));
-        }
-        if (!wave2 && hud.getEnemyCount() == 8) {
-            wave2 = true;
-            entities.add(new Walker(290, 70, collision, p,this));
-            entities.add(new Walker(250, 40, collision, p,this));
-            entities.add (new Potion(290, 50, collision, p ));
-            entities.add(new Runner(70, 290, collision, p, this));
         }
         else if (!wave3 && hud.getEnemyCount() == 5) {
->>>>>>> c8ff750c48c26fca6f817bc0e937dc426cbc9b73
             wave3 = true;
             entities.add(new Walker(290, 70, collision, p, this));
             entities.add(new Walker(250, 40, collision, p, this));
             entities.add(new Runner(70, 290, collision, p, this));
             entities.add(new Runner(700, 290, collision, p, this));
-<<<<<<< HEAD
-        } else if (!waveFinal && hud.getEnemyCount() == 1) {
-=======
         }
-        else if (!waveFinal && hud.getEnemyCount() == 1){
->>>>>>> c8ff750c48c26fca6f817bc0e937dc426cbc9b73
+        else if (!waveFinal && hud.getEnemyCount() == 1) {
             music.stop();
             music = Gdx.audio.newMusic(Gdx.files.internal("sounds/8Bit The Hero.mp3"));
             music.setVolume(0.3f);
             music.play();
             waveFinal = true;
-<<<<<<< HEAD
             entities.add(new Slime(300, 250, collision, p, this));
-=======
-            entities.add(new Slime (300, 250, collision, p, this));
->>>>>>> c8ff750c48c26fca6f817bc0e937dc426cbc9b73
         }
     }
 
@@ -159,7 +131,6 @@ public class PlayScreen extends GameMap implements Screen {
     public void render(float deltaTime) {
 
         if (pause) {
-
             try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {
@@ -169,7 +140,6 @@ public class PlayScreen extends GameMap implements Screen {
                 resume();
                 music.play();
             }
-
         } else
             update();
 
@@ -183,7 +153,6 @@ public class PlayScreen extends GameMap implements Screen {
             game.batch.draw(text_pause, 200, 200, 400, 400);
 
         game.batch.end();
-
 
         // Game will stop for 2 seconds before proceeding to LoseScreen
         if (p.health.isDead() && finalUpdate) {
@@ -270,30 +239,18 @@ public class PlayScreen extends GameMap implements Screen {
         for (int i = 0; i < collision.getHeight(); i++) {
             for (int j = 0; j < collision.getWidth(); j++) {
                 if (isCellBlocked(i, j))
-                    loc[i][j] = 2; //sets all blocked locations on array map to 2
+                    loc[i][j] = 2; // sets all blocked locations on array map to 2
                 else
                     loc[i][j] = 0; // sets all accessible spaces to 0
             }
         }
-
 
         for (Entity ent : entities) {
             int AIX = (int) ent.getX() / 32;
             int AIY = (int) ent.getY() / 32;
             loc[AIX][AIY] = 4;
         }
-
-
         loc[playerX][playerY] = 3;
-
-        for (int i = collision.getHeight() - 1; i > 0; i--) {
-            for (int j = 0; j < collision.getWidth(); j++) {
-                System.out.print(loc[j][i] + " ");
-            }
-            System.out.println();
-        }
-        System.out.println();
-        System.out.println();
 
         return loc;
     }
