@@ -6,7 +6,8 @@ public class HealthTracking {
     private int health;
     private int totalHealth;
     Entity target;
-    public HealthTracking(Entity e, int currHealth, int tHealth){
+
+    public HealthTracking(Entity e, int currHealth, int tHealth) {
         target = e;
         health = currHealth;
         totalHealth = tHealth;
@@ -16,27 +17,24 @@ public class HealthTracking {
         return health;
     }
 
-    public void decreaseHealth(int damage){
+    public void decreaseHealth(int damage) {
         if (health - damage > 0) {
             health -= damage;
-        }
-        else
+        } else
             health = 0;
     }
 
-    public void buffHealth(int potion){
+    public void buffHealth(int potion) {
         if (health + potion < totalHealth) {
             health += potion;
-        }
-        else
+        } else
             health = totalHealth;
     }
 
-    public boolean isDead(){
-        if (health == 0){
+    public boolean isDead() {
+        if (health == 0) {
             return true;
-        }
-        else
+        } else
             return false;
     }
 }

@@ -1,6 +1,5 @@
 package entity;
 
-
 public enum EntityType {
     PLAYER("player", 20, 40),
     COMPUTER("computer", 20, 40),
@@ -28,7 +27,5 @@ public enum EntityType {
     public int getHeight() {
         return height;
     }
-
-
 }
 

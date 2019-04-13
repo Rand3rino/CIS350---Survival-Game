@@ -1,8 +1,9 @@
 package entity;
-import Logic.HealthTracking;
+
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector2;
+
 public abstract class Entity {
 
     protected Vector2 pos;
@@ -18,7 +19,7 @@ public abstract class Entity {
         this.player = e;
     }
 
-    public void update(float deltaTime) {   
+    public void update(float deltaTime) {
 
     }
 
@@ -37,15 +38,16 @@ public abstract class Entity {
         //}
     }
 
-    protected boolean ladder(float x, float y){
+    protected boolean ladder(float x, float y) {
 
         TiledMapTileLayer.Cell ladder = map.getCell((int) (x / map.getTileWidth()), (int) (y / map.getTileHeight()));
         return ladder != null && ladder.getTile() != null && ladder.getTile().getProperties().containsKey("ladder");
+    }
+
+    public void render(SpriteBatch batch) {
 
     }
-    public void render(SpriteBatch batch){
 
-    }
     public Vector2 getPos() {
         return pos;
     }
@@ -70,8 +72,13 @@ public abstract class Entity {
         return type.getHeight();
     }
 
-    public void killed() {dead = true;}
-    public boolean isDead() {return dead;}
+    public void killed() {
+        dead = true;
+    }
+
+    public boolean isDead() {
+        return dead;
+    }
 
 
 }

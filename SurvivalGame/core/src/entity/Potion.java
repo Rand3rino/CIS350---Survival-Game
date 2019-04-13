@@ -1,13 +1,10 @@
 package entity;
 
-
 import Logic.HealthTracking;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.mygdx.game.Collision;
-
-
 
 public class Potion extends Entity {
 
@@ -39,12 +36,9 @@ public class Potion extends Entity {
         player = e;
         this.rect = new Collision(getX(),getY(),getWidth(),getHeight());
         this.collision = map;
-
-
     }
 
     private void loadTextures() {
-
         potion = new Texture("PinkPotion.png");
     }
 
@@ -58,23 +52,4 @@ public class Potion extends Entity {
         player.health.buffHealth(2);
         }
     }
-
-
-   /**** // Checks if the player is colliding with the potion
-    public boolean PotionCollide() {
-        for(float step = 0; step < getHeight(); step += map.getTileHeight() / 2)
-            if(isPotion(getX() + getWidth(), getY() + step))
-                return true;
-        return false;
-    }
-
-    private boolean isPotion(float x, float y) {
-
-        TiledMapTileLayer.Cell cell = map.getCell((int) (x / map.getTileWidth()), (int) (y / map.getTileHeight()));
-        return cell != null && cell.getTile() != null && cell.getTile().getProperties().containsKey("potion");
-    }
-    *****/
-
-
-
 }

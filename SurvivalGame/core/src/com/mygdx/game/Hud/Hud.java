@@ -25,12 +25,11 @@ public class Hud {
     private static Label healthLabel;
     private static Label enemyCountLabel;
 
-
-    public Hud (SpriteBatch batch) {
+    public Hud(SpriteBatch batch) {
         staminaBar = 100;
         attackGauge = 100;
         health = 10;
-        enemyCount = 4;
+        enemyCount = 10;
 
         viewport = new StretchViewport(SurvivalGame.WIDTH, SurvivalGame.HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, batch);
@@ -40,9 +39,9 @@ public class Hud {
         table.setFillParent(true);
 
         staminaLabel = new Label(String.format("%03d", staminaBar) + "% Stamina", new Label.LabelStyle(new BitmapFont(), Color.GREEN));
-        attackLabel =  new Label(String.format("%03d", attackGauge) + "% Attack", new Label.LabelStyle(new BitmapFont(), Color.GREEN));
+        attackLabel = new Label(String.format("%03d", attackGauge) + "% Attack", new Label.LabelStyle(new BitmapFont(), Color.GREEN));
         healthLabel = new Label(String.format("%d", health) + " Health", new Label.LabelStyle(new BitmapFont(), Color.GREEN));
-        enemyCountLabel =  new Label(String.format("%03d", enemyCount) + " Enemies", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        enemyCountLabel = new Label(String.format("%03d", enemyCount) + " Enemies", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         staminaLabel.setFontScale(1.5f);
         attackLabel.setFontScale(1.5f);
         healthLabel.setFontScale(1.5f);
@@ -55,42 +54,34 @@ public class Hud {
         stage.addActor(table);
     }
 
-    // TODO static?
     public static void decrementEnemy() {
         enemyCount--;
         if (enemyCount == 1) {
             enemyCountLabel.setStyle(new Label.LabelStyle(new BitmapFont(), Color.CYAN));
             enemyCountLabel.setText(String.format("BOSS BATTLE"));
-        }
-        else
+        } else
             enemyCountLabel.setText(String.format("%03d", enemyCount) + " Enemies");
     }
 
     public static void changeStamina(int value) {
         staminaBar = value;
-        if (staminaBar == 100) {
+        if (staminaBar == 100)
             staminaLabel.setStyle(new Label.LabelStyle(new BitmapFont(), Color.GREEN));
-        }
-        else if (staminaBar == 0){
+        else if (staminaBar == 0)
             staminaLabel.setStyle(new Label.LabelStyle(new BitmapFont(), Color.RED));
-        }
-        else {
+        else
             staminaLabel.setStyle(new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        }
         staminaLabel.setText(String.format("%03d", staminaBar) + "% Stamina");
     }
 
     public static void changeAttack(int value) {
         attackGauge = value;
-        if (attackGauge == 100) {
+        if (attackGauge == 100)
             attackLabel.setStyle(new Label.LabelStyle(new BitmapFont(), Color.GREEN));
-        }
-        else if (attackGauge == 0){
+        else if (attackGauge == 0)
             attackLabel.setStyle(new Label.LabelStyle(new BitmapFont(), Color.RED));
-        }
-        else {
+        else
             attackLabel.setStyle(new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        }
         attackLabel.setText(String.format("%03d", attackGauge) + "% Attack");
     }
 
@@ -100,18 +91,14 @@ public class Hud {
 
     public static void changeHealth(int value) {
         health = value;
-        if (health == 3) {
+        if (health == 3)
             healthLabel.setStyle(new Label.LabelStyle(new BitmapFont(), Color.GREEN));
-        }
-        else if (health < 2){
+        else if (health < 2)
             healthLabel.setStyle(new Label.LabelStyle(new BitmapFont(), Color.RED));
-        }
-        else {
+        else
             healthLabel.setStyle(new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        }
         healthLabel.setText(String.format("%d", health) + " Health");
     }
-
 
     public void dispose() {
         stage.dispose();

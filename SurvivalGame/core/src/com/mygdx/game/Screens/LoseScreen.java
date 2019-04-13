@@ -38,7 +38,6 @@ public class LoseScreen implements Screen {
 
         Label.LabelStyle font = new Label.LabelStyle(new BitmapFont(), Color.WHITE);
 
-
         Table table = new Table();
         table.center();
         table.setFillParent(true);
@@ -62,7 +61,7 @@ public class LoseScreen implements Screen {
     @Override
     public void render(float delta) {
         music.play();
-        if(Gdx.input.isKeyPressed(Input.Keys.ENTER)) {
+        if (Gdx.input.isKeyPressed(Input.Keys.ENTER)) {
             play.play();
             game.setScreen(new PlayScreen((SurvivalGame) game));
             dispose();
@@ -96,6 +95,5 @@ public class LoseScreen implements Screen {
     public void dispose() {
         music.dispose();
         play.dispose();
-
     }
 }

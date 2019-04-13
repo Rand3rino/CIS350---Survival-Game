@@ -23,7 +23,9 @@ public class Walker extends Entity {
     private static final int punchBarMax = 100;
     private int punchBar;
 
-    /** Punch sound */
+    /**
+     * Punch sound
+     */
     private Sound punchSFX;
 
     public HealthTracking health;
@@ -58,17 +60,17 @@ public class Walker extends Entity {
     private Texture knockdown2;
     private TiledMapTileLayer map;
 
-    public Walker (float x, float y, TiledMapTileLayer map, Player e, PlayScreen info){
-        super(x,y,EntityType.COMPUTER, map, e);
+    public Walker(float x, float y, TiledMapTileLayer map, Player e, PlayScreen info) {
+        super(x, y, EntityType.COMPUTER, map, e);
         player = e;
         loadTextures();
         image = down2;
-        this.rect = new Collision(getX(),getY(),getWidth(),getHeight());
+        this.rect = new Collision(getX(), getY(), getWidth(), getHeight());
         health = new HealthTracking(this, 1, 1);
         path = new PathFinder(map);
         combat = new Combat();
         punchBar = punchBarMax;
-        punchSFX= Gdx.audio.newSound(Gdx.files.internal("sounds/hits/12.ogg"));
+        punchSFX = Gdx.audio.newSound(Gdx.files.internal("sounds/hits/12.ogg"));
         start = time;
         screenInfo = info;
     }
@@ -94,7 +96,7 @@ public class Walker extends Entity {
 
     }
 
-    public void update (float deltaTime) {
+    public void update(float deltaTime) {
 
         if (punchBar < punchBarMax)
             punchBar++;
@@ -102,40 +104,39 @@ public class Walker extends Entity {
         if (player.punchArea.doesCollide(rect))
             health.decreaseHealth(1);
 
-        if(!health.isDead() && punchBar > 25) {
-            int move = path.find(new Point((int)pos.x, (int)pos.y), new Point((int)player.getX(), (int)player.getY()), screenInfo.devPath());
+        if (!health.isDead() && punchBar > 25) {
+            int move = path.find(new Point((int) pos.x, (int) pos.y), new Point((int) player.getX(), (int) player.getY()), screenInfo.devPath());
             if (move == 0) {
                 moveX(-speed);
-                rect.move(getX(),getY());
+                rect.move(getX(), getY());
                 if (ladder(getX(), getY()))
                     imgUp();
                 else
                     imgLeft();
             } else if (move == 1) {
                 moveX(speed);
-                rect.move(getX(),getY());
+                rect.move(getX(), getY());
                 if (ladder(getX(), getY()))
                     imgUp();
                 else
                     imgRight();
             } else if (move == 2) {
                 moveY(-speed);
-                rect.move(getX(),getY());
+                rect.move(getX(), getY());
                 if (ladder(getX(), getY()))
                     imgUp();
                 else
                     imgDown();
             } else if (move == 3) {
                 moveY(speed);
-                rect.move(getX(),getY());
+                rect.move(getX(), getY());
                 imgUp();
             }
 
             if (combat.inCombat(this, player))
                 playerPunch();
 
-        }
-        else if (health.isDead() && !updateDead) {
+        } else if (health.isDead() && !updateDead) {
             image = laydown;
             updateDead = true;
             Hud.decrementEnemy();
@@ -143,36 +144,23 @@ public class Walker extends Entity {
         }
     }
 
-
-
-    //if locked in combat
-    // AI can move in a square **/
-//        if (pos.x  < 400 && pos.y == 300)
-//            moveX(speed);
-//        else if (pos.x == 400 && pos.y < 400)
-//            moveY(speed);
-//        else if (pos.x > 300 && pos.y == 400)
-//            moveX(-speed);
-//        else
-//            moveY(-speed);
-
     /******************************************************************
      * playerPunch will handle if player presses the attack button
      *****************************************************************/
     private void playerPunch() {
 
         // Perform a punch upon button press if attack bar is full
-            if (punchBar == punchBarMax && !ladder(getX(),getY())) {
+        if (punchBar == punchBarMax && !ladder(getX(), getY())) {
 
-                // Update sprite image.
-                imgPunch();
-                punchSFX.play(0.15f);
+            // Update sprite image.
+            imgPunch();
+            punchSFX.play(0.15f);
 
-                // Reset attack bar
-                punchBar = 0;
-                player.hit(1);
-                player.knockback(getX(), getY());
-            }
+            // Reset attack bar
+            punchBar = 0;
+            player.hit(1);
+            player.knockback(getX(), getY());
+        }
     }
 
     private void imgPunch() {
@@ -196,30 +184,30 @@ public class Walker extends Entity {
         batch.draw(image, pos.x, pos.y, getWidth(), getHeight());
     }
 
-    private void imgLeft(){
+    private void imgLeft() {
 
-        if (left >= 30 )
+        if (left >= 30)
             image = left1;
         else if (left >= 20)
             image = left2;
         else if (left >= 10)
-            image =  left3;
+            image = left3;
         else if (left >= 0)
             image = left2;
         left++;
         left = left % 40;
     }
 
-    private void imgRight(){
+    private void imgRight() {
 
         if (right >= 30)
             image = right1;
-        else if(right >= 20)
-            image =  right2;
-        else if(right >= 10)
+        else if (right >= 20)
+            image = right2;
+        else if (right >= 10)
             image = right3;
-        else if(right >= 0)
-            image =  right2;
+        else if (right >= 0)
+            image = right2;
         right++;
         right = right % 40;
     }
@@ -227,7 +215,7 @@ public class Walker extends Entity {
     /**
      *
      */
-    private void imgDown(){
+    private void imgDown() {
 
         if (down >= 30)
             image = down1;

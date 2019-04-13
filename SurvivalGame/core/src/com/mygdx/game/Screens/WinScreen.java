@@ -62,7 +62,7 @@ public class WinScreen implements Screen {
     @Override
     public void render(float delta) {
         music.play();
-        if(Gdx.input.isKeyPressed(Input.Keys.ENTER)) {
+        if (Gdx.input.isKeyPressed(Input.Keys.ENTER)) {
             sfx.play();
             game.setScreen(new PlayScreen((SurvivalGame) game));
             dispose();
@@ -96,6 +96,5 @@ public class WinScreen implements Screen {
     public void dispose() {
         music.dispose();
         sfx.dispose();
-
     }
 }

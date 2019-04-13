@@ -11,9 +11,6 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TmxMapLoader;
-import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -31,15 +28,15 @@ public class HomeScreen implements Screen {
     private OrthographicCamera cam;
     private Texture loadMap;
 
-    public HomeScreen (Game game) {
+    public HomeScreen(Game game) {
         this.game = game;
         gamePort = new StretchViewport(SurvivalGame.WIDTH, SurvivalGame.HEIGHT, new OrthographicCamera());
         stage = new Stage(gamePort, ((SurvivalGame) game).batch);
 
         cam = new OrthographicCamera();
-        cam.position.set(SurvivalGame.WIDTH,SurvivalGame.HEIGHT, 0);
+        cam.position.set(SurvivalGame.WIDTH, SurvivalGame.HEIGHT, 0);
 
-        music = Gdx.audio.newMusic(Gdx.files.internal("sounds/Title.mp3"));
+        music = Gdx.audio.newMusic(Gdx.files.internal("sounds/8Bit The Hero.mp3"));
         music.setLooping(true);
         music.setVolume(0.2f);
 
@@ -47,9 +44,7 @@ public class HomeScreen implements Screen {
 
         loadMap = new Texture(Gdx.files.internal("map assets/Title.png"));
 
-
         Label.LabelStyle font = new Label.LabelStyle(new BitmapFont(), Color.BLACK);
-
 
         Table table = new Table();
         table.center();
@@ -57,8 +52,8 @@ public class HomeScreen implements Screen {
 
         Label titleLabel = new Label("One Punch Man", font);
         Label playAgainLabel = new Label("Press ENTER to Play", font);
-        Label authorLabel = new Label ("Ramell Collins, Scott Nguyen, Isfar Baset, & Randy Nguyen", font);
-        Label courseLabel = new Label ("For CIS 350-01: Introduction to Software Engineering Winter 2019", font);
+        Label authorLabel = new Label("Ramell Collins, Scott Nguyen, Isfar Baset, & Randy Nguyen", font);
+        Label courseLabel = new Label("For CIS 350-01: Introduction to Software Engineering Winter 2019", font);
         titleLabel.setFontScale(2);
         playAgainLabel.setFontScale(1.5f);
         authorLabel.setFontScale(1.5f);
@@ -73,10 +68,6 @@ public class HomeScreen implements Screen {
         table.add(courseLabel).expandX().padTop(10f);
 
         stage.addActor(table);
-
-
-
-
     }
 
     @Override
@@ -87,19 +78,17 @@ public class HomeScreen implements Screen {
     @Override
     public void render(float delta) {
         music.play();
-        if(Gdx.input.isKeyPressed(Input.Keys.ENTER)) {
+        if (Gdx.input.isKeyPressed(Input.Keys.ENTER)) {
             sound.play();
             game.setScreen(new PlayScreen((SurvivalGame) game));
             dispose();
         }
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        ((SurvivalGame)game).batch.begin();
-        ((SurvivalGame) game).batch.draw(loadMap,0,0);
+        ((SurvivalGame) game).batch.begin();
+        ((SurvivalGame) game).batch.draw(loadMap, 0, 0);
         ((SurvivalGame) game).batch.end();
         stage.draw();
-
-
     }
 
     @Override
@@ -127,6 +116,5 @@ public class HomeScreen implements Screen {
         music.dispose();
         sound.dispose();
         loadMap.dispose();
-
     }
 }

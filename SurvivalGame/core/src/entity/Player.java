@@ -10,35 +10,47 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.Collision;
 import com.mygdx.game.Hud.Hud;
-import com.mygdx.game.Screens.PlayScreen;
-import com.sun.org.apache.xpath.internal.functions.FuncFalse;
-import sun.reflect.annotation.ExceptionProxy;
-import com.badlogic.gdx.utils.Timer;
 
 public class Player extends Entity {
 
-    /** Directional Variables to be used in movement */
+    /**
+     * Directional Variables to be used in movement
+     */
     private int left = 1, right = 1, up = 1, down = 1;
 
-    /** Default Character Movement Speed */
+    /**
+     * Default Character Movement Speed
+     */
     private static final int speed = 1;
 
-    /** Enhanced Character Speed */
+    /**
+     * Enhanced Character Speed
+     */
     private static final int sprint = 2;
 
-    /** Maximum Value of Character's Stamina Bar */
+    /**
+     * Maximum Value of Character's Stamina Bar
+     */
     private static final int sprintBarMax = 100;
 
-    /** Energy Used in Attacks */
+    /**
+     * Energy Used in Attacks
+     */
     private static final int punchBarMax = 100;
 
-    /** Stamina Bar */
+    /**
+     * Stamina Bar
+     */
     private int sprintBar;
 
-    /** Attack Bar */
+    /**
+     * Attack Bar
+     */
     private int punchBar;
 
-    /** Punch sound */
+    /**
+     * Punch sound
+     */
     private Sound punchSFX;
 
     public HealthTracking health;
@@ -69,9 +81,6 @@ public class Player extends Entity {
     private Texture punchUp;
     private Texture punchDown;
 
-    private Timer timer;
-
-    // TODO
     TiledMapTileLayer collision;
 
 
@@ -84,18 +93,18 @@ public class Player extends Entity {
      * @param e An entity object for entities to track. Player will
      *          not use this variable
      *****************************************************************/
-    public Player (float x, float y, TiledMapTileLayer map, Entity e){
+    public Player(float x, float y, TiledMapTileLayer map, Entity e) {
 
-        super(x,y,EntityType.PLAYER, map, e);
+        super(x, y, EntityType.PLAYER, map, e);
         loadTextures();
         image = down2;
         health = new HealthTracking(this, 3, 3);
-        this.rect = new Collision(getX(),getY(),getWidth(),getHeight());
-        punchArea = new Collision(0,0,0,0);
+        this.rect = new Collision(getX(), getY(), getWidth(), getHeight());
+        punchArea = new Collision(0, 0, 0, 0);
         this.collision = map;
         sprintBar = sprintBarMax;
         punchBar = punchBarMax;
-        punchSFX= Gdx.audio.newSound(Gdx.files.internal("sounds/hits/12.ogg"));
+        punchSFX = Gdx.audio.newSound(Gdx.files.internal("sounds/hits/12.ogg"));
 
     }
 
@@ -145,7 +154,7 @@ public class Player extends Entity {
      *
      * @param deltaTime The amount of time for each move
      *****************************************************************/
-    public void update (float deltaTime){
+    public void update(float deltaTime) {
 
 
         // If the sprint button is not held, charge stamina till max
@@ -163,7 +172,7 @@ public class Player extends Entity {
         Hud.changeHealth(health.getHealth());
 
         // Clear the punch area
-        punchArea = new Collision(0,0,0,0);
+        punchArea = new Collision(0, 0, 0, 0);
 
         if (!health.isDead() && punchBar > 10) {
 
@@ -177,8 +186,7 @@ public class Player extends Entity {
             // TODO need deltaTime?
             playerPunch();
 
-        }
-        else if (health.isDead()){
+        } else if (health.isDead()) {
             image = laydown;
             Hud.changeHealth(health.getHealth());
         }
@@ -191,7 +199,7 @@ public class Player extends Entity {
 
         // Perform a punch upon button press if attack bar is full
         if (Gdx.input.isKeyPressed(Input.Keys.SPACE))
-            if (punchBar == punchBarMax && !ladder(getX(),getY())) {
+            if (punchBar == punchBarMax && !ladder(getX(), getY())) {
 
                 // Update sprite image and ake a collision object on map
                 punch();
@@ -210,8 +218,8 @@ public class Player extends Entity {
 
         // Run Left
         if (Gdx.input.isKeyPressed(Input.Keys.A)
-                && Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT)){
-            if(!collidesLeft() && sprintBar > 0) {
+                && Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT)) {
+            if (!collidesLeft() && sprintBar > 0) {
                 moveX(-speed * sprint * deltaTime);
                 rect.move(getX(), getY());
                 sprintBar--;
@@ -221,8 +229,8 @@ public class Player extends Entity {
 
         // Run Right
         if (Gdx.input.isKeyPressed(Input.Keys.D)
-                && Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT)){
-            if(!collidesRight() && sprintBar > 0) {
+                && Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT)) {
+            if (!collidesRight() && sprintBar > 0) {
                 moveX(speed * sprint * deltaTime);
                 rect.move(getX(), getY());
                 sprintBar--;
@@ -232,8 +240,8 @@ public class Player extends Entity {
 
         // Run Up
         if (Gdx.input.isKeyPressed(Input.Keys.W)
-                && Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT)){
-            if(!collidesTop() && sprintBar > 0) {
+                && Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT)) {
+            if (!collidesTop() && sprintBar > 0) {
                 moveY(speed * sprint * deltaTime);
                 rect.move(getX(), getY());
                 sprintBar--;
@@ -243,8 +251,8 @@ public class Player extends Entity {
 
         // Run Down
         if (Gdx.input.isKeyPressed(Input.Keys.S)
-                && Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT)){
-            if(!collidesBottom() && sprintBar > 0) {
+                && Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT)) {
+            if (!collidesBottom() && sprintBar > 0) {
                 moveY(-speed * sprint * deltaTime);
                 rect.move(getX(), getY());
                 sprintBar--;
@@ -257,12 +265,12 @@ public class Player extends Entity {
     private void playerWalk(float deltaTime) {
 
         // Walk Left
-        if (Gdx.input.isKeyPressed(Input.Keys.A)){
-            if(!collidesLeft()) {
+        if (Gdx.input.isKeyPressed(Input.Keys.A)) {
+            if (!collidesLeft()) {
                 moveX(-speed * deltaTime);
                 rect.move(getX(), getY());
             }
-            if(ladder(getX(),getY())){
+            if (ladder(getX(), getY())) {
                 imgUp();
             } else {
                 imgLeft();
@@ -270,12 +278,12 @@ public class Player extends Entity {
         }
 
         // Walk Right
-        if (Gdx.input.isKeyPressed(Input.Keys.D)){
-            if(!collidesRight()) {
+        if (Gdx.input.isKeyPressed(Input.Keys.D)) {
+            if (!collidesRight()) {
                 moveX(speed * deltaTime);
                 rect.move(getX(), getY());
             }
-            if(ladder(getX(),getY())){
+            if (ladder(getX(), getY())) {
                 imgUp();
             } else {
                 imgRight();
@@ -283,8 +291,8 @@ public class Player extends Entity {
         }
 
         // Walk Up
-        if (Gdx.input.isKeyPressed(Input.Keys.W)){
-            if(!collidesTop()) {
+        if (Gdx.input.isKeyPressed(Input.Keys.W)) {
+            if (!collidesTop()) {
                 moveY(speed * deltaTime);
                 rect.move(getX(), getY());
             }
@@ -293,12 +301,12 @@ public class Player extends Entity {
         }
 
         // Walk Down
-        if (Gdx.input.isKeyPressed(Input.Keys.S)){
-            if(!collidesBottom()) {
+        if (Gdx.input.isKeyPressed(Input.Keys.S)) {
+            if (!collidesBottom()) {
                 moveY(-speed * deltaTime);
                 rect.move(getX(), getY());
             }
-            if(ladder(getX(),getY())){
+            if (ladder(getX(), getY())) {
                 imgUp();
             } else {
                 imgDown();
@@ -319,24 +327,24 @@ public class Player extends Entity {
 
     // Checks if the player is colliding with tile on the right
     public boolean collidesRight() {
-        for(float step = 0; step < getHeight(); step += map.getTileHeight() / 2)
-            if(isCellBlocked(getX() + getWidth(), getY() + step))
+        for (float step = 0; step < getHeight(); step += map.getTileHeight() / 2)
+            if (isCellBlocked(getX() + getWidth(), getY() + step))
                 return true;
         return false;
     }
 
     // Checks if it collides on the left
     public boolean collidesLeft() {
-        for(float step = 0; step < getHeight(); step += map.getTileHeight() / 2)
-            if(isCellBlocked(getX(), getY() + step))
+        for (float step = 0; step < getHeight(); step += map.getTileHeight() / 2)
+            if (isCellBlocked(getX(), getY() + step))
                 return true;
         return false;
     }
 
     // Checks for collision above the player
     public boolean collidesTop() {
-        for(float step = 0; step < getWidth(); step += map.getTileWidth() / 2)
-            if(isCellBlocked(getX() + step, getY() + getHeight()))
+        for (float step = 0; step < getWidth(); step += map.getTileWidth() / 2)
+            if (isCellBlocked(getX() + step, getY() + getHeight()))
                 return true;
         return false;
 
@@ -344,8 +352,8 @@ public class Player extends Entity {
 
     // Checks collision below the player
     public boolean collidesBottom() {
-        for(float step = 0; step < getWidth(); step += map.getTileWidth() / 2)
-            if(isCellBlocked(getX() + step, getY()))
+        for (float step = 0; step < getWidth(); step += map.getTileWidth() / 2)
+            if (isCellBlocked(getX() + step, getY()))
                 return true;
         return false;
     }
@@ -353,29 +361,23 @@ public class Player extends Entity {
     private void punch() {
         if (image.equals(left1) || image.equals(left2) || image.equals(left3)) {
             image = punchLeft;
-            punchArea = new Collision(getX()-16,getY(),getWidth()/2,getHeight()/2);
-        }
-        else if (image.equals(right1) || image.equals(right2) || image.equals(right3)) {
+            punchArea = new Collision(getX() - 16, getY(), getWidth() / 2, getHeight() / 2);
+        } else if (image.equals(right1) || image.equals(right2) || image.equals(right3)) {
             image = punchRight;
             punchArea = new Collision(getX() + 16, getY(), getWidth(), getHeight());
-        }
-
-        else if(image.equals(up1) || image.equals(up2) ||  image.equals(up3)) {
+        } else if (image.equals(up1) || image.equals(up2) || image.equals(up3)) {
             image = punchUp;
             punchArea = new Collision(getX(), getY() + 16, getWidth() / 2, getHeight() / 2);
-        }
-
-        else if(image.equals(down1) || image.equals(down2) || image.equals(down3)) {
+        } else if (image.equals(down1) || image.equals(down2) || image.equals(down3)) {
             image = punchDown;
-            punchArea = new Collision(getX(), getY() - 16, getWidth()/2,getHeight()/2);
+            punchArea = new Collision(getX(), getY() - 16, getWidth() / 2, getHeight() / 2);
         }
     }
 
 
+    private void imgLeft() {
 
-    private void imgLeft(){
-
-        if (left >= 30 )
+        if (left >= 30)
             image = left1;
         else if (left >= 20)
             image = left2;
@@ -387,21 +389,21 @@ public class Player extends Entity {
         left = left % 40;
     }
 
-    private void imgRight(){
+    private void imgRight() {
 
         if (right >= 30)
             image = right1;
         else if (right >= 20)
             image = right2;
-        else if(right >= 10)
+        else if (right >= 10)
             image = right3;
-        else if(right >= 0)
+        else if (right >= 0)
             image = right2;
         right++;
         right = right % 40;
     }
 
-    private void imgDown(){
+    private void imgDown() {
         if (down >= 30)
             image = down1;
         else if (down >= 20)
@@ -431,20 +433,19 @@ public class Player extends Entity {
         health.decreaseHealth(damage);
     }
 
-    // TODO vertical knockback
     public void knockback(float x, float y) {
 
         // Knockback left
-        if (x > getX() ) {
+        if (x > getX()) {
             image = knockback2;
 
             // Change position if it does not result in a collision
-            if (!isCellBlocked(x-32, getY()))
+            if (!isCellBlocked(x - 32, getY()))
                 pos = new Vector2(x - 32, getY());
         }
 
         // Knockback right
-        else if (x < getX() ) {
+        else if (x < getX()) {
             image = knockback1;
 
             // Change position if it does not result in a collision
@@ -456,5 +457,4 @@ public class Player extends Entity {
     private void heal(int potion) {
         health.buffHealth(potion);
     }
-
 }

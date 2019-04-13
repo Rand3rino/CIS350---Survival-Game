@@ -35,9 +35,6 @@ public class Combat{
         playerPosition.set(player.getX(),player.getY());
 
         // If the distance between two vcctors are within one tile, combat is true.
-        //45.254 = sqrt(32^2+32^2)
-        //21.213 = sqrt(15^2 + 15^2)
-        System.out.print(aiPosition.dst(playerPosition) + "\n");
         if (aiPosition.dst(playerPosition) <= 27.5) {
             return true;
         }
