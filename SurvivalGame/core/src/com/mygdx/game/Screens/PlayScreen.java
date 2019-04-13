@@ -44,7 +44,14 @@ public class PlayScreen extends GameMap implements Screen {
     private TmxMapLoader mapLoader;
     private boolean wave1, wave2, wave3, waveFinal;
 
+<<<<<<< HEAD
     public PlayScreen(SurvivalGame game) {
+=======
+
+    private boolean wave1, wave2, wave3, waveFinal;
+
+    public PlayScreen (SurvivalGame game) {
+>>>>>>> c8ff750c48c26fca6f817bc0e937dc426cbc9b73
         this.game = game;
         gameCam = new OrthographicCamera();
         gamePort = new StretchViewport(SurvivalGame.WIDTH, SurvivalGame.HEIGHT, gameCam);
@@ -100,6 +107,7 @@ public class PlayScreen extends GameMap implements Screen {
     private void spawnWaves() {
         if (wave1) {
             wave1 = false;
+<<<<<<< HEAD
             entities.add(new Walker(530, 100, collision, p, this));
             entities.add(new Walker(430, 120, collision, p, this));
         }
@@ -110,18 +118,40 @@ public class PlayScreen extends GameMap implements Screen {
             entities.add(new Potion(290, 50, collision, p));
             entities.add(new Runner(70, 290, collision, p, this));
         } else if (!wave3 && hud.getEnemyCount() == 5) {
+=======
+            entities.add(new Walker(530,100,collision, p, this));
+            entities.add(new Walker(430,120,collision, p, this));
+        }
+        if (!wave2 && hud.getEnemyCount() == 8) {
+            wave2 = true;
+            entities.add(new Walker(290, 70, collision, p,this));
+            entities.add(new Walker(250, 40, collision, p,this));
+            entities.add (new Potion(290, 50, collision, p ));
+            entities.add(new Runner(70, 290, collision, p, this));
+        }
+        else if (!wave3 && hud.getEnemyCount() == 5) {
+>>>>>>> c8ff750c48c26fca6f817bc0e937dc426cbc9b73
             wave3 = true;
             entities.add(new Walker(290, 70, collision, p, this));
             entities.add(new Walker(250, 40, collision, p, this));
             entities.add(new Runner(70, 290, collision, p, this));
             entities.add(new Runner(700, 290, collision, p, this));
+<<<<<<< HEAD
         } else if (!waveFinal && hud.getEnemyCount() == 1) {
+=======
+        }
+        else if (!waveFinal && hud.getEnemyCount() == 1){
+>>>>>>> c8ff750c48c26fca6f817bc0e937dc426cbc9b73
             music.stop();
             music = Gdx.audio.newMusic(Gdx.files.internal("sounds/8Bit The Hero.mp3"));
             music.setVolume(0.3f);
             music.play();
             waveFinal = true;
+<<<<<<< HEAD
             entities.add(new Slime(300, 250, collision, p, this));
+=======
+            entities.add(new Slime (300, 250, collision, p, this));
+>>>>>>> c8ff750c48c26fca6f817bc0e937dc426cbc9b73
         }
     }
 

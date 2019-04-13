@@ -17,7 +17,6 @@ public class SurvivalGame extends Game {
 
 	@Override
 	public void create () {
-
 		camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		batch = new SpriteBatch();
 		setScreen(new HomeScreen(this));
