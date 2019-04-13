@@ -48,7 +48,7 @@ public class PlayScreen extends GameMap implements Screen {
     private TmxMapLoader mapLoader;
 
 
-    private boolean wave1, wave2, wave3, wave4, wave5, wave6, wave7, wave8, wave9, wave10, waveFinal;
+    private boolean wave1, wave2, wave3, waveFinal;
 
     public PlayScreen (SurvivalGame game) {
         this.game = game;
@@ -115,28 +115,28 @@ public class PlayScreen extends GameMap implements Screen {
             wave1 = false;
             entities.add(new Walker(530,100,collision, p, this));
             entities.add(new Walker(430,120,collision, p, this));
-            entities.add (new Potion(290, 50, collision, p ));
         }
         if (!wave2 && hud.getEnemyCount() == 8) {
             wave2 = true;
-            entities.add(new Runner(290, 70, collision, p,this));
-            entities.add(new Runner(250, 40, collision, p,this));
+            entities.add(new Walker(290, 70, collision, p,this));
+            entities.add(new Walker(250, 40, collision, p,this));
+            entities.add (new Potion(290, 50, collision, p ));
             entities.add(new Runner(70, 290, collision, p, this));
-            entities.add(new Runner(40, 250, collision, p, this));
         }
-        else if (!wave3 && hud.getEnemyCount() == 4) {
+        else if (!wave3 && hud.getEnemyCount() == 5) {
             wave3 = true;
             entities.add(new Walker(290, 70, collision, p, this));
             entities.add(new Walker(250, 40, collision, p, this));
-            entities.add(new Walker(40, 250, collision, p, this));
+            entities.add(new Runner(70, 290, collision, p, this));
+            entities.add(new Runner(700, 290, collision, p, this));
         }
         else if (!waveFinal && hud.getEnemyCount() == 1){
-        //    music.stop();
-        //    music = Gdx.audio.newMusic(Gdx.files.internal("sounds/bittersweet.mp3"));
-        //    music.play();
+            music.stop();
+            music = Gdx.audio.newMusic(Gdx.files.internal("sounds/8Bit The Hero.mp3"));
+            music.setVolume(0.3f);
+            music.play();
             waveFinal = true;
             entities.add(new Slime (300, 250, collision, p, this));
-            // TODO Release the SLIME
         }
     }
     @Override
