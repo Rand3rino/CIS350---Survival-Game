@@ -22,12 +22,9 @@ public class SurvivalGame extends Game {
 
 	@Override
 	public void create () {
-
 		camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		batch = new SpriteBatch();
-		// TODO start on homescreen for actual product
-//		setScreen(new HomeScreen(this));
-		setScreen(new PlayScreen(this));
+		setScreen(new HomeScreen(this));
 		camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		camera.update();
 	}
