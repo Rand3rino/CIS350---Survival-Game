@@ -49,7 +49,7 @@ public class PathFinder {
      * @param src the source cell's location
      * @param dest the destination cell's location
      * @param loc 2d array of the map layer
-     * @return TODO
+     * @return integer value that dictates AI move (1 - 4)
      */
     public int find(Point src, Point dest, int[][] loc) {
         int AIX = src.getX() / 32;
