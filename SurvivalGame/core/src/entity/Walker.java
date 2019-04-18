@@ -14,9 +14,15 @@ import com.mygdx.game.Collision;
 import com.mygdx.game.Hud.Hud;
 import com.mygdx.game.Screens.PlayScreen;
 
+/**
+ * The Walker Enemy, they may be slow but their numbers are great
+ * @author Ramell Collins
+ * @version 1.0
+ */
 public class Walker extends Entity {
     private int left = 1, right = 1, up = 1, down = 1;
 
+    /** PathFinder variable for AI movement */
     PathFinder path;
     private static final int speed = 1;
 
@@ -28,12 +34,20 @@ public class Walker extends Entity {
      */
     private Sound punchSFX;
 
+    /** Health tracking variable for the Walker */
     public HealthTracking health;
     private Combat combat;
 
+    /** 2D positional variable */
     Vector2 vector = new Vector2();
+
+    /** The player entity */
     Player player;
+
+    /** Current time according to the system */
     long time = System.currentTimeMillis();
+
+    /** The start time for AI movement */
     long start;
 
     private Collision rect;
@@ -60,6 +74,14 @@ public class Walker extends Entity {
     private Texture knockdown2;
     private TiledMapTileLayer map;
 
+    /**
+     * Constructor for the Walker class
+     * @param x position on the x axis
+     * @param y position on the y axis
+     * @param map tiled map layer contain collision properties
+     * @param e the player entity
+     * @param info the play screen information
+     */
     public Walker(float x, float y, TiledMapTileLayer map, Player e, PlayScreen info) {
         super(x, y, EntityType.COMPUTER, map, e);
         player = e;
@@ -96,6 +118,10 @@ public class Walker extends Entity {
 
     }
 
+    /**
+     * Update method for the Walker class, also handles movement and combat
+     * @param deltaTime amount of time
+     */
     public void update(float deltaTime) {
 
         if (punchBar < punchBarMax)
@@ -172,13 +198,20 @@ public class Walker extends Entity {
     }
 
 
-    // method "move to this point" Using tiledgamemap
+    /**
+     * Method for AI to move to "this" point
+     * @return current player's position
+     */
     public Vector2 playerLocation() {
         vector.x = player.getX();
         vector.y = player.getY();
         return vector;
     }
 
+    /**
+     * Renders the Walker assets and adds to the batch
+     * @param batch Assets of entities
+     */
     @Override
     public void render(SpriteBatch batch) {
         batch.draw(image, pos.x, pos.y, getWidth(), getHeight());

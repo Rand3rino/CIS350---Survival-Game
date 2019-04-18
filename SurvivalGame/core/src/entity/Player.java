@@ -11,6 +11,10 @@ import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.Collision;
 import com.mygdx.game.Hud.Hud;
 
+/**
+ * The player character that can move, punch, and die
+ * @author Scott Nguyen, Edited by Randy Nguyen and Ramell Collins
+ */
 public class Player extends Entity {
 
     /**
@@ -53,10 +57,13 @@ public class Player extends Entity {
      */
     private Sound punchSFX;
 
+    /** Health tracking variable */
     public HealthTracking health;
 
-    // TODO
+    /** Collision rectangle */
     Collision rect;
+
+    /** Collision rectangle representing the punch area */
     protected Collision punchArea;
 
     // TODO
@@ -81,6 +88,7 @@ public class Player extends Entity {
     private Texture punchUp;
     private Texture punchDown;
 
+    /** Tiled map layer that contains collision properties */
     TiledMapTileLayer collision;
 
 
@@ -261,7 +269,7 @@ public class Player extends Entity {
         }
     }
 
-    // Handle if player chooses to walk in a direction.
+
     private void playerWalk(float deltaTime) {
 
         // Walk Left
@@ -314,6 +322,10 @@ public class Player extends Entity {
         }
     }
 
+    /**
+     * Renders the player character
+     * @param batch Assets of entities
+     */
     @Override
     public void render(SpriteBatch batch) {
         batch.draw(image, pos.x, pos.y, getWidth(), getHeight());
@@ -325,7 +337,10 @@ public class Player extends Entity {
         return cell != null && cell.getTile() != null && cell.getTile().getProperties().containsKey("blocked");
     }
 
-    // Checks if the player is colliding with tile on the right
+    /**
+     * Checks the tile to right of the player whether it contains the blocked property
+     * @return true or false
+     */
     public boolean collidesRight() {
         for (float step = 0; step < getHeight(); step += map.getTileHeight() / 2)
             if (isCellBlocked(getX() + getWidth(), getY() + step))
@@ -333,7 +348,10 @@ public class Player extends Entity {
         return false;
     }
 
-    // Checks if it collides on the left
+    /**
+     * Checks whether the tile to the left is collideable
+     * @return true or false
+     */
     public boolean collidesLeft() {
         for (float step = 0; step < getHeight(); step += map.getTileHeight() / 2)
             if (isCellBlocked(getX(), getY() + step))
@@ -341,7 +359,10 @@ public class Player extends Entity {
         return false;
     }
 
-    // Checks for collision above the player
+    /**
+     * Checks whether the tile above the player is collideable
+     * @return true or false
+     */
     public boolean collidesTop() {
         for (float step = 0; step < getWidth(); step += map.getTileWidth() / 2)
             if (isCellBlocked(getX() + step, getY() + getHeight()))
@@ -350,7 +371,10 @@ public class Player extends Entity {
 
     }
 
-    // Checks collision below the player
+    /**
+     * Checks the tile below the player for the blocked property
+     * @return true or false
+     */
     public boolean collidesBottom() {
         for (float step = 0; step < getWidth(); step += map.getTileWidth() / 2)
             if (isCellBlocked(getX() + step, getY()))
@@ -429,10 +453,19 @@ public class Player extends Entity {
         up = up % 40;
     }
 
+    /**
+     * Method to handle the player getting hit by AI
+     * @param damage amount of damage taken
+     */
     public void hit(int damage) {
         health.decreaseHealth(damage);
     }
 
+    /**
+     * Method to knock back the player when hit
+     * @param x new position on the x axis
+     * @param y new position on the y axis
+     */
     public void knockback(float x, float y) {
 
         // Knockback left

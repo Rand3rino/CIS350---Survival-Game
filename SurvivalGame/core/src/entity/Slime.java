@@ -14,9 +14,15 @@ import com.mygdx.game.Collision;
 import com.mygdx.game.Hud.Hud;
 import com.mygdx.game.Screens.PlayScreen;
 
+/**
+ * The Slime enemy type, this si the final boss
+ * @author Ramell Collins
+ * @version 1.0
+ */
 public class Slime extends Entity {
     private int left = 1, right = 1, up = 1, down = 1;
 
+    /** PathFinder variable for AI movement */
     PathFinder path;
     private static final int speed = 1;
 
@@ -28,12 +34,18 @@ public class Slime extends Entity {
      */
     private Sound punchSFX;
 
+    /** Health tracking variable */
     public HealthTracking health;
     private Combat combat;
 
+    /** 2D positional variable */
     Vector2 vector = new Vector2();
     Player player;
+
+    /** Current time of the system */
     long time = System.currentTimeMillis();
+
+    /** Start time for AI movement */
     long start;
 
     private Collision rect;
@@ -59,6 +71,14 @@ public class Slime extends Entity {
 
     private TiledMapTileLayer map;
 
+    /**
+     * Constructor for the Slime class
+     * @param x position on the x axis
+     * @param y position on the y axis
+     * @param map tiled map layer that contains collision properties
+     * @param e the player entity
+     * @param info the PlayScreen info
+     */
     public Slime(float x, float y, TiledMapTileLayer map, Player e, PlayScreen info) {
         super(x, y, EntityType.SLIME, map, e);
         player = e;
@@ -92,6 +112,10 @@ public class Slime extends Entity {
         laydown = new Texture("KingSlime movement assets/down3.png");
     }
 
+    /**
+     * Updates the Slime entity by handling combat and movement
+     * @param deltaTime amount of time
+     */
     public void update(float deltaTime) {
 
         if (punchBar < punchBarMax)
@@ -168,13 +192,20 @@ public class Slime extends Entity {
     }
 
 
-    // method "move to this point" Using tiledgamemap
+    /**
+     * Method for AI to move to "this" point
+     * @return current player's location on map
+     */
     public Vector2 playerLocation() {
         vector.x = player.getX();
         vector.y = player.getY();
         return vector;
     }
 
+    /**
+     * Renders the entity to be added to the batch
+     * @param batch Assets of entities
+     */
     @Override
     public void render(SpriteBatch batch) {
         batch.draw(image, pos.x, pos.y, getWidth(), getHeight());

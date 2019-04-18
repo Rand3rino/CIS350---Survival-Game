@@ -6,19 +6,29 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.mygdx.game.Collision;
 
+/**
+ * Entity type that represents a potion to heal the player character
+ * @author Isfar Baset
+ */
 public class Potion extends Entity {
 
+    /** Tile layer that contains collision properties */
     TiledMapTileLayer collision;
+
+    /** Collision rectangle */
     Collision rect;
+
+    /** The player entity */
     Player player;
 
+    /** Health tracking variable */
     public HealthTracking health = new HealthTracking(this, 1, 1);
 
+    /** Texture variable representing an image */
     public Texture image;
 
+    /** Texture variable representing the potion */
     Texture potion;
-
-    SpriteBatch batch;
 
     /******************************************************************
      * Potion Constructor
@@ -42,10 +52,18 @@ public class Potion extends Entity {
         potion = new Texture("PinkPotion.png");
     }
 
+    /**
+     * Renders the potion to be added to the batch
+     * @param batch Assets of entities
+     */
     public void render(SpriteBatch batch) {
         batch.draw(image, pos.x, pos.y, getWidth(), getHeight());
     }
 
+    /**
+     * Updates the potion when punched
+     * @param deltaTime amount of time
+     */
     public void update(float deltaTime){
         if (player.punchArea.doesCollide(rect)){
         this.killed();

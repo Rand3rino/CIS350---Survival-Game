@@ -14,51 +14,123 @@ import com.mygdx.game.Collision;
 import com.mygdx.game.Hud.Hud;
 import com.mygdx.game.Screens.PlayScreen;
 
+/**
+ * The final boss entity
+ * @author Ramell Collins
+ */
 public class KingSlime extends Entity {
-    private int left = 1, right = 1, up = 1, down = 1;
 
+    /** Integer variable representing number of steps left */
+    private int left = 1;
+
+    /** Integer variable representing number of steps right */
+    private int right = 1;
+
+    /** Integer variable representing number of steps up */
+    private int up = 1;
+
+    /** Integer variable representing number of steps down */
+    private int down = 1;
+
+    /** PathFinder variable for AI movement */
     PathFinder path;
+
+    /** Integer variable representing speed of character */
     private static final int speed = 1;
 
+    /** Integer variable representing punch gauge */
     private static final int punchBarMax = 100;
+
+    /** Integer variable representing punch bar */
     private int punchBar;
 
-    /**
-     * Punch sound
-     */
+    /** Punching sound effects */
     private Sound punchSFX;
 
+    /** Health tracking variable */
     public HealthTracking health;
+
+    /** Combat variable */
     private Combat combat;
 
+    /** 2D vector variable representing position */
     Vector2 vector = new Vector2();
+
+    /** The player entity */
     Player player;
+
+    /** Current time in milliseconds */
     long time = System.currentTimeMillis();
     long start;
 
+    /** Collision class rectangle */
     private Collision rect;
+
+    /** Boolean variable representing death */
     private Boolean updateDead = false;
+
+    /** Current screen information */
     private PlayScreen screenInfo;
 
+    /** Texture variable representing the base image */
     private Texture image;
+
+    /** First image for animation while moving left */
     private Texture left1;
+
+    /** Second image for animation while moving left */
     private Texture left2;
+
+    /** Third image for animation while moving left */
     private Texture left3;
+
+    /** First image for animation while moving right */
     private Texture right1;
+
+    /** Second image for animation while moving right */
     private Texture right2;
+
+    /** Third image for animation while moving right */
     private Texture right3;
+
+    /** First image for animation while moving up */
     private Texture up1;
+
+    /** Second image for animation while moving up */
     private Texture up2;
+
+    /** Third image for animation while moving up */
     private Texture up3;
+
+    /** First image for animation while moving down */
     private Texture down1;
+
+    /** Second image for animation while moving down */
     private Texture down2;
+
+    /** Third image for animation while moving down */
     private Texture down3;
+
+    /** Image variable for punching left */
     private Texture punchLeft;
+
+    /** Image variable for punching right */
     private Texture punchRight;
+
+    /** Image variable for laying down */
     private Texture laydown;
 
+    /** Collision layer of the tiled map */
     private TiledMapTileLayer map;
 
+    /**
+     * Constructor method for the KingSlime class
+     * @param x current position on x axis
+     * @param y current position on y axis
+     * @param map collision layer
+     * @param e Player entity
+     * @param info
+     */
     public KingSlime(float x, float y, TiledMapTileLayer map, Player e, PlayScreen info) {
         super(x, y, EntityType.KINGSLIME, map, e);
         player = e;
@@ -92,6 +164,10 @@ public class KingSlime extends Entity {
         laydown = new Texture("KingSlime movement assets/down3.png");
     }
 
+    /**
+     * Updates the entity and handles combat with the player entity
+     * @param deltaTime amount of time
+     */
     public void update(float deltaTime) {
 
         if (punchBar < punchBarMax)
@@ -167,13 +243,20 @@ public class KingSlime extends Entity {
     }
 
 
-    // method "move to this point" Using tiledgamemap
+    /**
+     * Method to "move to this point"
+     * @return 2D position representing the players current position
+     */
     public Vector2 playerLocation() {
         vector.x = player.getX();
         vector.y = player.getY();
         return vector;
     }
 
+    /**
+     * Renders the KingSlime entity
+     * @param batch Assets of entities
+     */
     @Override
     public void render(SpriteBatch batch) {
         batch.draw(image, pos.x, pos.y, getWidth(), getHeight());

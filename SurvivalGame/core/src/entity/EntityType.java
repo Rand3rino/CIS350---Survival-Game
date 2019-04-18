@@ -1,5 +1,10 @@
 package entity;
 
+/**
+ * The type of entity with set dimensions
+ * @author Scott Nguyen, Edited by Ramell Collins
+ * @version 1.0
+ */
 public enum EntityType {
     PLAYER("player", 20, 40),
     COMPUTER("computer", 20, 40),
