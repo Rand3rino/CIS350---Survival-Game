@@ -21,118 +21,29 @@ import entity.*;
 
 import java.util.Iterator;
 
-/**
- * Screen for battling monsters and taking names
- * @author Randy Nguyen, Edited by Scott Nguyen, Ramell Collins, Isfar Basett
- * @version 1.1
- */
+
 public class PlayScreen extends GameMap implements Screen {
-
-    /**
-     * Variable for the tiled map
-     */
     TiledMap map;
-
-    /**
-     * Variable for the map renderer
-     */
     OrthogonalTiledMapRenderer renderer;
-
-    /**
-     * Variable for map properties
-     */
     MapProperties mapProp;
 
-    /**
-     * The amount of Time
-     */
     float deltaTime = 1;
-
-    /**
-     * Player entity
-     */
     Player p;
-
-    /**
-     * Map layer containing collision properties
-     */
     TiledMapTileLayer collision;
 
-    /**
-     * State of Game variable
-     */
     private SurvivalGame game;
-
-    /**
-     * Camera variable
-     */
     private OrthographicCamera gameCam;
-
-    /**
-     * Viewport variable
-     */
     private Viewport gamePort;
-
-    /**
-     * HUD variable
-     */
     private Hud hud;
-
-    /**
-     * Music variable
-     */
     private Music music;
-
-    /**
-     * boolean variable for pause when ESC is pressed
-     */
     private boolean pause = false;
-
-    /**
-     * boolean for the final update before changing screens
-     */
     private boolean finalUpdate = false;
-
-    /**
-     * boolean for the second to final update before changing screens
-     */
     private boolean secondToFinalUpdate = false;
-
-    /**
-     * Variable for the pause texture
-     */
     private Texture text_pause;
-
-
-    /**
-     * Engine variable for loading the map
-     */
+    private Sprite sprite_pause;
     private TmxMapLoader mapLoader;
+    private boolean wave1, wave2, wave3, waveFinal;
 
-    /**
-     * Boolean variable for the first wave of enemies
-     */
-    private boolean wave1;
-
-    /**
-     * boolean variable for the second waves of enemies
-     */
-    private boolean wave2;
-
-    /**
-     * Boolean variable for the third wave of enemies
-     */
-    private boolean wave3;
-
-    /**
-     * Boolean variables for the final wave of enemies
-     */
-    private boolean waveFinal;
-
-    /**
-     * Constructor for the play screen class
-     * @param game current state of the game
-     */
     public PlayScreen(SurvivalGame game) {
         this.game = game;
         gameCam = new OrthographicCamera();
@@ -156,28 +67,23 @@ public class PlayScreen extends GameMap implements Screen {
         collision = (TiledMapTileLayer) map.getLayers().get("Collision");
         entities.add(p = new Player(600, 600, collision, null));
         text_pause = new Texture(Gdx.files.internal("pause.png"));
+        sprite_pause = new Sprite(text_pause);
     }
 
-    /**
-     * method to show the play screen
-     */
     @Override
     public void show() {
 
     }
 
-    /**
-     * method the updates the game and spawns the waves of enemies
-     */
+    public void handleInput(float deltaTime) {
+
+    }
+
     public void update() {
 
         if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
-
-            // Calls the pause method
             pause();
             music.stop();
-
-            // Suspends the game for 0.1 seconds
             try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {
@@ -191,57 +97,36 @@ public class PlayScreen extends GameMap implements Screen {
         spawnWaves();
     }
 
-
     private void spawnWaves() {
         if (wave1) {
-
-            // Sets the wave1 variable to false so that it doesn't spawn again
             wave1 = false;
-
-            // Adds two Walker entities to entities array list as the first wave of enemies
             entities.add(new Walker(530, 100, collision, p, this));
             entities.add(new Walker(430, 120, collision, p, this));
         }
         else if (!wave2 && hud.getEnemyCount() == 8) {
-
-            // Sets to true so that the entities does not spawn again
             wave2 = true;
-
-            // Adds 2 Walkers, 1 Runner, and a potion
             entities.add(new Walker(290, 70, collision, p, this));
             entities.add(new Walker(250, 40, collision, p, this));
             entities.add(new Potion(290, 50, collision, p));
             entities.add(new Runner(70, 290, collision, p, this));
         }
         else if (!wave3 && hud.getEnemyCount() == 5) {
-
-            // Sets wave3 to true so that the enemies won't spawn again
             wave3 = true;
-
-            // Adds 2 Walkers and 2 Runners to the entities array list
             entities.add(new Walker(290, 70, collision, p, this));
             entities.add(new Walker(250, 40, collision, p, this));
             entities.add(new Runner(70, 290, collision, p, this));
-            entities.add(new Runner(700, 570, collision, p, this));
+            entities.add(new Runner(700, 290, collision, p, this));
         }
         else if (!waveFinal && hud.getEnemyCount() == 1) {
-
-            // Stops current music and sets to new audio file
             music.stop();
             music = Gdx.audio.newMusic(Gdx.files.internal("sounds/8Bit The Hero.mp3"));
             music.setVolume(0.3f);
             music.play();
             waveFinal = true;
-
-            // Spawns the final boss
             entities.add(new Slime(300, 250, collision, p, this));
         }
     }
 
-    /**
-     * Renders the playable screen
-     * @param deltaTime the amount of time
-     */
     @Override
     public void render(float deltaTime) {
 
@@ -299,31 +184,31 @@ public class PlayScreen extends GameMap implements Screen {
             finalUpdate = true;
     }
 
-    /**
-     * Resizes the screen
-     * @param width amount of width to change
-     * @param height amount of height to change
-     */
+
     @Override
     public void resize(int width, int height) {
         gamePort.update(width, height);
     }
 
     /**
-     * Getter method for pixel width of screen
-     * @return pixel amount for width of screen
-     */
+    *@param mapWidth - holds the map property of width
+    *@param mapWidth - holds the tile property of width
+    *@return mapWidth * tileWidth
+    **/
+    
     // FOUND HERE: https://gamedev.stackexchange.com/questions/57325/how-to-get-width-and-height-of-tiledmap-in-the-latest-version-of-libgdx
     public int getWidth() {
         int mapWidth = mapProp.get("width", Integer.class);
         int tileWidth = mapProp.get("tilewidth", Integer.class);
         return mapWidth * tileWidth;
     }
-
+   
     /**
-     * Getter method for pixel height of screen
-     * @return pixel amount for height of screen
-     */
+    *@param mapHeight - holds the map property of height
+    *@param tileHeight - holds the tile property of height
+    *@return map height * tileHeight
+    **/
+    
     // FOUND HERE: https://gamedev.stackexchange.com/questions/57325/how-to-get-width-and-height-of-tiledmap-in-the-latest-version-of-libgdx
     public int getHeight() {
         int mapHeight = mapProp.get("height", Integer.class);
@@ -331,41 +216,25 @@ public class PlayScreen extends GameMap implements Screen {
         return mapHeight * tileHeight;
     }
 
-    /**
-     * Getter method to get tile layer
-     * @return number representing layer
-     */
     public int getLayer() {
         return 0;
     }
 
-    /**
-     * Method to pause the game
-     */
     @Override
     public void pause() {
         pause = true;
     }
 
-    /**
-     * Method to resume the game
-     */
     @Override
     public void resume() {
         pause = false;
     }
 
-    /**
-     * Method to hide the play screen
-     */
     @Override
     public void hide() {
 
     }
 
-    /**
-     * Method to dispose the play screen assets
-     */
     @Override
     public void dispose() {
         map.dispose();
@@ -374,9 +243,13 @@ public class PlayScreen extends GameMap implements Screen {
     }
 
     /**
-     * Generates an array of the tiled map
-     * @return array of the map
-     */
+    *@param playerX - holds x parameter of player location
+    *@param playerY - holds y parameter of player location
+    *@param ent - iterator array for  entities type
+    *@param AIX - holds x parameter of AI for iterative placement
+    *@param AIY - holds y parameter of AI for iterative placement
+    *@return loc[][] the array that contains the final map with all player and AI listed for pathfinder method to develop logic
+    */
     public int[][] devPath() {
         Iterator<Entity> iterator = entities.iterator();
         int playerX = (int) p.getX() / 32;
@@ -401,6 +274,12 @@ public class PlayScreen extends GameMap implements Screen {
 
         return loc;
     }
+    
+    /**
+    *@parameter x - current x location being cheked for tile property
+    *@parameter y - current y location being checked for tile property
+    *@return cell values
+    */
 
     private boolean isCellBlocked(int x, int y) {
         TiledMapTileLayer.Cell cell = collision.getCell(x, y);
