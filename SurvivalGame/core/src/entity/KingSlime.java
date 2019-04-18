@@ -129,7 +129,7 @@ public class KingSlime extends Entity {
      * @param y current position on y axis
      * @param map collision layer
      * @param e Player entity
-     * @param info
+     * @param info play screen information
      */
     public KingSlime(float x, float y, TiledMapTileLayer map, Player e, PlayScreen info) {
         super(x, y, EntityType.KINGSLIME, map, e);
