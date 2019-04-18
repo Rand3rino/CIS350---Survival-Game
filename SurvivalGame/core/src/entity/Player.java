@@ -1,5 +1,6 @@
 package entity;
 
+import Logic.Combat;
 import Logic.HealthTracking;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -489,5 +490,42 @@ public class Player extends Entity {
 
     private void heal(int potion) {
         health.buffHealth(potion);
+    }
+
+    private boolean combatTest(){
+
+        //Edge Testing
+
+        Player p = new Player(100,100,map,null);
+        Walker w = new Walker(120,120,map,this,null);
+
+        Player pl = new Player(100,100,map,null);
+        Walker w1 = new Walker(110,110, map, p1,null);
+
+        Combat com = new Combat();
+
+        return com.inCombat(w,p);
+    }
+    private void healthTrackingTest(){
+
+        //Edge Testing
+
+        Player player = new Player(100,100,null,null);
+        HealthTracking health = new HealthTracking(player,3,3);
+
+        health.decreaseHealth(1);
+        System.out.println(health.getHealth());
+
+        health.decreaseHealth(2);
+        System.out.println(health.getHealth());
+        System.out.println("The player should be dead. Is it true? " + health.isDead());
+
+        health.buffHealth(3);
+        health.decreaseHealth(4);
+        System.out.println(health.getHealth());
+
+        health.buffHealth(4);
+        System.out.println("The maximum for health is 3");
+        System.out.println("Current Health: " + health.getHealth());
     }
 }
