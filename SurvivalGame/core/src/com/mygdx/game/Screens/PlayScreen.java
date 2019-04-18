@@ -114,8 +114,8 @@ public class PlayScreen extends GameMap implements Screen {
             wave3 = true;
             entities.add(new Walker(290, 70, collision, p, this));
             entities.add(new Walker(250, 40, collision, p, this));
-            entities.add(new Runner(70, 290, collision, p, this));
-            entities.add(new Runner(700, 290, collision, p, this));
+            entities.add(new Runner(70, 550, collision, p, this));
+            entities.add(new Runner(700, 500, collision, p, this));
         }
         else if (!waveFinal && hud.getEnemyCount() == 1) {
             music.stop();
