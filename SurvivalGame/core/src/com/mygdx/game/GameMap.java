@@ -45,12 +45,20 @@ public abstract class GameMap {
     /** disposes assets */
     public abstract void dispose();
 
-    /** Getter for width */
+    /**
+     * Getter for width
+     * @return width of the tiled game map
+     */
     public abstract int getWidth();
 
-    /** Getter for height */
+    /**
+     * Getter for height
+     * @return height og the tiled game map*/
     public abstract int getHeight();
 
-    /** Getter for layer of tiled map */
+    /**
+     * Getter for layer of tiled map
+     * @return tiled map layer
+     */
     public abstract int getLayer();
 }
