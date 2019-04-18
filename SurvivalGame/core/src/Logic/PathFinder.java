@@ -3,13 +3,39 @@ package Logic;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import java.lang.Math;
 
+/**
+ * Pathfinder Class
+ *
+ * This is used by the computer entities to find the shortest path to the
+ * player.
+ *
+ * @author Ramell Collins and Scott Nguyen
+ * @version 1.0
+ */
 public class PathFinder {
+
+    /**
+     * Map layer
+     * Details points on the map and includes collision areas and character locations
+     */
     TiledMapTileLayer mapIn;
 
+    /**
+     * PathFinder Constructor
+     * Sets the pathfinder's map to the current game's map.
+     * @param map Map layer with collision areas and character locations
+     */
     public PathFinder(TiledMapTileLayer map) {
         mapIn = map;
     }
 
+    /**
+     * isValidCell method
+     * Checks if a cell on the map can be traversed
+     * @param row Row location of the cell
+     * @param col Column location of the cell
+     * @return True or False if cell is valid
+     */
     private boolean isValidCell(int row, int col) {
         if (row < mapIn.getHeight() && row >= 0 && col < mapIn.getWidth() && col >= 0) {
             return true;
@@ -18,6 +44,13 @@ public class PathFinder {
         }
     }
 
+    /**
+     * find Method
+     * @param src the source cell's location
+     * @param dest the destination cell's location
+     * @param loc 2d array of the map layer
+     * @return TODO
+     */
     public int find(Point src, Point dest, int[][] loc) {
         int AIX = src.getX() / 32;
         int AIY = src.getY() / 32;
@@ -128,6 +161,13 @@ public class PathFinder {
         return -1;
     }
 
+    /**
+     * isValidCell method
+     * Checks if a cell on the map cannot be traversed
+     * @param x horizontal location of the cell
+     * @param y vertical location of the cell
+     * @return True of False if the cell cannot be traversed
+     */
     private boolean isCellBlocked(int x, int y) {
         TiledMapTileLayer.Cell cell = mapIn.getCell(x, y);
         return cell != null && cell.getTile() != null && cell.getTile().getProperties().containsKey("blocked");
